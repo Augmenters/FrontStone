@@ -10,11 +10,31 @@ import RealityKit
 
 struct ContentView : View {
     var body: some View {
-        ARViewContainer().edgesIgnoringSafeArea(.all)
+        ZStack{
+            ARViewContainer().edgesIgnoringSafeArea(.all)
+            VStack(alignment: .trailing) {
+                NavigationStack {
+                    NavigationLink {
+                        MapView()
+                    } label: {
+                        Label("2D Map", image: "map")
+                            .labelStyle(.iconOnly)
+                    }
+                    NavigationLink {
+                        POI_InfoView()
+                    } label: {
+                        Label("About", image: "i-letter")
+                            .labelStyle(.iconOnly)
+                    }.position(x:300,y:20)
+                }
+            } 
+        }
     }
 }
 
-struct ARViewContainer: UIViewRepresentable {
+struct ARViewContainer:
+
+    UIViewRepresentable {
     
     func makeUIView(context: Context) -> ARView {
         

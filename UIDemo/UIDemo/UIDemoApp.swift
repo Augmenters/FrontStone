@@ -11,7 +11,7 @@ import SwiftUI
 struct UIDemoApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ARView()
         }
     }
 }

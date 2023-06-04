@@ -15,6 +15,9 @@
 		B704002C29EF779F00C47193 /* ARDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B704002B29EF779F00C47193 /* ARDemoTests.swift */; };
 		B704003629EF779F00C47193 /* ARDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B704003529EF779F00C47193 /* ARDemoUITests.swift */; };
 		B704003829EF779F00C47193 /* ARDemoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B704003729EF779F00C47193 /* ARDemoUITestsLaunchTests.swift */; };
+		B737A25629F9CB2800F6D2F6 /* POI_InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B737A25529F9CB2800F6D2F6 /* POI_InfoView.swift */; };
+		B737A25A29F9D1DE00F6D2F6 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B737A25929F9D1DE00F6D2F6 /* AboutView.swift */; };
+		B737A25C29F9D3F600F6D2F6 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B737A25B29F9D3F600F6D2F6 /* MapView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +49,9 @@
 		B704003129EF779F00C47193 /* ARDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ARDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B704003529EF779F00C47193 /* ARDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARDemoUITests.swift; sourceTree = "<group>"; };
 		B704003729EF779F00C47193 /* ARDemoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARDemoUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		B737A25529F9CB2800F6D2F6 /* POI_InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POI_InfoView.swift; sourceTree = "<group>"; };
+		B737A25929F9D1DE00F6D2F6 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		B737A25B29F9D3F600F6D2F6 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,7 +103,10 @@
 			isa = PBXGroup;
 			children = (
 				B704001829EF779E00C47193 /* AppDelegate.swift */,
+				B737A25529F9CB2800F6D2F6 /* POI_InfoView.swift */,
 				B704001A29EF779E00C47193 /* ContentView.swift */,
+				B737A25929F9D1DE00F6D2F6 /* AboutView.swift */,
+				B737A25B29F9D3F600F6D2F6 /* MapView.swift */,
 				B704001C29EF779E00C47193 /* Experience.rcproject */,
 				B704001E29EF779F00C47193 /* Assets.xcassets */,
 				B704002029EF779F00C47193 /* Preview Content */,
@@ -261,8 +270,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				B704001B29EF779E00C47193 /* ContentView.swift in Sources */,
+				B737A25C29F9D3F600F6D2F6 /* MapView.swift in Sources */,
 				B704001929EF779E00C47193 /* AppDelegate.swift in Sources */,
 				B704001D29EF779E00C47193 /* Experience.rcproject in Sources */,
+				B737A25A29F9D1DE00F6D2F6 /* AboutView.swift in Sources */,
+				B737A25629F9CB2800F6D2F6 /* POI_InfoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

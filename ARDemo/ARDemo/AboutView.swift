@@ -13,10 +13,10 @@ struct AboutView: View {
             Text("AR City Tour")
                 .font(.largeTitle)
                 .fontWeight(.bold)
-            Text("The Augmenters")
-                .font(.title)
+            Text("Developed by: The Augmenters")
+                .font(.title2)
                 .padding(.bottom)
-            Text("This application was developed by Jackson Atkins, Andrew Brain, Jules Maslak, Jeff Morgan, Justin Reini and Erika Zhou as a senior project for Capstone II at the University of Missouri in Columbia")
+            Text("This application was developed by Jackson Atkins, Andrew Brain, Jules Maslak, Jeff Morgan, Justin Reini and Erika Zhou as a senior project for Capstone II at the University of Missouri in Columbia.")
                 .font(.system(size: 18))
             Spacer()
         }

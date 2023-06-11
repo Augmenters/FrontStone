@@ -17,15 +17,24 @@ struct ContentView : View {
                     NavigationLink {
                         MapView()
                     } label: {
-                        Label("2D Map", image: "map")
+//                        Label("2D Map", image: "map")
+                        Label("2D Map", systemImage: "map")
                             .labelStyle(.iconOnly)
                     }
                     NavigationLink {
                         POI_InfoView()
                     } label: {
-                        Label("About", image: "i-letter")
+//                        Label("POI Info", image: "i-letter")
+                        Label("POI Info", systemImage: "pin")
                             .labelStyle(.iconOnly)
-                    }.position(x:300,y:20)
+                    }
+                    NavigationLink {
+                        AboutView()
+                    } label: {
+//                        Label("About this app", image: "i-letter")
+                        Label("About this app", systemImage: "info")
+                            .labelStyle(.iconOnly)
+                    }
                 }
             } 
         }

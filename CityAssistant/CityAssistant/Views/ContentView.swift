@@ -9,32 +9,31 @@ import Foundation
 import SwiftUI
 import RealityKit
 
-struct Content : View {
+struct ContentView : View {
+    
+    init()
+    {
+        
+    }
+    
     var body: some View {
         ZStack{
-            CityTour().edgesIgnoringSafeArea(.all)
             VStack(alignment: .trailing) {
                 NavigationStack {
                     NavigationLink {
-                        Crime()
+                        CrimeView()
                     } label: {
-//                        Label("2D Map", image: "map")
                         Label("2D Map", systemImage: "map")
-                            .labelStyle(.iconOnly)
                     }
                     NavigationLink {
-                        POI()
+                        CityTourView()
                     } label: {
-//                        Label("POI Info", image: "i-letter")
-                        Label("POI Info", systemImage: "pin")
-                            .labelStyle(.iconOnly)
+                        Label("City Tour", systemImage: "info")
                     }
                     NavigationLink {
-                        About()
+                        AboutView()
                     } label: {
-//                        Label("About this app", image: "i-letter")
                         Label("About this app", systemImage: "info")
-                            .labelStyle(.iconOnly)
                     }
                 }
             }
@@ -42,10 +41,8 @@ struct Content : View {
     }
 }
 
-#if DEBUG
 struct Content_Previews : PreviewProvider {
     static var previews: some View {
-        Content()
+        ContentView()
     }
 }
-#endif

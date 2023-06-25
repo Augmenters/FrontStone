@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct Crime: View {
+struct CrimeView: View {
     var body: some View {
         Text("Map View")
 //            .navigationBarBackButtonHidden()
@@ -17,6 +17,6 @@ struct Crime: View {
 
 struct Crime_Previews: PreviewProvider {
     static var previews: some View {
-        Crime()
+        CrimeView()
     }
 }

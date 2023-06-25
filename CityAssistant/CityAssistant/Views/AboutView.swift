@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct About: View {
+struct AboutView: View {
     var body: some View {
         VStack {
             Text("AR City Tour")
@@ -28,6 +28,6 @@ struct About: View {
 
 struct About_Previews: PreviewProvider {
     static var previews: some View {
-        About()
+        AboutView()
     }
 }

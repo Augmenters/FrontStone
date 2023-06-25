@@ -7,21 +7,44 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD163B802A46A70F0048AE2B /* ReviewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD163B7F2A46A70F0048AE2B /* ReviewCard.swift */; };
+		BD163B822A46AB8C0048AE2B /* RatingStar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD163B812A46AB8C0048AE2B /* RatingStar.swift */; };
+		BD163B852A47A27A0048AE2B /* POIMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD163B842A47A27A0048AE2B /* POIMapView.swift */; };
+		BD163B872A47AE070048AE2B /* POICard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD163B862A47AE070048AE2B /* POICard.swift */; };
+		BD163B892A47C08F0048AE2B /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD163B882A47C08F0048AE2B /* LocationManager.swift */; };
+		BD4195252A415E2F00D47A65 /* Experience.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = BD4195242A415E2F00D47A65 /* Experience.rcproject */; };
+		BD4195332A415F2F00D47A65 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4195262A415F2E00D47A65 /* Result.swift */; };
+		BD4195342A415F2F00D47A65 /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4195272A415F2E00D47A65 /* Coordinate.swift */; };
+		BD4195352A415F2F00D47A65 /* TimeSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4195282A415F2E00D47A65 /* TimeSlot.swift */; };
+		BD4195362A415F2F00D47A65 /* BusinessReviewsReponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4195292A415F2E00D47A65 /* BusinessReviewsReponse.swift */; };
+		BD4195372A415F2F00D47A65 /* CrimeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD41952A2A415F2E00D47A65 /* CrimeResponse.swift */; };
+		BD4195382A415F2F00D47A65 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD41952B2A415F2E00D47A65 /* User.swift */; };
+		BD4195392A415F2F00D47A65 /* POI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD41952C2A415F2E00D47A65 /* POI.swift */; };
+		BD41953A2A415F2F00D47A65 /* CrimeDataAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD41952D2A415F2F00D47A65 /* CrimeDataAccess.swift */; };
+		BD41953B2A415F2F00D47A65 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD41952E2A415F2F00D47A65 /* Configuration.swift */; };
+		BD41953C2A415F2F00D47A65 /* BusinessDataAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD41952F2A415F2F00D47A65 /* BusinessDataAccess.swift */; };
+		BD41953D2A415F2F00D47A65 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4195302A415F2F00D47A65 /* Address.swift */; };
+		BD41953E2A415F2F00D47A65 /* HttpClientHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4195312A415F2F00D47A65 /* HttpClientHelper.swift */; };
+		BD41953F2A415F2F00D47A65 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4195322A415F2F00D47A65 /* Review.swift */; };
+		BD4195492A41603F00D47A65 /* POIViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4195482A41603F00D47A65 /* POIViewModel.swift */; };
+		BD41954C2A41607100D47A65 /* LoadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD41954B2A41607100D47A65 /* LoadingState.swift */; };
+		BD41954E2A41611A00D47A65 /* LoadableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD41954D2A41611A00D47A65 /* LoadableObject.swift */; };
+		BD4195502A41614000D47A65 /* AsyncContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD41954F2A41614000D47A65 /* AsyncContentView.swift */; };
+		BD4195522A4162CA00D47A65 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4195512A4162CA00D47A65 /* ErrorView.swift */; };
+		BD4195552A42A56000D47A65 /* LoadingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4195542A42A56000D47A65 /* LoadingError.swift */; };
+		BD4195592A42BB1000D47A65 /* CityTourViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4195582A42BB1000D47A65 /* CityTourViewModel.swift */; };
 		BDF1CEC72A4127D70053A5EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF1CEC62A4127D70053A5EA /* AppDelegate.swift */; };
-		BDF1CEC92A4127D70053A5EA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF1CEC82A4127D70053A5EA /* SceneDelegate.swift */; };
-		BDF1CECB2A4127D70053A5EA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF1CECA2A4127D70053A5EA /* ViewController.swift */; };
 		BDF1CECE2A4127D70053A5EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDF1CECC2A4127D70053A5EA /* Main.storyboard */; };
 		BDF1CED02A4127DA0053A5EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDF1CECF2A4127DA0053A5EA /* Assets.xcassets */; };
 		BDF1CED32A4127DA0053A5EA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDF1CED12A4127DA0053A5EA /* LaunchScreen.storyboard */; };
 		BDF1CEDE2A4127DA0053A5EA /* CityAssistantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF1CEDD2A4127DA0053A5EA /* CityAssistantTests.swift */; };
 		BDF1CEE82A4127DA0053A5EA /* CityAssistantUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF1CEE72A4127DA0053A5EA /* CityAssistantUITests.swift */; };
 		BDF1CEEA2A4127DA0053A5EA /* CityAssistantUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF1CEE92A4127DA0053A5EA /* CityAssistantUITestsLaunchTests.swift */; };
-		BDF1CEF92A4128B40053A5EA /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF1CEF82A4128B40053A5EA /* Content.swift */; };
-		BDF1CEFB2A4128EA0053A5EA /* About.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF1CEFA2A4128EA0053A5EA /* About.swift */; };
-		BDF1CEFD2A4129270053A5EA /* Crime.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF1CEFC2A4129270053A5EA /* Crime.swift */; };
-		BDF1CEFF2A41295C0053A5EA /* POI.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF1CEFE2A41295C0053A5EA /* POI.swift */; };
-		BDF1CF012A4136880053A5EA /* Experience.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = BDF1CF002A4136870053A5EA /* Experience.rcproject */; };
-		BDF1CF032A413D340053A5EA /* CityTour.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF1CF022A413D340053A5EA /* CityTour.swift */; };
+		BDF1CEF92A4128B40053A5EA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF1CEF82A4128B40053A5EA /* ContentView.swift */; };
+		BDF1CEFB2A4128EA0053A5EA /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF1CEFA2A4128EA0053A5EA /* AboutView.swift */; };
+		BDF1CEFD2A4129270053A5EA /* CrimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF1CEFC2A4129270053A5EA /* CrimeView.swift */; };
+		BDF1CEFF2A41295C0053A5EA /* POIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF1CEFE2A41295C0053A5EA /* POIView.swift */; };
+		BDF1CF032A413D340053A5EA /* CityTourView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF1CF022A413D340053A5EA /* CityTourView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,10 +65,35 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BD163B7F2A46A70F0048AE2B /* ReviewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCard.swift; sourceTree = "<group>"; };
+		BD163B812A46AB8C0048AE2B /* RatingStar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingStar.swift; sourceTree = "<group>"; };
+		BD163B832A46B0BE0048AE2B /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
+		BD163B842A47A27A0048AE2B /* POIMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POIMapView.swift; sourceTree = "<group>"; };
+		BD163B862A47AE070048AE2B /* POICard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POICard.swift; sourceTree = "<group>"; };
+		BD163B882A47C08F0048AE2B /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		BD4195242A415E2F00D47A65 /* Experience.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = Experience.rcproject; sourceTree = "<group>"; };
+		BD4195262A415F2E00D47A65 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		BD4195272A415F2E00D47A65 /* Coordinate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
+		BD4195282A415F2E00D47A65 /* TimeSlot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSlot.swift; sourceTree = "<group>"; };
+		BD4195292A415F2E00D47A65 /* BusinessReviewsReponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessReviewsReponse.swift; sourceTree = "<group>"; };
+		BD41952A2A415F2E00D47A65 /* CrimeResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrimeResponse.swift; sourceTree = "<group>"; };
+		BD41952B2A415F2E00D47A65 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		BD41952C2A415F2E00D47A65 /* POI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = POI.swift; sourceTree = "<group>"; };
+		BD41952D2A415F2F00D47A65 /* CrimeDataAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrimeDataAccess.swift; sourceTree = "<group>"; };
+		BD41952E2A415F2F00D47A65 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		BD41952F2A415F2F00D47A65 /* BusinessDataAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessDataAccess.swift; sourceTree = "<group>"; };
+		BD4195302A415F2F00D47A65 /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
+		BD4195312A415F2F00D47A65 /* HttpClientHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpClientHelper.swift; sourceTree = "<group>"; };
+		BD4195322A415F2F00D47A65 /* Review.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
+		BD4195482A41603F00D47A65 /* POIViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POIViewModel.swift; sourceTree = "<group>"; };
+		BD41954B2A41607100D47A65 /* LoadingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingState.swift; sourceTree = "<group>"; };
+		BD41954D2A41611A00D47A65 /* LoadableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadableObject.swift; sourceTree = "<group>"; };
+		BD41954F2A41614000D47A65 /* AsyncContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncContentView.swift; sourceTree = "<group>"; };
+		BD4195512A4162CA00D47A65 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		BD4195542A42A56000D47A65 /* LoadingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingError.swift; sourceTree = "<group>"; };
+		BD4195582A42BB1000D47A65 /* CityTourViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTourViewModel.swift; sourceTree = "<group>"; };
 		BDF1CEC32A4127D70053A5EA /* CityAssistant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CityAssistant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDF1CEC62A4127D70053A5EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		BDF1CEC82A4127D70053A5EA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		BDF1CECA2A4127D70053A5EA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		BDF1CECD2A4127D70053A5EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BDF1CECF2A4127DA0053A5EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BDF1CED22A4127DA0053A5EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -55,12 +103,11 @@
 		BDF1CEE32A4127DA0053A5EA /* CityAssistantUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CityAssistantUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDF1CEE72A4127DA0053A5EA /* CityAssistantUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityAssistantUITests.swift; sourceTree = "<group>"; };
 		BDF1CEE92A4127DA0053A5EA /* CityAssistantUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityAssistantUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		BDF1CEF82A4128B40053A5EA /* Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Content.swift; sourceTree = "<group>"; };
-		BDF1CEFA2A4128EA0053A5EA /* About.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = About.swift; sourceTree = "<group>"; };
-		BDF1CEFC2A4129270053A5EA /* Crime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crime.swift; sourceTree = "<group>"; };
-		BDF1CEFE2A41295C0053A5EA /* POI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POI.swift; sourceTree = "<group>"; };
-		BDF1CF002A4136870053A5EA /* Experience.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; name = Experience.rcproject; path = ../../../CapstoneRepos/FrontStone/ARDemo/ARDemo/Experience.rcproject; sourceTree = "<group>"; };
-		BDF1CF022A413D340053A5EA /* CityTour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTour.swift; sourceTree = "<group>"; };
+		BDF1CEF82A4128B40053A5EA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		BDF1CEFA2A4128EA0053A5EA /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		BDF1CEFC2A4129270053A5EA /* CrimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrimeView.swift; sourceTree = "<group>"; };
+		BDF1CEFE2A41295C0053A5EA /* POIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POIView.swift; sourceTree = "<group>"; };
+		BDF1CF022A413D340053A5EA /* CityTourView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTourView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +135,112 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BD163B7E2A46A6FE0048AE2B /* Business */ = {
+			isa = PBXGroup;
+			children = (
+				BD163B7F2A46A70F0048AE2B /* ReviewCard.swift */,
+				BD163B812A46AB8C0048AE2B /* RatingStar.swift */,
+				BD163B862A47AE070048AE2B /* POICard.swift */,
+			);
+			path = Business;
+			sourceTree = "<group>";
+		};
+		BD4195402A415F3B00D47A65 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BD4195422A415F5500D47A65 /* Business */,
+				BD4195432A415F5B00D47A65 /* Crime */,
+				BD41954A2A41604F00D47A65 /* Enums */,
+				BD4195302A415F2F00D47A65 /* Address.swift */,
+				BD4195272A415F2E00D47A65 /* Coordinate.swift */,
+				BD4195262A415F2E00D47A65 /* Result.swift */,
+				BD41954D2A41611A00D47A65 /* LoadableObject.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		BD4195412A415F4000D47A65 /* DataAccess */ = {
+			isa = PBXGroup;
+			children = (
+				BD41952F2A415F2F00D47A65 /* BusinessDataAccess.swift */,
+				BD41952D2A415F2F00D47A65 /* CrimeDataAccess.swift */,
+			);
+			path = DataAccess;
+			sourceTree = "<group>";
+		};
+		BD4195422A415F5500D47A65 /* Business */ = {
+			isa = PBXGroup;
+			children = (
+				BD41952C2A415F2E00D47A65 /* POI.swift */,
+				BD4195322A415F2F00D47A65 /* Review.swift */,
+				BD41952B2A415F2E00D47A65 /* User.swift */,
+				BD4195442A415F6200D47A65 /* Responses */,
+			);
+			path = Business;
+			sourceTree = "<group>";
+		};
+		BD4195432A415F5B00D47A65 /* Crime */ = {
+			isa = PBXGroup;
+			children = (
+				BD4195282A415F2E00D47A65 /* TimeSlot.swift */,
+				BD4195462A415F8B00D47A65 /* Responses */,
+			);
+			path = Crime;
+			sourceTree = "<group>";
+		};
+		BD4195442A415F6200D47A65 /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				BD4195292A415F2E00D47A65 /* BusinessReviewsReponse.swift */,
+			);
+			path = Responses;
+			sourceTree = "<group>";
+		};
+		BD4195452A415F7400D47A65 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				BD41952E2A415F2F00D47A65 /* Configuration.swift */,
+				BD4195312A415F2F00D47A65 /* HttpClientHelper.swift */,
+				BD163B882A47C08F0048AE2B /* LocationManager.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		BD4195462A415F8B00D47A65 /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				BD41952A2A415F2E00D47A65 /* CrimeResponse.swift */,
+			);
+			path = Responses;
+			sourceTree = "<group>";
+		};
+		BD4195472A41603400D47A65 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				BD4195482A41603F00D47A65 /* POIViewModel.swift */,
+				BD4195582A42BB1000D47A65 /* CityTourViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		BD41954A2A41604F00D47A65 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				BD41954B2A41607100D47A65 /* LoadingState.swift */,
+				BD4195542A42A56000D47A65 /* LoadingError.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		BD4195532A4162F900D47A65 /* Loading */ = {
+			isa = PBXGroup;
+			children = (
+				BD4195512A4162CA00D47A65 /* ErrorView.swift */,
+				BD41954F2A41614000D47A65 /* AsyncContentView.swift */,
+			);
+			path = Loading;
+			sourceTree = "<group>";
+		};
 		BDF1CEBA2A4127D70053A5EA = {
 			isa = PBXGroup;
 			children = (
@@ -111,15 +264,18 @@
 		BDF1CEC52A4127D70053A5EA /* CityAssistant */ = {
 			isa = PBXGroup;
 			children = (
+				BD4195472A41603400D47A65 /* ViewModels */,
+				BD4195452A415F7400D47A65 /* Utilities */,
+				BD4195412A415F4000D47A65 /* DataAccess */,
+				BD4195402A415F3B00D47A65 /* Models */,
 				BDF1CEF62A4128580053A5EA /* Views */,
 				BDF1CEC62A4127D70053A5EA /* AppDelegate.swift */,
-				BDF1CEC82A4127D70053A5EA /* SceneDelegate.swift */,
-				BDF1CECA2A4127D70053A5EA /* ViewController.swift */,
+				BD4195242A415E2F00D47A65 /* Experience.rcproject */,
 				BDF1CECC2A4127D70053A5EA /* Main.storyboard */,
-				BDF1CF002A4136870053A5EA /* Experience.rcproject */,
 				BDF1CECF2A4127DA0053A5EA /* Assets.xcassets */,
 				BDF1CED12A4127DA0053A5EA /* LaunchScreen.storyboard */,
 				BDF1CED42A4127DA0053A5EA /* Info.plist */,
+				BD163B832A46B0BE0048AE2B /* Development.xcconfig */,
 			);
 			path = CityAssistant;
 			sourceTree = "<group>";
@@ -145,11 +301,12 @@
 			isa = PBXGroup;
 			children = (
 				BDF1CEF72A41285F0053A5EA /* Component Views */,
-				BDF1CEF82A4128B40053A5EA /* Content.swift */,
-				BDF1CEFA2A4128EA0053A5EA /* About.swift */,
-				BDF1CEFC2A4129270053A5EA /* Crime.swift */,
-				BDF1CEFE2A41295C0053A5EA /* POI.swift */,
-				BDF1CF022A413D340053A5EA /* CityTour.swift */,
+				BDF1CEF82A4128B40053A5EA /* ContentView.swift */,
+				BDF1CEFA2A4128EA0053A5EA /* AboutView.swift */,
+				BDF1CEFC2A4129270053A5EA /* CrimeView.swift */,
+				BDF1CEFE2A41295C0053A5EA /* POIView.swift */,
+				BD163B842A47A27A0048AE2B /* POIMapView.swift */,
+				BDF1CF022A413D340053A5EA /* CityTourView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -157,6 +314,8 @@
 		BDF1CEF72A41285F0053A5EA /* Component Views */ = {
 			isa = PBXGroup;
 			children = (
+				BD163B7E2A46A6FE0048AE2B /* Business */,
+				BD4195532A4162F900D47A65 /* Loading */,
 			);
 			path = "Component Views";
 			sourceTree = "<group>";
@@ -292,15 +451,38 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BDF1CEFF2A41295C0053A5EA /* POI.swift in Sources */,
-				BDF1CEFB2A4128EA0053A5EA /* About.swift in Sources */,
-				BDF1CECB2A4127D70053A5EA /* ViewController.swift in Sources */,
-				BDF1CF032A413D340053A5EA /* CityTour.swift in Sources */,
+				BD4195592A42BB1000D47A65 /* CityTourViewModel.swift in Sources */,
+				BDF1CEFF2A41295C0053A5EA /* POIView.swift in Sources */,
+				BD4195372A415F2F00D47A65 /* CrimeResponse.swift in Sources */,
+				BDF1CEFB2A4128EA0053A5EA /* AboutView.swift in Sources */,
+				BD41954E2A41611A00D47A65 /* LoadableObject.swift in Sources */,
+				BDF1CF032A413D340053A5EA /* CityTourView.swift in Sources */,
+				BD4195492A41603F00D47A65 /* POIViewModel.swift in Sources */,
+				BD4195522A4162CA00D47A65 /* ErrorView.swift in Sources */,
+				BD163B872A47AE070048AE2B /* POICard.swift in Sources */,
 				BDF1CEC72A4127D70053A5EA /* AppDelegate.swift in Sources */,
-				BDF1CEF92A4128B40053A5EA /* Content.swift in Sources */,
-				BDF1CEFD2A4129270053A5EA /* Crime.swift in Sources */,
-				BDF1CF012A4136880053A5EA /* Experience.rcproject in Sources */,
-				BDF1CEC92A4127D70053A5EA /* SceneDelegate.swift in Sources */,
+				BD4195552A42A56000D47A65 /* LoadingError.swift in Sources */,
+				BD4195342A415F2F00D47A65 /* Coordinate.swift in Sources */,
+				BD41953A2A415F2F00D47A65 /* CrimeDataAccess.swift in Sources */,
+				BD4195252A415E2F00D47A65 /* Experience.rcproject in Sources */,
+				BD163B852A47A27A0048AE2B /* POIMapView.swift in Sources */,
+				BD4195382A415F2F00D47A65 /* User.swift in Sources */,
+				BD41953C2A415F2F00D47A65 /* BusinessDataAccess.swift in Sources */,
+				BD163B892A47C08F0048AE2B /* LocationManager.swift in Sources */,
+				BD41954C2A41607100D47A65 /* LoadingState.swift in Sources */,
+				BD4195332A415F2F00D47A65 /* Result.swift in Sources */,
+				BD4195502A41614000D47A65 /* AsyncContentView.swift in Sources */,
+				BDF1CEF92A4128B40053A5EA /* ContentView.swift in Sources */,
+				BD41953B2A415F2F00D47A65 /* Configuration.swift in Sources */,
+				BD41953D2A415F2F00D47A65 /* Address.swift in Sources */,
+				BD4195362A415F2F00D47A65 /* BusinessReviewsReponse.swift in Sources */,
+				BD4195392A415F2F00D47A65 /* POI.swift in Sources */,
+				BD41953F2A415F2F00D47A65 /* Review.swift in Sources */,
+				BDF1CEFD2A4129270053A5EA /* CrimeView.swift in Sources */,
+				BD4195352A415F2F00D47A65 /* TimeSlot.swift in Sources */,
+				BD163B802A46A70F0048AE2B /* ReviewCard.swift in Sources */,
+				BD41953E2A415F2F00D47A65 /* HttpClientHelper.swift in Sources */,
+				BD163B822A46AB8C0048AE2B /* RatingStar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +540,7 @@
 /* Begin XCBuildConfiguration section */
 		BDF1CEEB2A4127DA0053A5EA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BD163B832A46B0BE0048AE2B /* Development.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -472,6 +655,7 @@
 		};
 		BDF1CEEE2A4127DA0053A5EA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BD163B832A46B0BE0048AE2B /* Development.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

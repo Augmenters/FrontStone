@@ -32,13 +32,15 @@ public class CityTourViewModel: LoadableObject {
     func load() {
         self.state = LoadingState.loading
         
-        let result = businessDataAccess.GetLocations(latitude: userLocation.Latitude, longitude: userLocation.Longitude)
-        
-        if(result.Success) {
-            self.state = .loaded(result.Data)
-        }
-        else {
-            self.state = .failed(result.Error ?? LoadingError.internalError(message: "Failed to load"))
+        Task.init{
+            let result = await businessDataAccess.GetLocations(latitude: userLocation.Latitude, longitude: userLocation.Longitude)
+            
+            if(result.Success) {
+                self.state = .loaded(result.Data)
+            }
+            else {
+                self.state = .failed(result.Error ?? LoadingError.internalError(message: "Failed to load"))
+            }
         }
     }
     

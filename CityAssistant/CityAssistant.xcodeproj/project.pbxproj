@@ -12,6 +12,7 @@
 		BD163B852A47A27A0048AE2B /* POIMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD163B842A47A27A0048AE2B /* POIMapView.swift */; };
 		BD163B872A47AE070048AE2B /* POICard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD163B862A47AE070048AE2B /* POICard.swift */; };
 		BD163B892A47C08F0048AE2B /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD163B882A47C08F0048AE2B /* LocationManager.swift */; };
+		BD163B8E2A49636D0048AE2B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD163B8C2A49636D0048AE2B /* LaunchScreen.storyboard */; };
 		BD4195252A415E2F00D47A65 /* Experience.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = BD4195242A415E2F00D47A65 /* Experience.rcproject */; };
 		BD4195332A415F2F00D47A65 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4195262A415F2E00D47A65 /* Result.swift */; };
 		BD4195342A415F2F00D47A65 /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4195272A415F2E00D47A65 /* Coordinate.swift */; };
@@ -34,9 +35,7 @@
 		BD4195552A42A56000D47A65 /* LoadingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4195542A42A56000D47A65 /* LoadingError.swift */; };
 		BD4195592A42BB1000D47A65 /* CityTourViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4195582A42BB1000D47A65 /* CityTourViewModel.swift */; };
 		BDF1CEC72A4127D70053A5EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF1CEC62A4127D70053A5EA /* AppDelegate.swift */; };
-		BDF1CECE2A4127D70053A5EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDF1CECC2A4127D70053A5EA /* Main.storyboard */; };
 		BDF1CED02A4127DA0053A5EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDF1CECF2A4127DA0053A5EA /* Assets.xcassets */; };
-		BDF1CED32A4127DA0053A5EA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDF1CED12A4127DA0053A5EA /* LaunchScreen.storyboard */; };
 		BDF1CEDE2A4127DA0053A5EA /* CityAssistantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF1CEDD2A4127DA0053A5EA /* CityAssistantTests.swift */; };
 		BDF1CEE82A4127DA0053A5EA /* CityAssistantUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF1CEE72A4127DA0053A5EA /* CityAssistantUITests.swift */; };
 		BDF1CEEA2A4127DA0053A5EA /* CityAssistantUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF1CEE92A4127DA0053A5EA /* CityAssistantUITestsLaunchTests.swift */; };
@@ -71,6 +70,7 @@
 		BD163B842A47A27A0048AE2B /* POIMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POIMapView.swift; sourceTree = "<group>"; };
 		BD163B862A47AE070048AE2B /* POICard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POICard.swift; sourceTree = "<group>"; };
 		BD163B882A47C08F0048AE2B /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		BD163B8D2A49636D0048AE2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = CityAssistant/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BD4195242A415E2F00D47A65 /* Experience.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = Experience.rcproject; sourceTree = "<group>"; };
 		BD4195262A415F2E00D47A65 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		BD4195272A415F2E00D47A65 /* Coordinate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
@@ -94,9 +94,7 @@
 		BD4195582A42BB1000D47A65 /* CityTourViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTourViewModel.swift; sourceTree = "<group>"; };
 		BDF1CEC32A4127D70053A5EA /* CityAssistant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CityAssistant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDF1CEC62A4127D70053A5EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		BDF1CECD2A4127D70053A5EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BDF1CECF2A4127DA0053A5EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		BDF1CED22A4127DA0053A5EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BDF1CED42A4127DA0053A5EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BDF1CED92A4127DA0053A5EA /* CityAssistantTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CityAssistantTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDF1CEDD2A4127DA0053A5EA /* CityAssistantTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityAssistantTests.swift; sourceTree = "<group>"; };
@@ -244,6 +242,7 @@
 		BDF1CEBA2A4127D70053A5EA = {
 			isa = PBXGroup;
 			children = (
+				BD163B8C2A49636D0048AE2B /* LaunchScreen.storyboard */,
 				BDF1CEC52A4127D70053A5EA /* CityAssistant */,
 				BDF1CEDC2A4127DA0053A5EA /* CityAssistantTests */,
 				BDF1CEE62A4127DA0053A5EA /* CityAssistantUITests */,
@@ -271,9 +270,7 @@
 				BDF1CEF62A4128580053A5EA /* Views */,
 				BDF1CEC62A4127D70053A5EA /* AppDelegate.swift */,
 				BD4195242A415E2F00D47A65 /* Experience.rcproject */,
-				BDF1CECC2A4127D70053A5EA /* Main.storyboard */,
 				BDF1CECF2A4127DA0053A5EA /* Assets.xcassets */,
-				BDF1CED12A4127DA0053A5EA /* LaunchScreen.storyboard */,
 				BDF1CED42A4127DA0053A5EA /* Info.plist */,
 				BD163B832A46B0BE0048AE2B /* Development.xcconfig */,
 			);
@@ -424,9 +421,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BDF1CED32A4127DA0053A5EA /* LaunchScreen.storyboard in Resources */,
 				BDF1CED02A4127DA0053A5EA /* Assets.xcassets in Resources */,
-				BDF1CECE2A4127D70053A5EA /* Main.storyboard in Resources */,
+				BD163B8E2A49636D0048AE2B /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,18 +515,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		BDF1CECC2A4127D70053A5EA /* Main.storyboard */ = {
+		BD163B8C2A49636D0048AE2B /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				BDF1CECD2A4127D70053A5EA /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		BDF1CED12A4127DA0053A5EA /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BDF1CED22A4127DA0053A5EA /* Base */,
+				BD163B8D2A49636D0048AE2B /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -664,9 +652,9 @@
 				DEVELOPMENT_TEAM = X3N2CFBLA9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CityAssistant/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "City Assistant requires your location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -692,9 +680,9 @@
 				DEVELOPMENT_TEAM = X3N2CFBLA9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CityAssistant/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "City Assistant requires your location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

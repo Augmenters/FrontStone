@@ -12,14 +12,12 @@ public class CrimeResponse : Codable
     public var GridHash : String
     public var CrimeDensity : Double
     
-    public init()
-    {
+    public init() {
         GridHash = ""
         CrimeDensity = 0
     }
     
-    public enum CodingKeys : String, CodingKey
-    {
+    public enum CodingKeys : String, CodingKey {
         case GridHash
         case CrimeDensity
     }

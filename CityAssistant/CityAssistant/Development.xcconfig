@@ -8,5 +8,4 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 
-//This has to be http on dev because WebKit blocks localhost https automatically and it is a hassle to disable it
-BackstoneUrl = https:/$()/5c02-2604-2d80-4d02-500-6418-7433-8d98-7671.ngrok-free.app/ //the $() has to be there to stop it from being interpreted as a comment, open to suggestions on another method
+BackstoneUrl =  https:/$()/f42a-2604-2d80-4d02-500-a010-e30a-b18f-25ed.ngrok-free.app/ //the $() has to be there to stop it from being interpreted as a comment, open to suggestions on another method

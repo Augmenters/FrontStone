@@ -14,16 +14,14 @@ public class TimeSlot : Codable
     public var EndHour : Int
     public var Id : Int
     
-    public init()
-    {
+    public init() {
         DayOfWeek = 0
         StartHour = 0
         EndHour = 0
         Id = 0
     }
     
-    public enum CodingKeys : String, CodingKey
-    {
+    public enum CodingKeys : String, CodingKey {
         case DayOfWeek
         case StartHour
         case EndHour

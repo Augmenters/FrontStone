@@ -40,8 +40,7 @@ public class Review : Hashable, Codable
             return hasher.combine(id)
     }
     
-    public enum CodingKeys : String, CodingKey
-    {
+    public enum CodingKeys : String, CodingKey {
         case Url
         case Text
         case Rating

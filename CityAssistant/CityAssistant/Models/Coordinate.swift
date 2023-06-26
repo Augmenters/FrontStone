@@ -12,15 +12,18 @@ public class Coordinate : Codable, ObservableObject
     public var Latitude : Double
     public var Longitude : Double
     
-    public init()
-    {
+    public init() {
         self.Latitude = 0
         self.Longitude = 0
     }
     
-    public init(_ latitude: Double, _ longitude: Double)
-    {
+    public init(_ latitude: Double, _ longitude: Double) {
         self.Latitude = latitude
         self.Longitude = longitude
+    }
+    
+    public enum CodingKeys: CodingKey {
+        case Latitude
+        case Longitude
     }
 }

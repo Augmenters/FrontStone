@@ -11,8 +11,7 @@ import RealityKit
 
 struct ContentView : View {
     
-    init()
-    {
+    init() {
         
     }
     

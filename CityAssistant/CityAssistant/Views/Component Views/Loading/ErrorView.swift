@@ -14,11 +14,10 @@ struct ErrorView : View {
     
     var body: some View {
         Text("Encountered an error")
-        Button{
+        Button {
             retryHandler()
         }
-        label:
-        {
+        label: {
             Text("retry")
         }
     }

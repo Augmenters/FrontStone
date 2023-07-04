@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MapKit
 
 public class Coordinate : Codable, ObservableObject
 {
@@ -25,5 +26,22 @@ public class Coordinate : Codable, ObservableObject
     public enum CodingKeys: CodingKey {
         case Latitude
         case Longitude
+    }
+}
+
+public extension Coordinate {
+    // this isn't ideal, would be open to a better solution
+    // CLLocation is not serializable though so its cleaner and simpler to just do this
+    func Distance(from: Coordinate) -> Double {
+        return CLLocation(latitude: self.Latitude, longitude: self.Longitude).distance(from: CLLocation(latitude: from.Latitude, longitude: from.Longitude))
+    }
+    
+    func Angle(relativeTo: Coordinate) -> Double {
+        return atan2(Double(self.Longitude) - relativeTo.Longitude,
+                     Double(self.Latitude) - relativeTo.Latitude)
+    }
+    
+    func AsCLLocationCoordinate() -> CLLocationCoordinate2D {
+        return CLLocationCoordinate2D(latitude: self.Latitude, longitude: self.Longitude)
     }
 }

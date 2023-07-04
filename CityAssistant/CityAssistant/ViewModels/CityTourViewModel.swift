@@ -14,12 +14,25 @@ public class CityTourViewModel: LoadableObject {
 
     private let businessDataAccess: BusinessDataAccess
     private let locationManager = LocationManager()
+    private let reloadDistance: Double
+    private var previousPosition: Coordinate?
     
     public init() {
         self.userLocation = Coordinate()
         self.businessDataAccess = BusinessDataAccess()
         self.state = LoadingState.idle
+        
+        do {
+            self.reloadDistance = try Configuration.value(for: "ReloadDistance")
+        }
+        catch {
+            self.reloadDistance = 5
+        }
+
         locationManager.locationChangedAction = PositionChanged
+        locationManager.failureAction = { error in
+            self.state = .failed(error)
+        }
     }
     
     public init(pois:[POI])
@@ -27,26 +40,36 @@ public class CityTourViewModel: LoadableObject {
         self.userLocation = Coordinate()
         self.businessDataAccess = BusinessDataAccess()
         self.state = LoadingState.loaded(pois)
+        self.reloadDistance = 0
     }
     
     func load() {
         self.state = LoadingState.loading
         
         Task.init{
-            let result = await businessDataAccess.GetLocations(latitude: userLocation.Latitude, longitude: userLocation.Longitude)
-            
-            if(result.Success) {
-                self.state = .loaded(result.Data)
-            }
-            else {
-                self.state = .failed(result.Error ?? LoadingError.internalError(message: "Failed to load"))
-            }
+            await LoadPOIs()
+        }
+    }
+    
+    func LoadPOIs() async {
+        let result = await businessDataAccess.GetLocations(latitude: userLocation.Latitude, longitude: userLocation.Longitude)
+        
+        if(result.Success) {
+            self.state = .loaded(result.Data)
+        }
+        else {
+            self.state = .failed(result.Error ?? LoadingError.internalError(message: "Failed to load"))
         }
     }
     
     func PositionChanged(coordinate: Coordinate)
     {
-        self.userLocation = coordinate
-        self.load()
+        userLocation = coordinate
+
+        if(previousPosition == nil || previousPosition!.Distance(from: userLocation) > reloadDistance)
+        {
+            load()
+            previousPosition = userLocation
+        }
     }
 }

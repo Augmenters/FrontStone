@@ -17,14 +17,12 @@ public class User: Codable
         ImageUrl = ""
     }
     
-    public init(_ name: String)
-    {
+    public init(_ name: String) {
         self.Name = name
         self.ImageUrl = ""
     }
     
-    public enum CodingKeys: String, CodingKey
-    {
+    public enum CodingKeys: String, CodingKey {
         case Name
         case ImageUrl
     }

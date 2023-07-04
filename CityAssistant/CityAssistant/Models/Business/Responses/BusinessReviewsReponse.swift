@@ -13,15 +13,13 @@ public class BusinessReviewsResponse : Codable
     public var Total : Int
     public var PossibleLanguages : [String]
     
-    public init()
-    {
+    public init() {
         Reviews = []
         Total = 0
         PossibleLanguages = []
     }
     
-    public enum CodingKeys: String, CodingKey
-    {
+    public enum CodingKeys: String, CodingKey {
         case Reviews
         case Total
         case PossibleLanguages

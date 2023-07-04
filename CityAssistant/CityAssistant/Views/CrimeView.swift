@@ -9,9 +9,18 @@ import Foundation
 import SwiftUI
 
 struct CrimeView: View {
+    let viewModel: CrimeViewModel
+    
+    init() {
+        viewModel = CrimeViewModel()
+    }
+    
     var body: some View {
-        Text("Map View")
-//            .navigationBarBackButtonHidden()
+        AsyncContentView(source: viewModel) { crimes in
+            
+            MapView(userLocation: viewModel.userLocation)
+                .edgesIgnoringSafeArea(.all)
+        }
     }
 }
 

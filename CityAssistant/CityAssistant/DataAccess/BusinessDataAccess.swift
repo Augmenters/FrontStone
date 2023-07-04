@@ -11,8 +11,7 @@ public class BusinessDataAccess
 {
     private let backstoneUrl : String
     
-    init()
-    {
+    init() {
         do {
             self.backstoneUrl = try Configuration.value(for: "BackstoneUrl")
         }
@@ -21,21 +20,19 @@ public class BusinessDataAccess
         }
     }
     
-    public func GetLocations(latitude: Double, longitude: Double) -> Result<[POI]?>
-    {
+    public func GetLocations(latitude: Double, longitude: Double) async -> Result<[POI]?> {
         let params = [
             URLQueryItem(name:"latitude", value: String(latitude)),
             URLQueryItem(name:"longitude", value: String(longitude))
         ]
         
-        let result : Result<[POI]?> = HttpClientHelper().Get(baseUrl: backstoneUrl, resource: "Business/Search", queryParams: params)
+        let result : Result<[POI]?> = await HttpClientHelper().Get(baseUrl: backstoneUrl, resource: "Business/Search", queryParams: params)
         
         return result
     }
     
-    public func GetReviews(businessId: String) -> Result<BusinessReviewsResponse?>
-    {
-        let result : Result<BusinessReviewsResponse?> = HttpClientHelper().Get(baseUrl: backstoneUrl, resource: "\(businessId)/Reviews")
+    public func GetReviews(businessId: String) async -> Result<BusinessReviewsResponse?> {
+        let result : Result<BusinessReviewsResponse?> = await HttpClientHelper().Get(baseUrl: backstoneUrl, resource: "Business/\(businessId)/Reviews")
         
         return result
     }

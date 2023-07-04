@@ -20,8 +20,7 @@ public class POI : Codable, Identifiable
     public var Address : Address
     public var Info : String?
     
-    public init()
-    {
+    public init() {
         self.Id = ""
         self.BusinessName = ""
         self.Phone = ""
@@ -33,8 +32,7 @@ public class POI : Codable, Identifiable
         self.Info = ""
     }
     
-    public init(_ name: String, _ phone: String, _ rating: Decimal, _ price: String, _ address: Address, _ reviewCount: Int)
-    {
+    public init(_ name: String, _ phone: String, _ rating: Decimal, _ price: String, _ address: Address, _ reviewCount: Int) {
         self.Id = ""
         self.BusinessName = name
         self.Phone = phone
@@ -46,8 +44,7 @@ public class POI : Codable, Identifiable
         self.Info = ""
     }
     
-    public enum CodingKeys: String, CodingKey
-    {
+    public enum CodingKeys: String, CodingKey {
         case Id
         case BusinessName
         case Phone

@@ -11,19 +11,18 @@ import MapKit
 
 struct POIMapView: View {
     @ObservedObject var userLocation: Coordinate
-    @State private var region: MKCoordinateRegion
 
     var pois: [POI]
 
     init(pois: [POI], userLocation: Coordinate) {
         self.pois = pois
         self.userLocation = userLocation
-        region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: userLocation.Latitude, longitude: userLocation.Longitude), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
     }
     
     var body: some View {
         VStack{
-            Map(coordinateRegion: $region, showsUserLocation: true, userTrackingMode: .constant(.follow))
+            MapView(userLocation: userLocation,
+                    annotations: pois.map{AnnotationItem(coordinate: $0.Coordinates)} )
                 .edgesIgnoringSafeArea([.top])
                 .frame(width: 400, height: 500)
             NavigationStack {

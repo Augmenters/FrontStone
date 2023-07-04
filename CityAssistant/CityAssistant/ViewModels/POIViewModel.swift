@@ -15,7 +15,6 @@ public class POIViewModel: LoadableObject {
     
     public let SelectedBusiness: POI
     
-    //preview helper
     public init(selectedBusiness: POI, reviews: [Review]) {
         self.SelectedBusiness = selectedBusiness
         self.state = LoadingState.loaded(reviews)
@@ -32,13 +31,14 @@ public class POIViewModel: LoadableObject {
     func load() {
         self.state = LoadingState.loading
         
-        var result = businessDataAccess.GetReviews(businessId: SelectedBusiness.Id)
-        
-        if(result.Success) {
-            self.state = .loaded(result.Data?.Reviews)
-        }
-        else {
-            self.state = .failed(result.Error ?? LoadingError.internalError(message: "Failed to load"))
+        Task.init {
+            let result = await businessDataAccess.GetReviews(businessId: SelectedBusiness.Id)
+            if(result.Success) {
+                self.state = .loaded(result.Data?.Reviews)
+            }
+            else {
+                self.state = .failed(result.Error ?? LoadingError.internalError(message: "Failed to load"))
+            }
         }
     }
 }

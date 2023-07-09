@@ -12,7 +12,6 @@
 		BD163B852A47A27A0048AE2B /* POIMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD163B842A47A27A0048AE2B /* POIMapView.swift */; };
 		BD163B872A47AE070048AE2B /* POICard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD163B862A47AE070048AE2B /* POICard.swift */; };
 		BD163B892A47C08F0048AE2B /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD163B882A47C08F0048AE2B /* LocationManager.swift */; };
-		BD163B8E2A49636D0048AE2B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD163B8C2A49636D0048AE2B /* LaunchScreen.storyboard */; };
 		BD163B902A54B6210048AE2B /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD163B8F2A54B6210048AE2B /* MapView.swift */; };
 		BD163B922A54C5D10048AE2B /* AnnotationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD163B912A54C5D10048AE2B /* AnnotationItem.swift */; };
 		BD163B942A54CFAA0048AE2B /* CrimeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD163B932A54CFAA0048AE2B /* CrimeViewModel.swift */; };
@@ -73,7 +72,6 @@
 		BD163B842A47A27A0048AE2B /* POIMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POIMapView.swift; sourceTree = "<group>"; };
 		BD163B862A47AE070048AE2B /* POICard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POICard.swift; sourceTree = "<group>"; };
 		BD163B882A47C08F0048AE2B /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
-		BD163B8D2A49636D0048AE2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = CityAssistant/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BD163B8F2A54B6210048AE2B /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		BD163B912A54C5D10048AE2B /* AnnotationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationItem.swift; sourceTree = "<group>"; };
 		BD163B932A54CFAA0048AE2B /* CrimeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrimeViewModel.swift; sourceTree = "<group>"; };
@@ -250,7 +248,6 @@
 		BDF1CEBA2A4127D70053A5EA = {
 			isa = PBXGroup;
 			children = (
-				BD163B8C2A49636D0048AE2B /* LaunchScreen.storyboard */,
 				BDF1CEC52A4127D70053A5EA /* CityAssistant */,
 				BDF1CEDC2A4127DA0053A5EA /* CityAssistantTests */,
 				BDF1CEE62A4127DA0053A5EA /* CityAssistantUITests */,
@@ -431,7 +428,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BDF1CED02A4127DA0053A5EA /* Assets.xcassets in Resources */,
-				BD163B8E2A49636D0048AE2B /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -525,17 +521,6 @@
 			targetProxy = BDF1CEE42A4127DA0053A5EA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		BD163B8C2A49636D0048AE2B /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BD163B8D2A49636D0048AE2B /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		BDF1CEEB2A4127DA0053A5EA /* Debug */ = {
@@ -661,7 +646,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = X3N2CFBLA9;
+				DEVELOPMENT_TEAM = WRAMRJ6AAF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CityAssistant/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "City Assistant requires your location";
@@ -689,7 +674,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = X3N2CFBLA9;
+				DEVELOPMENT_TEAM = WRAMRJ6AAF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CityAssistant/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "City Assistant requires your location";

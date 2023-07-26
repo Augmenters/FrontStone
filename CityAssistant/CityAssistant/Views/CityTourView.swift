@@ -31,24 +31,30 @@ struct CityTour:
 
 struct CityTourView: View {
     @ObservedObject var viewModel: CityTourViewModel
+    @ObservedObject var poiViewModel: POIViewModel
+
     @State var showARView = true
     
     init() {
         viewModel = CityTourViewModel()
+        poiViewModel = POIViewModel() //we instantiate this here so that the context isn't lost if the view refreshes, probably a better way to do this
     }
     
     init(pois: [POI]) {
         viewModel = CityTourViewModel(pois: pois)
+        poiViewModel = POIViewModel()
     }
     
     var body: some View {
-        AsyncContentView(source: viewModel) { pois in
+        AsyncContentView(source: viewModel, content:  { pois in
             ZStack {
                 if(showARView) {
                     //CityTour().edgesIgnoringSafeArea(.all)
                 }
                 else {
-                    POIMapView(pois: pois ?? [], userLocation: viewModel.userLocation)
+                    POIMapView(pois: pois ?? [],
+                               userLocation: viewModel.userLocation,
+                               poiViewModel: poiViewModel)
                 }
                 VStack() {
                     Spacer()
@@ -59,7 +65,7 @@ struct CityTourView: View {
                     }
                 }
             }
-        }
+        },  useProgressView: false)
     }
 }
 

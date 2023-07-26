@@ -13,8 +13,8 @@ public class POIViewModel: LoadableObject {
     
     private let businessDataAccess: BusinessDataAccess
     
-    public let SelectedBusiness: POI
-    
+    public var SelectedBusiness: POI
+        
     public init(selectedBusiness: POI, reviews: [Review]) {
         self.SelectedBusiness = selectedBusiness
         self.state = LoadingState.loaded(reviews)
@@ -25,11 +25,23 @@ public class POIViewModel: LoadableObject {
     {
         self.businessDataAccess = BusinessDataAccess()
         self.SelectedBusiness = business
-        self.state = LoadingState.idle
+        self.state = LoadingState.ignored
+    }
+    
+    public init()
+    {
+        self.businessDataAccess = BusinessDataAccess()
+        self.SelectedBusiness = POI()
+        self.state = LoadingState.ignored
     }
     
     func load() {
+        load(business: SelectedBusiness)
+    }
+    
+    func load(business: POI) {
         self.state = LoadingState.loading
+        self.SelectedBusiness = business
         
         Task.init {
             let result = await businessDataAccess.GetReviews(businessId: SelectedBusiness.Id)

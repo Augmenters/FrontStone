@@ -16,11 +16,13 @@ public class CityTourViewModel: LoadableObject {
     private let locationManager = LocationManager()
     private let reloadDistance: Double
     private var previousPosition: Coordinate?
+    private var loadedPOIs: [POI]
     
     public init() {
         self.userLocation = Coordinate()
         self.businessDataAccess = BusinessDataAccess()
         self.state = LoadingState.idle
+        self.loadedPOIs = []
         
         do {
             self.reloadDistance = try Configuration.value(for: "ReloadDistance")
@@ -41,6 +43,7 @@ public class CityTourViewModel: LoadableObject {
         self.businessDataAccess = BusinessDataAccess()
         self.state = LoadingState.loaded(pois)
         self.reloadDistance = 0
+        self.loadedPOIs = pois
     }
     
     func load() {
@@ -55,7 +58,17 @@ public class CityTourViewModel: LoadableObject {
         let result = await businessDataAccess.GetLocations(latitude: userLocation.Latitude, longitude: userLocation.Longitude)
         
         if(result.Success) {
-            self.state = .loaded(result.Data)
+            // yelp isn't really returning enough POIs for us to have consistent results at the moment especially because location in the simulator is so buggy
+            // since we are using the result from the service, at every update we are forcing a reload
+            // this is happening way too often, and causing POIs to be garbage collected while they are active in child views
+            // we do not want to actually be keeping this array in the final version of the app but this is a good hacky fix for the time being
+            for poi in result.Data ?? []  {
+                if(!loadedPOIs.contains(where: { (loadedPOI) -> Bool in return loadedPOI.Id == poi.Id })) {
+                    loadedPOIs.append(poi)
+                }
+            }
+            
+            self.state = .loaded(loadedPOIs)
         }
         else {
             self.state = .failed(result.Error ?? LoadingError.internalError(message: "Failed to load"))

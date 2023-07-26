@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BD1322212A6F8F9A0079614E /* OverlayItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1322202A6F8F9A0079614E /* OverlayItem.swift */; };
 		BD1322262A70C1A80079614E /* Map in Frameworks */ = {isa = PBXBuildFile; productRef = BD1322252A70C1A80079614E /* Map */; };
 		BD163B802A46A70F0048AE2B /* ReviewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD163B7F2A46A70F0048AE2B /* ReviewCard.swift */; };
 		BD163B822A46AB8C0048AE2B /* RatingStar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD163B812A46AB8C0048AE2B /* RatingStar.swift */; };
@@ -70,7 +69,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		BD1322202A6F8F9A0079614E /* OverlayItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayItem.swift; sourceTree = "<group>"; };
 		BD163B7F2A46A70F0048AE2B /* ReviewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCard.swift; sourceTree = "<group>"; };
 		BD163B812A46AB8C0048AE2B /* RatingStar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingStar.swift; sourceTree = "<group>"; };
 		BD163B832A46B0BE0048AE2B /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
@@ -166,7 +164,6 @@
 				BD4195262A415F2E00D47A65 /* Result.swift */,
 				BD41954D2A41611A00D47A65 /* LoadableObject.swift */,
 				BD163B912A54C5D10048AE2B /* AnnotationItem.swift */,
-				BD1322202A6F8F9A0079614E /* OverlayItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -483,7 +480,6 @@
 				BDF1CEC72A4127D70053A5EA /* AppDelegate.swift in Sources */,
 				BD4195552A42A56000D47A65 /* LoadingError.swift in Sources */,
 				BD4195342A415F2F00D47A65 /* Coordinate.swift in Sources */,
-				BD1322212A6F8F9A0079614E /* OverlayItem.swift in Sources */,
 				BD41953A2A415F2F00D47A65 /* CrimeDataAccess.swift in Sources */,
 				BD4195252A415E2F00D47A65 /* Experience.rcproject in Sources */,
 				BD163B852A47A27A0048AE2B /* POIMapView.swift in Sources */,

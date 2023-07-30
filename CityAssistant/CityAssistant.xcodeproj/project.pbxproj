@@ -661,7 +661,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = X3N2CFBLA9;
+				DEVELOPMENT_TEAM = WRAMRJ6AAF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CityAssistant/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "City Assistant requires your location";
@@ -689,7 +689,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = X3N2CFBLA9;
+				DEVELOPMENT_TEAM = WRAMRJ6AAF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CityAssistant/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "City Assistant requires your location";

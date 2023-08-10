@@ -41,7 +41,7 @@ struct MapView : View {
                 userTrackingMode: $userTrackingMode,
                 annotationItems: annotations ?? [],
                 annotationContent: { item in
-                    MapMarker(coordinate: item.Coordinate)
+                    return MapMarker(coordinate: item.Coordinate)
                 },
                 overlays: overlays ?? [],
                 overlayContent: { overlay in

@@ -12,4 +12,5 @@ enum LoadingState<Value> {
     case loading
     case failed(Error)
     case loaded(Value)
+    case ignored //for when you want to kick off loading at a time after initialization of vm
 }

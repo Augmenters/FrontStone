@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum LoadingError: Error {
+public enum LoadingError: Error, Equatable {
     case notFound
     case unauthorized
     case internalError(message: String)

@@ -9,31 +9,37 @@ import Foundation
 import SwiftUI
 
 struct POIView: View {
-    @ObservedObject var viewModel: POIViewModel
+    @State var viewModel: POIViewModel
+    @State var selectedBusiness: POI
+    
+    public init(selectedBusiness: POI, viewModel: POIViewModel) {
+        self.selectedBusiness = selectedBusiness
+        self.viewModel = viewModel
+    }
     
     var body: some View {
         AsyncContentView(source: viewModel) { reviews in
             VStack(alignment: .leading) {
                 Group{
                     VStack(alignment: .leading){
-                        Text(viewModel.SelectedBusiness.BusinessName)
+                        Text(selectedBusiness.BusinessName)
                             .font(.largeTitle)
                             .fontWeight(.bold)
                         HStack {
                             Text("Business Type")
                                 .font(.title2)
                                 .padding(.bottom)
-                            Text((viewModel.SelectedBusiness.Price ?? ""))
+                            Text((selectedBusiness.Price ?? ""))
                                 .font(.title2)
                                 .padding(.bottom)
                         }
-                        Text("Address: " +  viewModel.SelectedBusiness.Address.ToString())
+                        Text("Address: " +  selectedBusiness.Address.ToString())
                             .font(.body)
                         Text("Hours: " + "8 am to 9 pm")
                             .font(.body)
-                        Text("Phone Number: " + viewModel.SelectedBusiness.Phone)
+                        Text("Phone Number: " + selectedBusiness.Phone)
                             .font(.body)
-                        Text("Website: " + ( viewModel.SelectedBusiness.Info ?? ""))
+                        Text("Website: " + (selectedBusiness.Info ?? ""))
                             .font(.body)
                             .padding(.bottom)
                         
@@ -41,11 +47,11 @@ struct POIView: View {
                             .font(.title2)
                             .bold()
                         HStack {
-                            if(viewModel.SelectedBusiness.Rating != nil)
+                            if(selectedBusiness.Rating != nil)
                             {
-                                RatingStars(rating: viewModel.SelectedBusiness.Rating!)
+                                RatingStars(rating: selectedBusiness.Rating!)
                                     .frame(minWidth: 1, idealWidth: 100, maxWidth: 140, minHeight: 1, idealHeight: 20, maxHeight: 20)
-                                Text("\(viewModel.SelectedBusiness.ReviewCount)")
+                                Text("\(selectedBusiness.ReviewCount)")
                                     .font(.body)
                             }
                         }
@@ -62,7 +68,8 @@ struct POIView: View {
                 
             }
             .padding(/*@START_MENU_TOKEN@*/[.top, .bottom, .trailing]/*@END_MENU_TOKEN@*/)
-            
+        }.onAppear {
+            viewModel.load(business: selectedBusiness)
         }
     }
 }
@@ -77,6 +84,6 @@ struct POI_Previews: PreviewProvider {
     static let mockViewModel: POIViewModel = POIViewModel(selectedBusiness: mockPOI, reviews: mockReviews)
     
     static var previews: some View {
-        POIView(viewModel: mockViewModel)
+        POIView(selectedBusiness: mockPOI, viewModel: mockViewModel)
     }
 }

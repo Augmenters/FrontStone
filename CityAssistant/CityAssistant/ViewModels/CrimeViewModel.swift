@@ -9,8 +9,8 @@ import Foundation
 
 public class CrimeViewModel : LoadableObject {
     
-    typealias Output = [CrimeResponse]?
-    var state: LoadingState<[CrimeResponse]?>
+    typealias Output = [Crime]?
+    var state: LoadingState<[Crime]?>
     @Published var userLocation: Coordinate
     
     private let locationManager = LocationManager()

@@ -17,8 +17,8 @@ struct CrimeView: View {
     
     var body: some View {
         AsyncContentView(source: viewModel) { crimes in
-            
-            MapView(userLocation: viewModel.userLocation)
+            MapView(userLocation: viewModel.userLocation,
+                    overlays: crimes?.map { $0.Overlay })
                 .edgesIgnoringSafeArea(.all)
         }
     }

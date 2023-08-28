@@ -32,8 +32,14 @@ public class HttpClientHelper
             result = Result<T?>(data: decoded, success: true)
         } catch {
             print(error)
-            result = Result<T?>(data: nil, success: false, error: LoadingError.internalError(message: error.localizedDescription))
-        }
+            
+            if(error is Swift.DecodingError) {
+                result = Result<T?>(data: nil, success: false, error: LoadingError.notFound)
+            }
+            else {
+                result = Result<T?>(data: nil, success: false, error: LoadingError.internalError(message: error.localizedDescription))
+            }
+       }
         
         return result
     }

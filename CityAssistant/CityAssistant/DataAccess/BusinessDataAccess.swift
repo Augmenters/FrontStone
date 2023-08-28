@@ -26,7 +26,13 @@ public class BusinessDataAccess
             URLQueryItem(name:"longitude", value: String(longitude))
         ]
         
-        let result : Result<[POI]?> = await HttpClientHelper().Get(baseUrl: backstoneUrl, resource: "Business/Search", queryParams: params)
+        var result : Result<[POI]?> = await HttpClientHelper().Get(baseUrl: backstoneUrl, resource: "Business/Search", queryParams: params)
+        
+        
+        if(result.Error == LoadingError.notFound)
+        {
+            result = Result<[POI]?>(data: [], success: true, error: nil)
+        }
         
         return result
     }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD1322262A70C1A80079614E /* Map in Frameworks */ = {isa = PBXBuildFile; productRef = BD1322252A70C1A80079614E /* Map */; };
 		BD163B802A46A70F0048AE2B /* ReviewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD163B7F2A46A70F0048AE2B /* ReviewCard.swift */; };
 		BD163B822A46AB8C0048AE2B /* RatingStar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD163B812A46AB8C0048AE2B /* RatingStar.swift */; };
 		BD163B852A47A27A0048AE2B /* POIMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD163B842A47A27A0048AE2B /* POIMapView.swift */; };
@@ -16,6 +17,7 @@
 		BD163B902A54B6210048AE2B /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD163B8F2A54B6210048AE2B /* MapView.swift */; };
 		BD163B922A54C5D10048AE2B /* AnnotationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD163B912A54C5D10048AE2B /* AnnotationItem.swift */; };
 		BD163B942A54CFAA0048AE2B /* CrimeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD163B932A54CFAA0048AE2B /* CrimeViewModel.swift */; };
+		BD1BB8672A70C99200CB7DD4 /* Crime.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1BB8662A70C99200CB7DD4 /* Crime.swift */; };
 		BD4195252A415E2F00D47A65 /* Experience.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = BD4195242A415E2F00D47A65 /* Experience.rcproject */; };
 		BD4195332A415F2F00D47A65 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4195262A415F2E00D47A65 /* Result.swift */; };
 		BD4195342A415F2F00D47A65 /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4195272A415F2E00D47A65 /* Coordinate.swift */; };
@@ -77,6 +79,7 @@
 		BD163B8F2A54B6210048AE2B /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		BD163B912A54C5D10048AE2B /* AnnotationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationItem.swift; sourceTree = "<group>"; };
 		BD163B932A54CFAA0048AE2B /* CrimeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrimeViewModel.swift; sourceTree = "<group>"; };
+		BD1BB8662A70C99200CB7DD4 /* Crime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crime.swift; sourceTree = "<group>"; };
 		BD4195242A415E2F00D47A65 /* Experience.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = Experience.rcproject; sourceTree = "<group>"; };
 		BD4195262A415F2E00D47A65 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		BD4195272A415F2E00D47A65 /* Coordinate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
@@ -119,6 +122,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD1322262A70C1A80079614E /* Map in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,6 +191,7 @@
 		BD4195432A415F5B00D47A65 /* Crime */ = {
 			isa = PBXGroup;
 			children = (
+				BD1BB8662A70C99200CB7DD4 /* Crime.swift */,
 				BD4195282A415F2E00D47A65 /* TimeSlot.swift */,
 				BD4195462A415F8B00D47A65 /* Responses */,
 			);
@@ -342,6 +347,9 @@
 			dependencies = (
 			);
 			name = CityAssistant;
+			packageProductDependencies = (
+				BD1322252A70C1A80079614E /* Map */,
+			);
 			productName = CityAssistant;
 			productReference = BDF1CEC32A4127D70053A5EA /* CityAssistant.app */;
 			productType = "com.apple.product-type.application";
@@ -414,6 +422,9 @@
 				Base,
 			);
 			mainGroup = BDF1CEBA2A4127D70053A5EA;
+			packageReferences = (
+				BD1322242A70C1A80079614E /* XCRemoteSwiftPackageReference "Map" */,
+			);
 			productRefGroup = BDF1CEC42A4127D70053A5EA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -475,6 +486,7 @@
 				BD4195382A415F2F00D47A65 /* User.swift in Sources */,
 				BD41953C2A415F2F00D47A65 /* BusinessDataAccess.swift in Sources */,
 				BD163B892A47C08F0048AE2B /* LocationManager.swift in Sources */,
+				BD1BB8672A70C99200CB7DD4 /* Crime.swift in Sources */,
 				BD41954C2A41607100D47A65 /* LoadingState.swift in Sources */,
 				BD4195332A415F2F00D47A65 /* Result.swift in Sources */,
 				BD4195502A41614000D47A65 /* AsyncContentView.swift in Sources */,
@@ -826,6 +838,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BD1322242A70C1A80079614E /* XCRemoteSwiftPackageReference "Map" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pauljohanneskraft/Map.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BD1322252A70C1A80079614E /* Map */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BD1322242A70C1A80079614E /* XCRemoteSwiftPackageReference "Map" */;
+			productName = Map;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BDF1CEBB2A4127D70053A5EA /* Project object */;
 }

@@ -10,7 +10,7 @@ import Foundation
 public class User: Codable
 {
     public var Name : String
-    public var ImageUrl : String
+    public var ImageUrl : String?
     
     public init() {
         Name = ""

@@ -8,5 +8,5 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 
-BackstoneUrl = http:/$()/3.145.32.27:32771/ //the $() has to be there to stop it from being interpreted as a comment, open to suggestions on another method
+BackstoneUrl = http:/$()/3.139.93.19:32771/ //the $() has to be there to stop it from being interpreted as a comment, open to suggestions on another method
 ReloadDistance = 1000 //this is arbitrarily high to avoid hitting the api a bunch when running in the simulator, adjust this if you're running on an actual device

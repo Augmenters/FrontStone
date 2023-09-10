@@ -673,9 +673,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = WRAMRJ6AAF;
+				DEVELOPMENT_TEAM = 8943T9GWZR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CityAssistant/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "City Assistant requires Camera Permssions";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "City Assistant requires your location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
@@ -701,9 +702,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = WRAMRJ6AAF;
+				DEVELOPMENT_TEAM = 8943T9GWZR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CityAssistant/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "City Assistant requires Camera Permssions";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "City Assistant requires your location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;

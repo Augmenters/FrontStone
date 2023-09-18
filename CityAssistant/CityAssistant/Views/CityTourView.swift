@@ -37,6 +37,7 @@ struct CityTour:
         bubbleAnchor.addChild(plane)
         anchor.addChild(txt)
         arView.scene.addAnchor(anchor)
+        arView.scene.addAnchor(bubbleAnchor)
         return arView
         
     }

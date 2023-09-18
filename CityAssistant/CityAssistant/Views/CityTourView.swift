@@ -21,11 +21,20 @@ struct CityTour:
         
         arView.addGestureRecognizer(UITapGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.handleTap(_:))))
         let anchor = AnchorEntity()
+        let bubbleAnchor = AnchorEntity()
+        
+        let plane = ModelEntity(
+            mesh: MeshResource.generatePlane(width: 50, height: 70, cornerRadius: 2.5),
+                materials: [SimpleMaterial(color: .blue, isMetallic: false)],
+                collisionShape: ShapeResource.generateBox(width: 50, height: 70, depth: 1),
+                mass: 0
+            )
         
         let txt = ModelEntity(mesh: MeshResource.generateText("Test Text", extrusionDepth: 0.01, font: .boldSystemFont(ofSize: 0.01), containerFrame: .zero, alignment: .center,lineBreakMode: .byWordWrapping), materials: [SimpleMaterial(color: .black, isMetallic: true)])
         
         txt.generateCollisionShapes(recursive: true)
         
+        bubbleAnchor.addChild(plane)
         anchor.addChild(txt)
         arView.scene.addAnchor(anchor)
         return arView

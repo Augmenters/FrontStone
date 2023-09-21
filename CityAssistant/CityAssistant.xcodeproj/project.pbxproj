@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B70556542ABCDEE2001FDAF1 /* Tap.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70556532ABCDEE2001FDAF1 /* Tap.swift */; };
+		B7B2C40A2AAF8D2500454BCB /* CityARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B2C4092AAF8D2500454BCB /* CityARView.swift */; };
 		BD1322262A70C1A80079614E /* Map in Frameworks */ = {isa = PBXBuildFile; productRef = BD1322252A70C1A80079614E /* Map */; };
 		BD163B802A46A70F0048AE2B /* ReviewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD163B7F2A46A70F0048AE2B /* ReviewCard.swift */; };
 		BD163B822A46AB8C0048AE2B /* RatingStar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD163B812A46AB8C0048AE2B /* RatingStar.swift */; };
@@ -69,6 +71,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B70556532ABCDEE2001FDAF1 /* Tap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tap.swift; sourceTree = "<group>"; };
+		B7B2C4092AAF8D2500454BCB /* CityARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityARView.swift; sourceTree = "<group>"; };
 		BD163B7F2A46A70F0048AE2B /* ReviewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCard.swift; sourceTree = "<group>"; };
 		BD163B812A46AB8C0048AE2B /* RatingStar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingStar.swift; sourceTree = "<group>"; };
 		BD163B832A46B0BE0048AE2B /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
@@ -230,6 +234,7 @@
 				BD4195482A41603F00D47A65 /* POIViewModel.swift */,
 				BD4195582A42BB1000D47A65 /* CityTourViewModel.swift */,
 				BD163B932A54CFAA0048AE2B /* CrimeViewModel.swift */,
+				B70556532ABCDEE2001FDAF1 /* Tap.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -317,6 +322,7 @@
 				BDF1CEFE2A41295C0053A5EA /* POIView.swift */,
 				BD163B842A47A27A0048AE2B /* POIMapView.swift */,
 				BDF1CF022A413D340053A5EA /* CityTourView.swift */,
+				B7B2C4092AAF8D2500454BCB /* CityARView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -470,6 +476,7 @@
 				BD4195592A42BB1000D47A65 /* CityTourViewModel.swift in Sources */,
 				BDF1CEFF2A41295C0053A5EA /* POIView.swift in Sources */,
 				BD4195372A415F2F00D47A65 /* CrimeResponse.swift in Sources */,
+				B7B2C40A2AAF8D2500454BCB /* CityARView.swift in Sources */,
 				BDF1CEFB2A4128EA0053A5EA /* AboutView.swift in Sources */,
 				BD41954E2A41611A00D47A65 /* LoadableObject.swift in Sources */,
 				BDF1CF032A413D340053A5EA /* CityTourView.swift in Sources */,
@@ -477,6 +484,7 @@
 				BD163B922A54C5D10048AE2B /* AnnotationItem.swift in Sources */,
 				BD4195522A4162CA00D47A65 /* ErrorView.swift in Sources */,
 				BD163B872A47AE070048AE2B /* POICard.swift in Sources */,
+				B70556542ABCDEE2001FDAF1 /* Tap.swift in Sources */,
 				BDF1CEC72A4127D70053A5EA /* AppDelegate.swift in Sources */,
 				BD4195552A42A56000D47A65 /* LoadingError.swift in Sources */,
 				BD4195342A415F2F00D47A65 /* Coordinate.swift in Sources */,

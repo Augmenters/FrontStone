@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+// Class created to track gestures acted upon AR objects
+
+class Tap: ObservableObject {
+    @Published var tapped = false
+    func clicked() {
+        self.tapped.toggle()
+    }
+}

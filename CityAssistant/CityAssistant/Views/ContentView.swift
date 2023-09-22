@@ -27,7 +27,7 @@ struct ContentView : View {
                     NavigationLink {
                         CityTourView()
                     } label: {
-                        Label("City Tour", systemImage: "info")
+                        Label("City Tour", systemImage: "camera")
                     }
                     NavigationLink {
                         AboutView()

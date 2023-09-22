@@ -9,25 +9,6 @@ import Foundation
 import SwiftUI
 import RealityKit
 
-struct CityTour:
-    UIViewRepresentable {
-    
-    func makeUIView(context: Context) -> ARView {
-        
-        let arView = ARView(frame: .zero)
-        
-        // Load the "Box" scene from the "Experience" Reality File
-        let boxAnchor = try! Experience.loadBox()
-        
-        // Add the box anchor to the scene
-        arView.scene.anchors.append(boxAnchor)
-        
-        return arView
-        
-    }
-    
-    func updateUIView(_ uiView: ARView, context: Context) {}
-}
 
 struct CityTourView: View {
     @ObservedObject var viewModel: CityTourViewModel
@@ -42,14 +23,14 @@ struct CityTourView: View {
     
     init(pois: [POI]) {
         viewModel = CityTourViewModel(pois: pois)
-        poiViewModel = POIViewModel()
+        poiViewModel = POIViewModel(business: CityTourView_Previews.mockPOI)
     }
     
     var body: some View {
         AsyncContentView(source: viewModel, content:  { pois in
             ZStack {
                 if(showARView) {
-                    //CityTour().edgesIgnoringSafeArea(.all)
+                    CityARView()
                 }
                 else {
                     POIMapView(pois: pois ?? [],
@@ -73,6 +54,11 @@ struct CityTourView_Previews: PreviewProvider {
     static let mockAddress: Address = Address("101 street st.", "Columbia", "MO", "65201")
     static let mockPOI: POI = POI("Harpo's Columbia", "(417)-111-1111", 4.7, "$$", mockAddress, 3145)
     static let mockPOIs: [POI] = [mockPOI]
+    static let mockReviews: [Review] = [
+        Review("The food here was great. Would recommend bringing family.", 4.5, "Micheal Scott"),
+        Review("Service was slow and waiters were rude. Not worth the price", 2, "Patrick Mahomes"),
+        Review("Good food for a sunny day.", 3, "Tiger Woods")]
+    static let mockViewModel: POIViewModel = POIViewModel(selectedBusiness: mockPOI, reviews: mockReviews)
     
     static var previews: some View {
         CityTourView(pois: mockPOIs)

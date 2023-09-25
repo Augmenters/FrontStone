@@ -57,7 +57,7 @@ struct CameraView: UIViewRepresentable {
     func placePOI(poi: ModelEntity, arView: ARView) {
         // Place individual poi in scene
         // Places test text at default coordinate for now
-        let poiAnchor = AnchorEntity(plane: .any)
+        let poiAnchor = AnchorEntity()
         poiAnchor.addChild(poi)
         arView.scene.addAnchor(poiAnchor)
     }

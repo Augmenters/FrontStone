@@ -11,7 +11,7 @@ import RealityKit
 
 
 struct CityTourView: View {
-    @ObservedObject var viewModel: CityTourViewModel
+    @ObservedObject var viewModel: CityTourViewModel 
     @ObservedObject var poiViewModel: POIViewModel
 
     @State var showARView = true

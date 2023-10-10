@@ -60,10 +60,6 @@ public class CityTourViewModel
         let result = await businessDataAccess.GetLocations(latitude: userLocation.Latitude, longitude: userLocation.Longitude)
         
         if(result.Success) {
-            // yelp isn't really returning enough POIs for us to have consistent results at the moment especially because location in the simulator is so buggy
-            // since we are using the result from the service, at every update we are forcing a reload
-            // this is happening way too often, and causing POIs to be garbage collected while they are active in child views
-            // we do not want to actually be keeping this array in the final version of the app but this is a good hacky fix for the time being
             for poi in result.Data ?? []  {
                 //If the poi has not been seen, add it to the loaded pois... we should probably also be clearing the loaded poi list at some point
                 //Worth noting that the Id here is returned from yelp (or in the case of an empty address the database) not the uuid or entity id

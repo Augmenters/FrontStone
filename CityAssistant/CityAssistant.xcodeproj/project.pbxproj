@@ -18,7 +18,6 @@
 		BD163B902A54B6210048AE2B /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD163B8F2A54B6210048AE2B /* MapView.swift */; };
 		BD163B922A54C5D10048AE2B /* AnnotationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD163B912A54C5D10048AE2B /* AnnotationItem.swift */; };
 		BD163B942A54CFAA0048AE2B /* CrimeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD163B932A54CFAA0048AE2B /* CrimeViewModel.swift */; };
-		BD1BB8672A70C99200CB7DD4 /* Crime.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1BB8662A70C99200CB7DD4 /* Crime.swift */; };
 		BD4195252A415E2F00D47A65 /* Experience.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = BD4195242A415E2F00D47A65 /* Experience.rcproject */; };
 		BD4195332A415F2F00D47A65 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4195262A415F2E00D47A65 /* Result.swift */; };
 		BD4195342A415F2F00D47A65 /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4195272A415F2E00D47A65 /* Coordinate.swift */; };
@@ -85,7 +84,6 @@
 		BD163B8F2A54B6210048AE2B /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		BD163B912A54C5D10048AE2B /* AnnotationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationItem.swift; sourceTree = "<group>"; };
 		BD163B932A54CFAA0048AE2B /* CrimeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrimeViewModel.swift; sourceTree = "<group>"; };
-		BD1BB8662A70C99200CB7DD4 /* Crime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crime.swift; sourceTree = "<group>"; };
 		BD4195242A415E2F00D47A65 /* Experience.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = Experience.rcproject; sourceTree = "<group>"; };
 		BD4195262A415F2E00D47A65 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		BD4195272A415F2E00D47A65 /* Coordinate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
@@ -174,6 +172,7 @@
 				BD4195262A415F2E00D47A65 /* Result.swift */,
 				BD41954D2A41611A00D47A65 /* LoadableObject.swift */,
 				BD163B912A54C5D10048AE2B /* AnnotationItem.swift */,
+				BDBDDFEC2AC0D35A00F58A11 /* OverlayObject.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -201,8 +200,8 @@
 		BD4195432A415F5B00D47A65 /* Crime */ = {
 			isa = PBXGroup;
 			children = (
-				BD1BB8662A70C99200CB7DD4 /* Crime.swift */,
 				BD4195282A415F2E00D47A65 /* TimeSlot.swift */,
+				BDBDDFF12AC1306400F58A11 /* TimeSlotGrouping.swift */,
 				BD4195462A415F8B00D47A65 /* Responses */,
 			);
 			path = Crime;
@@ -261,6 +260,14 @@
 				BD41954F2A41614000D47A65 /* AsyncContentView.swift */,
 			);
 			path = Loading;
+			sourceTree = "<group>";
+		};
+		BDBDDFEE2AC12FDC00F58A11 /* Crime */ = {
+			isa = PBXGroup;
+			children = (
+				BDBDDFEF2AC12FF400F58A11 /* TimeSlotSelector.swift */,
+			);
+			path = Crime;
 			sourceTree = "<group>";
 		};
 		BDF1CEBA2A4127D70053A5EA = {
@@ -336,6 +343,7 @@
 		BDF1CEF72A41285F0053A5EA /* Component Views */ = {
 			isa = PBXGroup;
 			children = (
+				BDBDDFEE2AC12FDC00F58A11 /* Crime */,
 				BD163B7E2A46A6FE0048AE2B /* Business */,
 				BD4195532A4162F900D47A65 /* Loading */,
 				BD163B8F2A54B6210048AE2B /* MapView.swift */,
@@ -493,13 +501,14 @@
 				BDF1CEC72A4127D70053A5EA /* AppDelegate.swift in Sources */,
 				BD4195552A42A56000D47A65 /* LoadingError.swift in Sources */,
 				BD4195342A415F2F00D47A65 /* Coordinate.swift in Sources */,
+				BDBDDFED2AC0D35A00F58A11 /* OverlayObject.swift in Sources */,
 				BD41953A2A415F2F00D47A65 /* CrimeDataAccess.swift in Sources */,
 				BD4195252A415E2F00D47A65 /* Experience.rcproject in Sources */,
 				BD163B852A47A27A0048AE2B /* POIMapView.swift in Sources */,
 				BD4195382A415F2F00D47A65 /* User.swift in Sources */,
 				BD41953C2A415F2F00D47A65 /* BusinessDataAccess.swift in Sources */,
+				BDBDDFF22AC1306400F58A11 /* TimeSlotGrouping.swift in Sources */,
 				BD163B892A47C08F0048AE2B /* LocationManager.swift in Sources */,
-				BD1BB8672A70C99200CB7DD4 /* Crime.swift in Sources */,
 				BD41954C2A41607100D47A65 /* LoadingState.swift in Sources */,
 				BDA672012AD37B7E00E209E4 /* CityTourViewModel.swift in Sources */,
 				BD4195332A415F2F00D47A65 /* Result.swift in Sources */,
@@ -509,6 +518,7 @@
 				BD41953D2A415F2F00D47A65 /* Address.swift in Sources */,
 				BD163B942A54CFAA0048AE2B /* CrimeViewModel.swift in Sources */,
 				BD4195362A415F2F00D47A65 /* BusinessReviewsReponse.swift in Sources */,
+				BDBDDFF02AC12FF400F58A11 /* TimeSlotSelector.swift in Sources */,
 				BD163B902A54B6210048AE2B /* MapView.swift in Sources */,
 				BD4195392A415F2F00D47A65 /* POI.swift in Sources */,
 				BD41953F2A415F2F00D47A65 /* Review.swift in Sources */,
@@ -687,7 +697,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8943T9GWZR;
+				DEVELOPMENT_TEAM = X3N2CFBLA9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CityAssistant/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "City Assistant requires Camera Permssions";
@@ -701,7 +711,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.augmenters.CityAssistant;
+				PRODUCT_BUNDLE_IDENTIFIER = net.augmenters.CityAssistant1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

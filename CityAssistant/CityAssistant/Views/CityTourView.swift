@@ -10,32 +10,34 @@ import SwiftUI
 import RealityKit
 
 
-struct CityTourView: View {
-    @ObservedObject var viewModel: CityTourViewModel
+struct CityTourViewWrapper: View {
+    @ObservedObject var poiMapViewModel: POIMapViewModel
     @ObservedObject var poiViewModel: POIViewModel
 
     @State var showARView = true
-    
+
     init() {
-        viewModel = CityTourViewModel()
+        poiMapViewModel = POIMapViewModel()
         poiViewModel = POIViewModel() //we instantiate this here so that the context isn't lost if the view refreshes, probably a better way to do this
     }
-    
+
     init(pois: [POI]) {
-        viewModel = CityTourViewModel(pois: pois)
+        poiMapViewModel = POIMapViewModel(pois: pois)
         poiViewModel = POIViewModel(business: CityTourView_Previews.mockPOI)
     }
-    
+
     var body: some View {
-        AsyncContentView(source: viewModel, content:  { pois in
             ZStack {
                 if(showARView) {
                     CityARView()
                 }
                 else {
-                    POIMapView(pois: pois ?? [],
-                               userLocation: viewModel.userLocation,
-                               poiViewModel: poiViewModel)
+                    AsyncContentView(source: poiMapViewModel, content:  { pois in
+
+                        POIMapView(pois: pois ?? [],
+                                   userLocation: poiMapViewModel.userLocation,
+                                   poiViewModel: poiViewModel)
+                    },  useProgressView: false)
                 }
                 VStack() {
                     Spacer()
@@ -46,7 +48,6 @@ struct CityTourView: View {
                     }
                 }
             }
-        },  useProgressView: false)
     }
 }
 
@@ -59,8 +60,8 @@ struct CityTourView_Previews: PreviewProvider {
         Review("Service was slow and waiters were rude. Not worth the price", 2, "Patrick Mahomes"),
         Review("Good food for a sunny day.", 3, "Tiger Woods")]
     static let mockViewModel: POIViewModel = POIViewModel(selectedBusiness: mockPOI, reviews: mockReviews)
-    
+
     static var previews: some View {
-        CityTourView(pois: mockPOIs)
+        CityTourViewWrapper(pois: mockPOIs)
     }
 }

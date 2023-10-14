@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9475229E2AB7B74C008F9756 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9475229D2AB7B74C008F9756 /* SplashScreen.swift */; };
+		9475229E2AB7B74C008F9756 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		B70556542ABCDEE2001FDAF1 /* Tap.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70556532ABCDEE2001FDAF1 /* Tap.swift */; };
 		B7B2C40A2AAF8D2500454BCB /* CityARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B2C4092AAF8D2500454BCB /* CityARView.swift */; };
 		BD1322262A70C1A80079614E /* Map in Frameworks */ = {isa = PBXBuildFile; productRef = BD1322252A70C1A80079614E /* Map */; };
@@ -319,7 +319,6 @@
 				BDF1CEF72A41285F0053A5EA /* Component Views */,
 				BDF1CEF82A4128B40053A5EA /* ContentView.swift */,
 				BDF1CEFA2A4128EA0053A5EA /* AboutView.swift */,
-				9475229D2AB7B74C008F9756 /* SplashScreen.swift */,
 				BDF1CEFC2A4129270053A5EA /* CrimeView.swift */,
 				BDF1CEFE2A41295C0053A5EA /* POIView.swift */,
 				BD163B842A47A27A0048AE2B /* POIMapView.swift */,
@@ -492,7 +491,7 @@
 				BD4195342A415F2F00D47A65 /* Coordinate.swift in Sources */,
 				BD41953A2A415F2F00D47A65 /* CrimeDataAccess.swift in Sources */,
 				BD4195252A415E2F00D47A65 /* Experience.rcproject in Sources */,
-				9475229E2AB7B74C008F9756 /* SplashScreen.swift in Sources */,
+				9475229E2AB7B74C008F9756 /* (null) in Sources */,
 				BD163B852A47A27A0048AE2B /* POIMapView.swift in Sources */,
 				BD4195382A415F2F00D47A65 /* User.swift in Sources */,
 				BD41953C2A415F2F00D47A65 /* BusinessDataAccess.swift in Sources */,
@@ -687,7 +686,7 @@
 				DEVELOPMENT_TEAM = WRAMRJ6AAF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CityAssistant/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "City Assistant requires Camera Permssions";
+				INFOPLIST_KEY_NSCameraUsageDescription = "City Assistant requires Camera Permissions";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "City Assistant requires your location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
@@ -698,7 +697,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.augmenters.CityAssistant;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.missouri.CityAssistant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -716,7 +715,7 @@
 				DEVELOPMENT_TEAM = WRAMRJ6AAF;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CityAssistant/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "City Assistant requires Camera Permssions";
+				INFOPLIST_KEY_NSCameraUsageDescription = "City Assistant requires Camera Permissions";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "City Assistant requires your location";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
@@ -727,7 +726,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.augmenters.CityAssistant;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.missouri.CityAssistant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

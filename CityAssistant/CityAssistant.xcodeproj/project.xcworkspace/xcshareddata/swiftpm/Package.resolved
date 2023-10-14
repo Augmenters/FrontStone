@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "map",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pauljohanneskraft/Map.git",
+      "state" : {
+        "revision" : "3eed43ceaf7892a4021a34f87da2e6561e50318c",
+        "version" : "0.2.0"
+      }
+    }
+  ],
+  "version" : 2
+}

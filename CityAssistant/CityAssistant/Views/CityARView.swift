@@ -45,10 +45,11 @@ struct CameraView: UIViewRepresentable {
         let planeCornerRadius: Float = 0.1
         let planeCollisionDepth: Float = 0.1
         let planeCollisionMass: Float = 0
+        let planeColor = UIColor(red: 170, green: 166, blue: 255, alpha: 0.80)
         
         let plane = ModelEntity(
             mesh: MeshResource.generatePlane(width: planeWidth, height: planeHeight, cornerRadius: planeCornerRadius),
-                materials: [SimpleMaterial(color: .blue, isMetallic: false)],
+                materials: [SimpleMaterial(color: planeColor, isMetallic: false)],
             collisionShape: ShapeResource.generateBox(width: planeWidth, height: planeHeight, depth: planeCollisionDepth),
                 mass: planeCollisionMass
             )

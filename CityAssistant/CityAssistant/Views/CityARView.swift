@@ -39,24 +39,9 @@ struct CameraView: UIViewRepresentable {
         
         placePOI(poi: poi, arView: arView)
         
-        // Temporary plane test. POI bubble creation should be in a function.
-        let planeWidth: Float = 1
-        let planeHeight: Float = 1.5
-        let planeCornerRadius: Float = 0.1
-        let planeCollisionDepth: Float = 0.1
-        let planeCollisionMass: Float = 0
-        let planeColor = UIColor(red: 170, green: 166, blue: 255, alpha: 0.80)
-        
-        let plane = ModelEntity(
-            mesh: MeshResource.generatePlane(width: planeWidth, height: planeHeight, cornerRadius: planeCornerRadius),
-                materials: [SimpleMaterial(color: planeColor, isMetallic: false)],
-            collisionShape: ShapeResource.generateBox(width: planeWidth, height: planeHeight, depth: planeCollisionDepth),
-                mass: planeCollisionMass
-            )
-        
-        let bubbleAnchor = AnchorEntity()
-        bubbleAnchor.addChild(plane)
-        arView.scene.addAnchor(bubbleAnchor)
+        let bubble = createBubble()
+        // for now, using the same placement function as the 3D text
+        placePOI(poi: bubble, arView: arView)
         
         return arView
     }
@@ -72,6 +57,30 @@ struct CameraView: UIViewRepresentable {
         return txt
     }
     
+    func createBubble() -> ModelEntity {
+        // Temporary plane test. POI bubble creation should be in a function.
+        let planeWidth: Float = 1
+        let planeHeight: Float = 1.5
+        let planeCornerRadius: Float = 0.1
+        let planeCollisionDepth: Float = 0.1
+        let planeCollisionMass: Float = 0
+        let planeColor = UIColor(red: 170, green: 166, blue: 255, alpha: 0.80)
+        
+        let plane = ModelEntity(
+            mesh: MeshResource.generatePlane(width: planeWidth, height: planeHeight, cornerRadius: planeCornerRadius),
+                materials: [SimpleMaterial(color: planeColor, isMetallic: false)],
+            collisionShape: ShapeResource.generateBox(width: planeWidth, height: planeHeight, depth: planeCollisionDepth),
+                mass: planeCollisionMass
+            )
+        
+//        let bubbleAnchor = AnchorEntity()
+//        bubbleAnchor.addChild(plane)
+//        arView.scene.addAnchor(bubbleAnchor)
+        return plane
+    }
+    
+    // Could we modify placePOI to take an array, and have the createPOI return an array of ModelEntities to be placed on the same anchor?
+    //  https://developer.apple.com/documentation/realitykit/entity
     func placePOI(poi: ModelEntity, arView: ARView) {
         // Place individual poi in scene
         // Places test text at default coordinate for now

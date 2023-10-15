@@ -40,11 +40,17 @@ struct CameraView: UIViewRepresentable {
         placePOI(poi: poi, arView: arView)
         
         // Temporary plane test. POI bubble creation should be in a function.
+        let planeWidth: Float = 1
+        let planeHeight: Float = 1.5
+        let planeCornerRadius: Float = 0.1
+        let planeCollisionDepth: Float = 0.1
+        let planeCollisionMass: Float = 0
+        
         let plane = ModelEntity(
-            mesh: MeshResource.generatePlane(width: 50, height: 70, cornerRadius: 2.5),
+            mesh: MeshResource.generatePlane(width: planeWidth, height: planeHeight, cornerRadius: planeCornerRadius),
                 materials: [SimpleMaterial(color: .blue, isMetallic: false)],
-                collisionShape: ShapeResource.generateBox(width: 50, height: 70, depth: 1),
-                mass: 0
+            collisionShape: ShapeResource.generateBox(width: planeWidth, height: planeHeight, depth: planeCollisionDepth),
+                mass: planeCollisionMass
             )
         
         let bubbleAnchor = AnchorEntity()

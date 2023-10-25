@@ -44,13 +44,13 @@ struct CameraView: UIViewRepresentable {
         placePOI(poi: bubble, arView: arView)
         
         // Test placing text at location
-        let x = -2
-        let y = 0
+        let x = -0.5
+        let y = 0.5
         let rectOrigin = CGPoint(x: x, y: y)
         let rectSize = CGSize(width: 0, height: 0)
         let myRect = CGRect(origin: rectOrigin, size: rectSize)
         
-        let myTxt = ModelEntity(mesh: MeshResource.generateText("El Rancho", extrusionDepth: 0.01, font: .boldSystemFont(ofSize: 0.1), containerFrame: myRect, alignment: .center,lineBreakMode: .byWordWrapping), materials: [SimpleMaterial(color: .black, isMetallic: true)])
+        let myTxt = ModelEntity(mesh: MeshResource.generateText(CameraView.mockPOI.BusinessName, extrusionDepth: 0.01, font: .boldSystemFont(ofSize: 0.1), containerFrame: myRect, alignment: .center,lineBreakMode: .byWordWrapping), materials: [SimpleMaterial(color: .black, isMetallic: true)])
         myTxt.generateCollisionShapes(recursive: true)
         let myAnchor = AnchorEntity()
         myAnchor.addChild(myTxt)

@@ -44,17 +44,19 @@ struct CameraView: UIViewRepresentable {
         placePOI(poi: bubble, arView: arView)
         
         // Test placing text at location
-        let x = -0.5
-        let y = 0.5
-        let rectOrigin = CGPoint(x: x, y: y)
-        let rectSize = CGSize(width: 0, height: 0)
-        let myRect = CGRect(origin: rectOrigin, size: rectSize)
-        
-        let myTxt = ModelEntity(mesh: MeshResource.generateText(CameraView.mockPOI.BusinessName, extrusionDepth: 0.01, font: .boldSystemFont(ofSize: 0.1), containerFrame: myRect, alignment: .center,lineBreakMode: .byWordWrapping), materials: [SimpleMaterial(color: .black, isMetallic: true)])
-        myTxt.generateCollisionShapes(recursive: true)
-        let myAnchor = AnchorEntity()
-        myAnchor.addChild(myTxt)
-        arView.scene.addAnchor(myAnchor)
+//        let x = -0.5
+//        let y = 0.5
+//        let rectOrigin = CGPoint(x: x, y: y)
+//        let rectSize = CGSize(width: 0, height: 0)
+//        let textFrameRect = CGRect(origin: rectOrigin, size: rectSize)
+//        
+//        let myTxt = ModelEntity(mesh: MeshResource.generateText(CameraView.mockPOI.BusinessName, extrusionDepth: 0.01, font: .boldSystemFont(ofSize: 0.1), containerFrame: textFrameRect, alignment: .center, lineBreakMode: .byWordWrapping), materials: [SimpleMaterial(color: .black, isMetallic: true)])
+//        myTxt.generateCollisionShapes(recursive: true)
+//        let myAnchor = AnchorEntity()
+//        myAnchor.addChild(myTxt)
+//        arView.scene.addAnchor(myAnchor)
+        let businessNameText = create3dText(text: CameraView.mockPOI.BusinessName, x: -0.5, y: 0.5)
+        placePOI(poi: businessNameText, arView: arView)
         
         return arView
     }
@@ -70,6 +72,20 @@ struct CameraView: UIViewRepresentable {
         return txt
     }
     
+    // Create custom 3D text at specified local coordinate (x,y)
+    func create3dText(text: String, x: Double = 0.0, y: Double = 0.0) -> ModelEntity {
+        // Test placing text at location
+        let x = x
+        let y = y
+        let rectOrigin = CGPoint(x: x, y: y)
+        let rectSize = CGSize(width: 0, height: 0)
+        let textFrameRect = CGRect(origin: rectOrigin, size: rectSize)
+        
+        let myTxt = ModelEntity(mesh: MeshResource.generateText(CameraView.mockPOI.BusinessName, extrusionDepth: 0.01, font: .boldSystemFont(ofSize: 0.1), containerFrame: textFrameRect, alignment: .center, lineBreakMode: .byWordWrapping), materials: [SimpleMaterial(color: .black, isMetallic: true)])
+        myTxt.generateCollisionShapes(recursive: true)
+        return myTxt
+    }
+        
     // Creates bubble rectangle for POI
     func createBubble() -> ModelEntity {
         // Temporary plane test. POI bubble creation should be in a function.

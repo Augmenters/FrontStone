@@ -43,11 +43,24 @@ struct CameraView: UIViewRepresentable {
         // for now, using the same placement function as the 3D text
         placePOI(poi: bubble, arView: arView)
         
+        // Test placing text at location
+        let x = -2
+        let y = 0
+        let rectOrigin = CGPoint(x: x, y: y)
+        let rectSize = CGSize(width: 0, height: 0)
+        let myRect = CGRect(origin: rectOrigin, size: rectSize)
+        
+        let myTxt = ModelEntity(mesh: MeshResource.generateText("El Rancho", extrusionDepth: 0.01, font: .boldSystemFont(ofSize: 0.1), containerFrame: myRect, alignment: .center,lineBreakMode: .byWordWrapping), materials: [SimpleMaterial(color: .black, isMetallic: true)])
+        myTxt.generateCollisionShapes(recursive: true)
+        let myAnchor = AnchorEntity()
+        myAnchor.addChild(myTxt)
+        arView.scene.addAnchor(myAnchor)
+        
         return arView
     }
         
         
-    
+    // have this take in a POI object
     func createPOI() -> ModelEntity {
         // For now, this function creates the test text
         // Will be used to create POI bubbles
@@ -57,6 +70,7 @@ struct CameraView: UIViewRepresentable {
         return txt
     }
     
+    // Creates bubble rectangle for POI
     func createBubble() -> ModelEntity {
         // Temporary plane test. POI bubble creation should be in a function.
         let planeWidth: Float = 1

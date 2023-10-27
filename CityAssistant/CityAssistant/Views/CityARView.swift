@@ -35,9 +35,9 @@ struct CameraView: UIViewRepresentable {
         context.coordinator.view = arView
         arView.addGestureRecognizer(UITapGestureRecognizer(target: context.coordinator, action: #selector(CityCoordinator.handleTap(_:))))
         
-        let poi = createPOI()
-        
-        placePOI(poi: poi, arView: arView)
+//        // The "Text Text" 3D object
+//        let poi = createPOI()
+//        placePOI(poi: poi, arView: arView)
         
         let bubble = createBubble()
         // for now, using the same placement function as the 3D text
@@ -58,8 +58,17 @@ struct CameraView: UIViewRepresentable {
         let businessNameText = create3dText(text: CameraView.mockPOI.BusinessName, x: -0.45, y: 0.4)
         placePOI(poi: businessNameText, arView: arView)
         let businessType = "Business Type"
-        let businessTypeText = create3dText(text: businessType, x: -0.45, y: 0.35, fontSize: 0.08)
+        let businessTypeText = create3dText(text: businessType, x: -0.45, y: 0.3, fontSize: 0.07)
         placePOI(poi: businessTypeText, arView: arView)
+        let addressText = create3dText(text: CameraView.mockPOI.Address.ToString(), x: -0.45, y: 0.2, fontSize: 0.07)
+        placePOI(poi: addressText, arView: arView)
+        let hours = "8 am to 9 pm"
+        let hoursText = create3dText(text: hours, x: -0.45, y: 0.1, fontSize: 0.07)
+        placePOI(poi: hoursText, arView: arView)
+        let ratingText = create3dText(text: "Yelp Rating: \(CameraView.mockPOI.Rating!)/5 Stars", x: -0.45, y: 0.0, fontSize: 0.07)
+        placePOI(poi: ratingText, arView: arView)
+        let promptText = create3dText(text: "Click for more information", x: -0.45, y: -0.4, fontSize: 0.05)
+        placePOI(poi: promptText, arView: arView)
         
         return arView
     }

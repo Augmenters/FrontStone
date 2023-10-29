@@ -37,52 +37,11 @@ struct CameraView: UIViewRepresentable {
         
         createPOIBubble(poi: CameraView.mockPOI, arView: arView)
         
-//        // The "Test Text" 3D object
-//        let poi = createPOI()
-//        placePOI(poi: poi, arView: arView)
-        
-        // Creates Plane
-//        let bubble = createBubble()
-//        // for now, using the same placement function as the 3D text
-//        placePOI(poi: bubble, arView: arView)
-        
-        // Test placing text at position on bubble
-//        let x = -0.5
-//        let y = 0.5
-//        let rectOrigin = CGPoint(x: x, y: y)
-//        let rectSize = CGSize(width: 0, height: 0)
-//        let textFrameRect = CGRect(origin: rectOrigin, size: rectSize)
-//        
-//        let myTxt = ModelEntity(mesh: MeshResource.generateText(CameraView.mockPOI.BusinessName, extrusionDepth: 0.01, font: .boldSystemFont(ofSize: 0.1), containerFrame: textFrameRect, alignment: .center, lineBreakMode: .byWordWrapping), materials: [SimpleMaterial(color: .black, isMetallic: true)])
-//        myTxt.generateCollisionShapes(recursive: true)
-//        let myAnchor = AnchorEntity()
-//        myAnchor.addChild(myTxt)
-//        arView.scene.addAnchor(myAnchor)
-        
-        // Test POI with mock data
-//        let businessNameText = create3dText(text: CameraView.mockPOI.BusinessName, x: -0.45, y: 0.4)
-//        placePOI(poi: businessNameText, arView: arView)
-//        let businessType = "Business Type"
-//        let businessTypeText = create3dText(text: businessType, x: -0.45, y: 0.3, fontSize: 0.07)
-//        placePOI(poi: businessTypeText, arView: arView)
-////        let addressText = create3dText(text: CameraView.mockPOI.Address.ToString(), x: -0.45, y: 0.2, fontSize: 0.07)
-//        placePOI(poi: addressText, arView: arView)
-//        let hours = "8 am to 9 pm"
-//        let hoursText = create3dText(text: hours, x: -0.45, y: 0.2, fontSize: 0.07)
-//        placePOI(poi: hoursText, arView: arView)
-//        let ratingText = create3dText(text: "Yelp Rating: \(CameraView.mockPOI.Rating!)/5 Stars", x: -0.45, y: 0.1, fontSize: 0.07)
-//        placePOI(poi: ratingText, arView: arView)
-//        let promptText = create3dText(text: "Click for more information", x: -0.45, y: -0.4, fontSize: 0.05)
-//        placePOI(poi: promptText, arView: arView)
-        
         return arView
     }
         
-        
-    // have this take in a POI object
+    // this function creates test text
     func createTestText() -> ModelEntity {
-        // For now, this function creates the test text
-        // Will be used to create POI bubbles
         let txt = ModelEntity(mesh: MeshResource.generateText("Test Text", extrusionDepth: 0.01, font: .boldSystemFont(ofSize: 0.1), containerFrame: .zero, alignment: .center,lineBreakMode: .byWordWrapping), materials: [SimpleMaterial(color: .black, isMetallic: true)])
         
         txt.generateCollisionShapes(recursive: true)
@@ -92,6 +51,9 @@ struct CameraView: UIViewRepresentable {
     // Creates and places POI bubble.
     func createPOIBubble(poi: POI, arView: ARView) {
         let leftMargin = -0.45
+        let topMargin = 0.4
+        let bottomMargin = -0.4
+        let textSpacing = 0.1
         let bigFontSize = 0.1
         let mediumFontSize = 0.07
         let smallFontSize = 0.05
@@ -100,17 +62,17 @@ struct CameraView: UIViewRepresentable {
         // for now, using the same placement function as the 3D text
         placePOI(poi: bubble, arView: arView)
         
-        let businessNameText = create3dText(text: poi.BusinessName, x: leftMargin, y: 0.4, fontSize: bigFontSize)
+        let businessNameText = create3dText(text: poi.BusinessName, x: leftMargin, y: topMargin, fontSize: bigFontSize)
         placePOI(poi: businessNameText, arView: arView)
-        let businessType = "Business Type"
-        let businessTypeText = create3dText(text: businessType, x: leftMargin, y: 0.3, fontSize: mediumFontSize)
+        let businessType = "Business Type" // do we have this?
+        let businessTypeText = create3dText(text: businessType, x: leftMargin, y: topMargin - textSpacing, fontSize: mediumFontSize)
         placePOI(poi: businessTypeText, arView: arView)
-        let hours = "8 am to 9 pm"
-        let hoursText = create3dText(text: hours, x: leftMargin, y: 0.2, fontSize: mediumFontSize)
+        let hours = "8 am to 9 pm" // this should be pulled from business open time
+        let hoursText = create3dText(text: hours, x: leftMargin, y: topMargin - textSpacing * 2, fontSize: mediumFontSize)
         placePOI(poi: hoursText, arView: arView)
-        let ratingText = create3dText(text: "Yelp Rating: \(poi.Rating!)/5 Stars", x: leftMargin, y: 0.1, fontSize: mediumFontSize)
+        let ratingText = create3dText(text: "Yelp Rating: \(poi.Rating!)/5 Stars", x: leftMargin, y: topMargin - textSpacing * 3, fontSize: mediumFontSize)
         placePOI(poi: ratingText, arView: arView)
-        let promptText = create3dText(text: "Click for more information", x: leftMargin, y: -0.4, fontSize: smallFontSize)
+        let promptText = create3dText(text: "Click for more information", x: leftMargin, y: bottomMargin, fontSize: smallFontSize)
         placePOI(poi: promptText, arView: arView)
     }
     
@@ -123,14 +85,13 @@ struct CameraView: UIViewRepresentable {
         let rectSize = CGSize(width: 0, height: 0)
         let textFrameRect = CGRect(origin: rectOrigin, size: rectSize)
         
-        let myTxt = ModelEntity(mesh: MeshResource.generateText(text, extrusionDepth: 0.01, font: .boldSystemFont(ofSize: fontSize), containerFrame: textFrameRect, alignment: .center, lineBreakMode: .byWordWrapping), materials: [SimpleMaterial(color: .black, isMetallic: true)])
-        myTxt.generateCollisionShapes(recursive: true)
-        return myTxt
+        let myText = ModelEntity(mesh: MeshResource.generateText(text, extrusionDepth: 0.01, font: .boldSystemFont(ofSize: fontSize), containerFrame: textFrameRect, alignment: .center, lineBreakMode: .byWordWrapping), materials: [SimpleMaterial(color: .black, isMetallic: true)])
+        myText.generateCollisionShapes(recursive: true)
+        return myText
     }
         
-    // Creates bubble rectangle for POI
+    // Creates rectangle plane for POI bubble
     func createBubble() -> ModelEntity {
-        // Temporary plane test. POI bubble creation should be in a function.
         let planeWidth: Float = 1
         let planeHeight: Float = 1
         let planeCornerRadius: Float = 0.1
@@ -144,10 +105,6 @@ struct CameraView: UIViewRepresentable {
             collisionShape: ShapeResource.generateBox(width: planeWidth, height: planeHeight, depth: planeCollisionDepth),
                 mass: planeCollisionMass
             )
-        
-//        let bubbleAnchor = AnchorEntity()
-//        bubbleAnchor.addChild(plane)
-//        arView.scene.addAnchor(bubbleAnchor)
         return plane
     }
     
@@ -160,7 +117,6 @@ struct CameraView: UIViewRepresentable {
         poiAnchor.addChild(poi)
         arView.scene.addAnchor(poiAnchor)
     }
-    
     
     func updateUIView(_ uiView: ARView, context: Context) {
         //Place to unload old anchors and add new ones when the user moves

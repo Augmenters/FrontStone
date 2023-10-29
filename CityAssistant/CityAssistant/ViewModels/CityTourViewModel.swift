@@ -8,7 +8,7 @@
 import Foundation
 import RealityKit
 
-public class CityTourViewModel
+public class CityTourViewModel : ObservableObject
 {
     @Published var userLocation: Coordinate
     @Published var selectedPOI: POI?

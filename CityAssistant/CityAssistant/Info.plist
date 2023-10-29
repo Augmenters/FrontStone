@@ -4,6 +4,11 @@
 <dict>
 	<key>BackstoneUrl</key>
 	<string>$(BackstoneUrl)</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>ReloadDistance</key>
 	<string>$(ReloadDistance)</string>
 </dict>

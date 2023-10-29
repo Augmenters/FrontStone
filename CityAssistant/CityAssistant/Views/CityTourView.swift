@@ -13,23 +13,26 @@ import RealityKit
 struct CityTourViewWrapper: View {
     @ObservedObject var poiMapViewModel: POIMapViewModel
     @ObservedObject var poiViewModel: POIViewModel
+    @ObservedObject var cityTourViewModel: CityTourViewModel
 
     @State var showARView = true
 
     init() {
         poiMapViewModel = POIMapViewModel()
         poiViewModel = POIViewModel() //we instantiate this here so that the context isn't lost if the view refreshes, probably a better way to do this
+        cityTourViewModel = CityTourViewModel() 
     }
 
     init(pois: [POI]) {
         poiMapViewModel = POIMapViewModel(pois: pois)
         poiViewModel = POIViewModel(business: CityTourView_Previews.mockPOI)
+        cityTourViewModel = CityTourViewModel()
     }
 
     var body: some View {
             ZStack {
                 if(showARView) {
-                    CityARView()
+                    CityARView(cityModel: cityTourViewModel, poiModel: poiViewModel)
                 }
                 else {
                     AsyncContentView(source: poiMapViewModel, content:  { pois in

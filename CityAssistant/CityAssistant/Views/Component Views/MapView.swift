@@ -42,7 +42,7 @@ struct MapView : View {
                 annotationItems: annotations ?? [],
                 annotationContent:
                 { item in
-                    MapMarker(coordinate: item.Coordinate)
+                    return MapMarker(coordinate: item.Coordinate)
                 },
                 overlays: overlays?.map { $0.Overlay } ?? [],
                 overlayContent:

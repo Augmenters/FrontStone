@@ -58,9 +58,9 @@ struct CityARView : View
     @State var cityTourViewModel: CityTourViewModel
     @State var poiViewModel: POIViewModel
 
-    init() {
-        cityTourViewModel = CityTourViewModel()
-        poiViewModel = POIViewModel()
+    init(cityModel: CityTourViewModel, poiModel: POIViewModel) {
+        cityTourViewModel = cityModel
+        poiViewModel = poiModel
     }
 
     var body: some View {

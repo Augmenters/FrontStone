@@ -11,7 +11,7 @@ import RealityKit
 
 struct CameraView: UIViewRepresentable {
     
-    //Temporary test, will be removed when seperate files are created for AR objects
+    //Temporary test, will be removed when separate files are created for AR objects
     static let mockAddress: Address = Address("101 street st.", "Columbia", "MO", "65201")
     static let mockPOI: POI = POI("Harpo's Columbia", "(417)-111-1111", 4.7, "$$", mockAddress, 3145)
     static let mockPOIs: [POI] = [mockPOI]
@@ -60,12 +60,12 @@ struct CameraView: UIViewRepresentable {
         let businessType = "Business Type"
         let businessTypeText = create3dText(text: businessType, x: -0.45, y: 0.3, fontSize: 0.07)
         placePOI(poi: businessTypeText, arView: arView)
-        let addressText = create3dText(text: CameraView.mockPOI.Address.ToString(), x: -0.45, y: 0.2, fontSize: 0.07)
-        placePOI(poi: addressText, arView: arView)
+//        let addressText = create3dText(text: CameraView.mockPOI.Address.ToString(), x: -0.45, y: 0.2, fontSize: 0.07)
+//        placePOI(poi: addressText, arView: arView)
         let hours = "8 am to 9 pm"
-        let hoursText = create3dText(text: hours, x: -0.45, y: 0.1, fontSize: 0.07)
+        let hoursText = create3dText(text: hours, x: -0.45, y: 0.2, fontSize: 0.07)
         placePOI(poi: hoursText, arView: arView)
-        let ratingText = create3dText(text: "Yelp Rating: \(CameraView.mockPOI.Rating!)/5 Stars", x: -0.45, y: 0.0, fontSize: 0.07)
+        let ratingText = create3dText(text: "Yelp Rating: \(CameraView.mockPOI.Rating!)/5 Stars", x: -0.45, y: 0.1, fontSize: 0.07)
         placePOI(poi: ratingText, arView: arView)
         let promptText = create3dText(text: "Click for more information", x: -0.45, y: -0.4, fontSize: 0.05)
         placePOI(poi: promptText, arView: arView)

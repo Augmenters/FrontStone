@@ -35,13 +35,16 @@ struct CameraView: UIViewRepresentable {
         context.coordinator.view = arView
         arView.addGestureRecognizer(UITapGestureRecognizer(target: context.coordinator, action: #selector(CityCoordinator.handleTap(_:))))
         
-//        // The "Text Text" 3D object
+        createPOIBubble(poi: CameraView.mockPOI, arView: arView)
+        
+//        // The "Test Text" 3D object
 //        let poi = createPOI()
 //        placePOI(poi: poi, arView: arView)
         
-        let bubble = createBubble()
-        // for now, using the same placement function as the 3D text
-        placePOI(poi: bubble, arView: arView)
+        // Creates Plane
+//        let bubble = createBubble()
+//        // for now, using the same placement function as the 3D text
+//        placePOI(poi: bubble, arView: arView)
         
         // Test placing text at position on bubble
 //        let x = -0.5
@@ -55,27 +58,29 @@ struct CameraView: UIViewRepresentable {
 //        let myAnchor = AnchorEntity()
 //        myAnchor.addChild(myTxt)
 //        arView.scene.addAnchor(myAnchor)
-        let businessNameText = create3dText(text: CameraView.mockPOI.BusinessName, x: -0.45, y: 0.4)
-        placePOI(poi: businessNameText, arView: arView)
-        let businessType = "Business Type"
-        let businessTypeText = create3dText(text: businessType, x: -0.45, y: 0.3, fontSize: 0.07)
-        placePOI(poi: businessTypeText, arView: arView)
-//        let addressText = create3dText(text: CameraView.mockPOI.Address.ToString(), x: -0.45, y: 0.2, fontSize: 0.07)
+        
+        // Test POI with mock data
+//        let businessNameText = create3dText(text: CameraView.mockPOI.BusinessName, x: -0.45, y: 0.4)
+//        placePOI(poi: businessNameText, arView: arView)
+//        let businessType = "Business Type"
+//        let businessTypeText = create3dText(text: businessType, x: -0.45, y: 0.3, fontSize: 0.07)
+//        placePOI(poi: businessTypeText, arView: arView)
+////        let addressText = create3dText(text: CameraView.mockPOI.Address.ToString(), x: -0.45, y: 0.2, fontSize: 0.07)
 //        placePOI(poi: addressText, arView: arView)
-        let hours = "8 am to 9 pm"
-        let hoursText = create3dText(text: hours, x: -0.45, y: 0.2, fontSize: 0.07)
-        placePOI(poi: hoursText, arView: arView)
-        let ratingText = create3dText(text: "Yelp Rating: \(CameraView.mockPOI.Rating!)/5 Stars", x: -0.45, y: 0.1, fontSize: 0.07)
-        placePOI(poi: ratingText, arView: arView)
-        let promptText = create3dText(text: "Click for more information", x: -0.45, y: -0.4, fontSize: 0.05)
-        placePOI(poi: promptText, arView: arView)
+//        let hours = "8 am to 9 pm"
+//        let hoursText = create3dText(text: hours, x: -0.45, y: 0.2, fontSize: 0.07)
+//        placePOI(poi: hoursText, arView: arView)
+//        let ratingText = create3dText(text: "Yelp Rating: \(CameraView.mockPOI.Rating!)/5 Stars", x: -0.45, y: 0.1, fontSize: 0.07)
+//        placePOI(poi: ratingText, arView: arView)
+//        let promptText = create3dText(text: "Click for more information", x: -0.45, y: -0.4, fontSize: 0.05)
+//        placePOI(poi: promptText, arView: arView)
         
         return arView
     }
         
         
     // have this take in a POI object
-    func createPOI() -> ModelEntity {
+    func createTestText() -> ModelEntity {
         // For now, this function creates the test text
         // Will be used to create POI bubbles
         let txt = ModelEntity(mesh: MeshResource.generateText("Test Text", extrusionDepth: 0.01, font: .boldSystemFont(ofSize: 0.1), containerFrame: .zero, alignment: .center,lineBreakMode: .byWordWrapping), materials: [SimpleMaterial(color: .black, isMetallic: true)])
@@ -84,9 +89,34 @@ struct CameraView: UIViewRepresentable {
         return txt
     }
     
+    // Creates and places POI bubble.
+    func createPOIBubble(poi: POI, arView: ARView) {
+        let leftMargin = -0.45
+        let bigFontSize = 0.1
+        let mediumFontSize = 0.07
+        let smallFontSize = 0.05
+        
+        let bubble = createBubble() // creates plane
+        // for now, using the same placement function as the 3D text
+        placePOI(poi: bubble, arView: arView)
+        
+        let businessNameText = create3dText(text: poi.BusinessName, x: leftMargin, y: 0.4, fontSize: bigFontSize)
+        placePOI(poi: businessNameText, arView: arView)
+        let businessType = "Business Type"
+        let businessTypeText = create3dText(text: businessType, x: leftMargin, y: 0.3, fontSize: mediumFontSize)
+        placePOI(poi: businessTypeText, arView: arView)
+        let hours = "8 am to 9 pm"
+        let hoursText = create3dText(text: hours, x: leftMargin, y: 0.2, fontSize: mediumFontSize)
+        placePOI(poi: hoursText, arView: arView)
+        let ratingText = create3dText(text: "Yelp Rating: \(poi.Rating!)/5 Stars", x: leftMargin, y: 0.1, fontSize: mediumFontSize)
+        placePOI(poi: ratingText, arView: arView)
+        let promptText = create3dText(text: "Click for more information", x: leftMargin, y: -0.4, fontSize: smallFontSize)
+        placePOI(poi: promptText, arView: arView)
+    }
+    
     // Create custom 3D text at specified local coordinate (x,y)
     func create3dText(text: String, x: Double = 0.0, y: Double = 0.0, fontSize: CGFloat = 0.1) -> ModelEntity {
-        // Test placing text at location
+        // Where to place the text
         let x = x
         let y = y
         let rectOrigin = CGPoint(x: x, y: y)

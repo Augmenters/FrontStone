@@ -16,10 +16,16 @@ struct CrimeView: View {
     }
     
     var body: some View {
-        AsyncContentView(source: viewModel) { crimes in
-            MapView(userLocation: viewModel.userLocation,
-                    overlays: crimes?.map { $0.Overlay })
+        AsyncContentView(source: viewModel)
+        { crimeOverlays in
+            ZStack()
+            {
+                MapView(userLocation: viewModel.userLocation,
+                        overlays: crimeOverlays)
                 .edgesIgnoringSafeArea(.all)
+                
+                TimeSlotSelector(timeSlots: viewModel.timeSlots, sliderChangedAction: viewModel.SelectTimeSlot)
+            }
         }
     }
 }

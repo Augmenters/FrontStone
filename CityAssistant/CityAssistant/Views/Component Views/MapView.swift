@@ -14,13 +14,13 @@ struct MapView : View {
     @ObservedObject var userLocation: Coordinate
     @State private var region: MKCoordinateRegion
     @State private var annotations: [AnnotationItem]?
-    @State private var overlays: [MKOverlay]?
+    @State private var overlays: [OverlayObject]?
     @State private var userTrackingMode: UserTrackingMode
     @State private var mapType: MKMapType
     
     init(userLocation: Coordinate,
          annotations: [AnnotationItem]? = nil,
-         overlays: [MKOverlay]? = nil,
+         overlays: [OverlayObject]? = nil,
          trackUser: Bool = false,
          mapType: MKMapType = .satellite) {
         self.userLocation = userLocation
@@ -40,20 +40,28 @@ struct MapView : View {
                 interactionModes: [.all],
                 userTrackingMode: $userTrackingMode,
                 annotationItems: annotations ?? [],
-                annotationContent: { item in
+                annotationContent:
+                { item in
                     return MapMarker(coordinate: item.Coordinate)
                 },
-                overlays: overlays ?? [],
-                overlayContent: { overlay in
-                    RendererMapOverlay(overlay: overlay) { _, overlay in
-                        if let polygon = overlay as? MKPolygon {
-                            let renderer = MKPolygonRenderer(polygon: polygon)
-                            //specify styling of overlay here
-                            return renderer
+                overlays: overlays?.map { $0.Overlay } ?? [],
+                overlayContent:
+                { overlay in
+                RendererMapOverlay(overlay: overlay)
+                    { _, overlay in
+                        if let polygon = overlay as? MKPolygon
+                        {
+                            if let overlayObject = overlays?.first(where: {$0.Overlay === overlay})
+                            {
+                                let renderer = MKPolygonRenderer(polygon: polygon)
+                                
+                                
+                                renderer.fillColor = overlayObject.Color
+                                return renderer
+                            }
                         }
-                        else {
-                            return MKOverlayRenderer(overlay: overlay)
-                        }
+
+                        return MKOverlayRenderer(overlay: overlay)
                     }
                 }
             )

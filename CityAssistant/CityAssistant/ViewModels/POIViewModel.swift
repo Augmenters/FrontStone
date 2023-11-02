@@ -44,7 +44,7 @@ public class POIViewModel: LoadableObject {
         self.SelectedBusiness = business
         
         Task.init {
-            let result = await businessDataAccess.GetReviews(businessId: SelectedBusiness.Id)
+            let result = await businessDataAccess.GetReviews(businessId: SelectedBusiness.Id ?? "0")
             if(result.Success) {
                 self.state = .loaded(result.Data?.Reviews)
             }

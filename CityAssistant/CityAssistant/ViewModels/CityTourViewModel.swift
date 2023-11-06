@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 import RealityKit
 
 public class CityTourViewModel : ObservableObject
@@ -97,11 +98,13 @@ public class CityTourViewModel : ObservableObject
             let newPosition = SIMD3<Float>(x: newX, y: newY, z: cameraPos.z)
             let anchor = AnchorEntity(world: newPosition)
             
-            addPOIToARView(poi: poi, anchor: anchor)
+//            addPOIToARView(poi: poi, anchor: anchor)
+            createPOIBubble(poi: poi, arView: arView) // Erika's POI bubble function
             i += 1
         }
     }
     
+    // Jules slotting functions
     func selectSlottedPOI(entity: ModelEntity) {
         let poi = getSlottedPOIFromEntity(entity: entity)
         if(poi != nil)
@@ -135,4 +138,77 @@ public class CityTourViewModel : ObservableObject
         model.generateCollisionShapes(recursive: true)
         return model
     }
+    
+    
+    
+    // Erika POI bubble functions. Might be deprecated
+    // Creates and places POI bubble.
+    func createPOIBubble(poi: POI, arView: ARView) {
+        let leftMargin = -0.45
+        let topMargin = 0.4
+        let bottomMargin = -0.4
+        let textSpacing = 0.1
+        let bigFontSize = 0.1
+        let mediumFontSize = 0.07
+        let smallFontSize = 0.05
+        
+        let bubble = createBubble() // creates plane
+        // for now, using the same placement function as the 3D text
+        placePOI(poi: bubble, arView: arView)
+        
+        let businessNameText = create3dText(text: poi.BusinessName, x: leftMargin, y: topMargin, fontSize: bigFontSize)
+        placePOI(poi: businessNameText, arView: arView)
+        let businessType = "Business Type" // do we have this?
+        let businessTypeText = create3dText(text: businessType, x: leftMargin, y: topMargin - textSpacing, fontSize: mediumFontSize)
+        placePOI(poi: businessTypeText, arView: arView)
+        let hours = "8 am to 9 pm" // this should be pulled from business open time
+        let hoursText = create3dText(text: hours, x: leftMargin, y: topMargin - textSpacing * 2, fontSize: mediumFontSize)
+        placePOI(poi: hoursText, arView: arView)
+        let ratingText = create3dText(text: "Yelp Rating: \(poi.Rating!)/5 Stars", x: leftMargin, y: topMargin - textSpacing * 3, fontSize: mediumFontSize)
+        placePOI(poi: ratingText, arView: arView)
+        let promptText = create3dText(text: "Click for more information", x: leftMargin, y: bottomMargin, fontSize: smallFontSize)
+        placePOI(poi: promptText, arView: arView)
+    }
+    
+    // Create custom 3D text at specified local coordinate (x,y)
+        func create3dText(text: String, x: Double = 0.0, y: Double = 0.0, fontSize: CGFloat = 0.1) -> ModelEntity {
+            // Where to place the text
+            let x = x
+            let y = y
+            let rectOrigin = CGPoint(x: x, y: y)
+            let rectSize = CGSize(width: 0, height: 0)
+            let textFrameRect = CGRect(origin: rectOrigin, size: rectSize)
+            
+            let myText = ModelEntity(mesh: MeshResource.generateText(text, extrusionDepth: 0.01, font: .boldSystemFont(ofSize: fontSize), containerFrame: textFrameRect, alignment: .center, lineBreakMode: .byWordWrapping), materials: [SimpleMaterial(color: .black, isMetallic: true)])
+            myText.generateCollisionShapes(recursive: true)
+            return myText
+        }
+            
+        // Creates rectangle plane for POI bubble
+        func createBubble() -> ModelEntity {
+            let planeWidth: Float = 1
+            let planeHeight: Float = 1
+            let planeCornerRadius: Float = 0.1
+            let planeCollisionDepth: Float = 0.1
+            let planeCollisionMass: Float = 0
+            let planeColor = UIColor(red: 170, green: 166, blue: 255, alpha: 0.80)
+            
+            let plane = ModelEntity(
+                mesh: MeshResource.generatePlane(width: planeWidth, height: planeHeight, cornerRadius: planeCornerRadius),
+                    materials: [SimpleMaterial(color: planeColor, isMetallic: false)],
+                collisionShape: ShapeResource.generateBox(width: planeWidth, height: planeHeight, depth: planeCollisionDepth),
+                    mass: planeCollisionMass
+                )
+            return plane
+        }
+        
+        // Could we modify placePOI to take an array, and have the createPOI return an array of ModelEntities to be placed on the same anchor?
+        //  https://developer.apple.com/documentation/realitykit/entity
+        func placePOI(poi: ModelEntity, arView: ARView) {
+            // Place individual poi in scene
+            // Places test text at default coordinate for now
+            let poiAnchor = AnchorEntity()
+            poiAnchor.addChild(poi)
+            arView.scene.addAnchor(poiAnchor)
+        }
 }

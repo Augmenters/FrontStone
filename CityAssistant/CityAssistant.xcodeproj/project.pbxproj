@@ -52,7 +52,7 @@
 		BDF1CEFB2A4128EA0053A5EA /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF1CEFA2A4128EA0053A5EA /* AboutView.swift */; };
 		BDF1CEFD2A4129270053A5EA /* CrimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF1CEFC2A4129270053A5EA /* CrimeView.swift */; };
 		BDF1CEFF2A41295C0053A5EA /* POIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF1CEFE2A41295C0053A5EA /* POIView.swift */; };
-		BDF1CF032A413D340053A5EA /* CityTourView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF1CF022A413D340053A5EA /* CityTourView.swift */; };
+		BDF1CF032A413D340053A5EA /* CityTourViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF1CF022A413D340053A5EA /* CityTourViewWrapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,7 +122,7 @@
 		BDF1CEFA2A4128EA0053A5EA /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		BDF1CEFC2A4129270053A5EA /* CrimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrimeView.swift; sourceTree = "<group>"; };
 		BDF1CEFE2A41295C0053A5EA /* POIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POIView.swift; sourceTree = "<group>"; };
-		BDF1CF022A413D340053A5EA /* CityTourView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTourView.swift; sourceTree = "<group>"; };
+		BDF1CF022A413D340053A5EA /* CityTourViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTourViewWrapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -334,7 +334,7 @@
 				BDF1CEFC2A4129270053A5EA /* CrimeView.swift */,
 				BDF1CEFE2A41295C0053A5EA /* POIView.swift */,
 				BD163B842A47A27A0048AE2B /* POIMapView.swift */,
-				BDF1CF022A413D340053A5EA /* CityTourView.swift */,
+				BDF1CF022A413D340053A5EA /* CityTourViewWrapper.swift */,
 				B7B2C4092AAF8D2500454BCB /* CityARView.swift */,
 			);
 			path = Views;
@@ -493,7 +493,7 @@
 				B7B2C40A2AAF8D2500454BCB /* CityARView.swift in Sources */,
 				BDF1CEFB2A4128EA0053A5EA /* AboutView.swift in Sources */,
 				BD41954E2A41611A00D47A65 /* LoadableObject.swift in Sources */,
-				BDF1CF032A413D340053A5EA /* CityTourView.swift in Sources */,
+				BDF1CF032A413D340053A5EA /* CityTourViewWrapper.swift in Sources */,
 				BD4195492A41603F00D47A65 /* POIViewModel.swift in Sources */,
 				BD163B922A54C5D10048AE2B /* AnnotationItem.swift in Sources */,
 				BD4195522A4162CA00D47A65 /* ErrorView.swift in Sources */,
@@ -504,7 +504,6 @@
 				BDBDDFED2AC0D35A00F58A11 /* OverlayObject.swift in Sources */,
 				BD41953A2A415F2F00D47A65 /* CrimeDataAccess.swift in Sources */,
 				BD4195252A415E2F00D47A65 /* Experience.rcproject in Sources */,
-				9475229E2AB7B74C008F9756 /* (null) in Sources */,
 				BD163B852A47A27A0048AE2B /* POIMapView.swift in Sources */,
 				BD4195382A415F2F00D47A65 /* User.swift in Sources */,
 				BD41953C2A415F2F00D47A65 /* BusinessDataAccess.swift in Sources */,

@@ -89,7 +89,7 @@ public class CityTourViewModel : ObservableObject
     func slotPOIs() {
         let angleIncrement = Float(360) / Float(loadedPOIs.count)
         let radius : Float = 1
-        var i = 0;
+        var i = 0
         
         for poi in loadedPOIs {
             let cameraPos = arView.cameraTransform.translation

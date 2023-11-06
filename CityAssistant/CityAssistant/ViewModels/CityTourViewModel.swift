@@ -105,7 +105,7 @@ public class CityTourViewModel : ObservableObject
         }
     }
     
-    // Jules slotting functions
+    // Jules' slotting helper functions
     func selectSlottedPOI(entity: ModelEntity) {
         let poi = getSlottedPOIFromEntity(entity: entity)
         if(poi != nil)

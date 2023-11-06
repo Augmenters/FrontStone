@@ -140,7 +140,7 @@ public class CityTourViewModel : ObservableObject
         return model
     }
     
-    // Creates POI bubble, returns anchor that the bubble is fixed to
+    // Creates POI bubble and returns anchor that the bubble is fixed to
     func createPOIBubble(poi: POI, newPosition: SIMD3<Float>) -> AnchorEntity {
         let leftMargin = -0.45
         let topMargin = 0.4

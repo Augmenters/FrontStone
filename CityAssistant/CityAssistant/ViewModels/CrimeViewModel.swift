@@ -36,9 +36,9 @@ public class CrimeViewModel : LoadableObject {
         }
         catch {
             self.selectedTimeSlotId = 2 // Sunday second time slot
-            self.lowCrimeThreshold = 50
-            self.mediumCrimeThreshold = 100
-            self.highCrimeThreshold = 150
+            self.lowCrimeThreshold = 0
+            self.mediumCrimeThreshold = 1
+            self.highCrimeThreshold = 2
         }
 
         locationManager.locationChangedAction = PositionChanged

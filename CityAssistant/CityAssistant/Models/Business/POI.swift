@@ -10,9 +10,9 @@ import Foundation
 public class POI : Codable, Identifiable
 {
     public let id = UUID()
-    public var Id : String
+    public var Id : String?
     public var BusinessName : String
-    public var Phone : String
+    public var Phone : String?
     public var Rating : Decimal?
     public var ReviewCount : Int
     public var Price : String?

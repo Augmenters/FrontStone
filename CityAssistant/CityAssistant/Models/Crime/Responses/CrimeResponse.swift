@@ -11,18 +11,18 @@ import MapKit
 public class CrimeResponse : Codable
 {
     public var GridHash : String
-    public var CrimeDensity : Double
+    public var CrimeCount : Int
     public var Coordinates : [Coordinate]
     
     public init() {
         GridHash = ""
-        CrimeDensity = 0
+        CrimeCount = 0
         Coordinates = []
     }
     
     public enum CodingKeys : String, CodingKey {
         case GridHash
-        case CrimeDensity
+        case CrimeCount
         case Coordinates
     }
 }

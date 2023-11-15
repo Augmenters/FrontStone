@@ -38,7 +38,16 @@ public class BusinessDataAccess
     }
     
     public func GetReviews(businessId: String) async -> Result<BusinessReviewsResponse?> {
-        let result : Result<BusinessReviewsResponse?> = await HttpClientHelper().Get(baseUrl: backstoneUrl, resource: "Business/\(businessId)/Reviews")
+        var result : Result<BusinessReviewsResponse?>
+        if(businessId == "null")
+        {
+            result = Result<BusinessReviewsResponse?>(data: nil, success: true, error: nil)
+        }
+        else
+        {
+            result = await HttpClientHelper().Get(baseUrl: backstoneUrl, resource: "Business/\(businessId)/Reviews")
+        }
+        
         
         return result
     }

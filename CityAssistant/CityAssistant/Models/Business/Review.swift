@@ -37,7 +37,7 @@ public class Review : Hashable, Codable
     }
     
     public func hash(into hasher: inout Hasher) {
-            return hasher.combine(id)
+        return hasher.combine(id)
     }
     
     public enum CodingKeys : String, CodingKey {

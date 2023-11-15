@@ -37,7 +37,7 @@ struct POIView: View {
                             .font(.body)
                         Text("Hours: " + "8 am to 9 pm")
                             .font(.body)
-                        Text("Phone Number: " + selectedBusiness.Phone)
+                        Text("Phone Number: " + (selectedBusiness.Phone ?? ""))
                             .font(.body)
                         Text("Website: " + (selectedBusiness.Info ?? ""))
                             .font(.body)

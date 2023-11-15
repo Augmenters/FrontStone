@@ -55,8 +55,8 @@ class POITap: NSObject {
 
 struct CityARView : View
 {
-    @State var cityTourViewModel: CityTourViewModel
-    @State var poiViewModel: POIViewModel
+    @ObservedObject var cityTourViewModel: CityTourViewModel
+    @ObservedObject var poiViewModel: POIViewModel
 
     init(cityModel: CityTourViewModel, poiModel: POIViewModel) {
         cityTourViewModel = cityModel

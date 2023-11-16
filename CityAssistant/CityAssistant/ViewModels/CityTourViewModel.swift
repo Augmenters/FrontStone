@@ -28,11 +28,11 @@ public class CityTourViewModel : ObservableObject
     private var loadedPOIs: [POI]
 
     public init() {
-        self.arView = ARView(frame: .zero, cameraMode: .ar, automaticallyConfigureSession: true)
+        self.arView = ARView(frame: .zero)
+        let config = ARWorldTrackingConfiguration()
+        config.planeDetection = [.horizontal, .vertical]
+        self.arView.session.run(config, options: [.resetTracking, .removeExistingAnchors])
         
-        let worldConfiguration = ARWorldTrackingConfiguration()
-        
-        self.arView.session.run(worldConfiguration)
         self.userLocation = Coordinate()
         self.businessDataAccess = BusinessDataAccess()
         self.slottedPOIs = [:]
@@ -51,6 +51,25 @@ public class CityTourViewModel : ObservableObject
         locationManager.failureAction = { error in
             //No real error handling in this view, need to find a way to display an error to the user
         }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.addModelTo(arView: self.arView)
+        }
+    }
+    
+    private func addModelTo(arView: ARView) {
+        print("Placing simple object")
+        let boxMesh = MeshResource.generateBox(size: 0.5)
+        let material = SimpleMaterial(color: .red, isMetallic: false)
+        let boxEntity = ModelEntity(mesh: boxMesh, materials: [material])
+        
+        // Position the model 10 meters in front of the user
+        var translation = matrix_identity_float4x4
+        translation.columns.3.z = -2.0 // 10 meters away
+        let anchor = AnchorEntity(world: translation)
+        anchor.addChild(boxEntity)
+
+        arView.scene.addAnchor(anchor)
     }
 
     func load() {
@@ -63,6 +82,7 @@ public class CityTourViewModel : ObservableObject
     }
 
     func LoadPOIs() async {
+        print("Loading POIS")
         let result = await businessDataAccess.GetLocations(latitude: userLocation.Latitude, longitude: userLocation.Longitude)
 
         if(result.Success) {
@@ -89,28 +109,48 @@ public class CityTourViewModel : ObservableObject
             //This is where we will have to remove POIs that are far away, assuming that they did not get replaced during slotting already
         }
     }
+    func degreesToRadians(_ degrees: Float) -> Float {
+        return degrees * (.pi / 180)
+    }
 
     func slotPOIs() {
+        print("Slotting POIS")
         let angleIncrement = Float(360) / 12
+        let angleIncrementRadians = degreesToRadians(angleIncrement)
         let radius : Float = 1
-
+        print("Loaded POIS")
+        print(loadedPOIs)
 
         for i in 0...11
         {
+            print("\n\nSlot: " + String(i))
             var currentlySlotted: (POI, AnchorEntity, Double)?
+            
+            //this is the width of the slot
+            let slotRangeLow = Double(angleIncrementRadians) * Double(i)
+            let slotRangeHigh = Double(angleIncrementRadians) * Double(i + 1)
+            print(slotRangeLow)
+            print(slotRangeHigh)
 
             for poi in loadedPOIs {
+                
+//                print("POI")
+//                print(poi)
                 //this is the real angle to the user
-                let angleToPOI = atan((userLocation.Latitude - poi.Coordinates.Latitude)/(userLocation.Longitude - poi.Coordinates.Longitude))
-
-                //this is the width of the slot
-                let slotRangeLow = Double(angleIncrement) * Double(i)
-                let slotRangeHigh = Double(angleIncrement) * Double(i + 1)
+                let deltaY = userLocation.Latitude - poi.Coordinates.Latitude
+                let deltaX = userLocation.Longitude - poi.Coordinates.Longitude
+                var angleToPOI = atan2(deltaY, deltaX)
+                
+                if angleToPOI < 0 {
+                    angleToPOI += 2 * .pi
+                }
 
                 if(angleToPOI < slotRangeLow || angleToPOI > slotRangeHigh)
                 {
                     continue
                 }
+                
+                print("POI In angle range")
 
                 // arbitrarily high so that if the distance is null for whatever reason (it should never be)
                 // we replace the slot on the next go or dont slot it
@@ -123,11 +163,13 @@ public class CityTourViewModel : ObservableObject
                         continue;
                     }
                 }
+                
+                print("Slotting POI")
 
                 //this is the new position inside of the AR view coordinate space
                 let cameraPos = arView.cameraTransform.translation
-                let newX = cameraPos.x + (radius * sin(angleIncrement * Float(i)))
-                let newZ = cameraPos.z + (radius * cos(angleIncrement * Float(i)))
+                let newX = cameraPos.x + (radius * sin(angleIncrementRadians * Float(i)))
+                let newZ = cameraPos.z + (radius * cos(angleIncrementRadians * Float(i)))
                 let newPosition = SIMD3<Float>(x: newX, y: cameraPos.y, z: newZ)
 
                 let poiAnchor = AnchorEntity()
@@ -143,6 +185,7 @@ public class CityTourViewModel : ObservableObject
                 addPOIToARView(poi: currentlySlotted!.0, anchor: currentlySlotted!.1)
             }
         }
+        print("POIS Slotted")
     }
 
     // Jules' slotting helper functions

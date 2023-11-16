@@ -36,9 +36,9 @@ public class CrimeViewModel : LoadableObject {
         }
         catch {
             self.selectedTimeSlotId = 2 // Sunday second time slot
-            self.lowCrimeThreshold = 50
-            self.mediumCrimeThreshold = 100
-            self.highCrimeThreshold = 150
+            self.lowCrimeThreshold = 0
+            self.mediumCrimeThreshold = 1
+            self.highCrimeThreshold = 2
         }
 
         locationManager.locationChangedAction = PositionChanged
@@ -103,21 +103,23 @@ public class CrimeViewModel : LoadableObject {
     private func GetOverlay(coordinates: [Coordinate], crimeCount: Int) -> OverlayObject
     {
         var color: UIColor
+        let opacity: CGFloat = 0.5
+        
         if(crimeCount > highCrimeThreshold)
         {
-            color = UIColor.red
+            color = UIColor.red.withAlphaComponent(opacity)
         }
         else if(crimeCount > mediumCrimeThreshold)
         {
-            color = UIColor.orange
+            color = UIColor.orange.withAlphaComponent(opacity)
         }
         else if(crimeCount > lowCrimeThreshold)
         {
-            color = UIColor.yellow
+            color = UIColor.yellow.withAlphaComponent(opacity)
         }
         else
         {
-            color = UIColor.green
+            color = UIColor.green.withAlphaComponent(opacity)
         }
 
         return OverlayObject(coordinates: coordinates, color: color)

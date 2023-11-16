@@ -4,6 +4,10 @@
 <dict>
 	<key>BackstoneUrl</key>
 	<string>$(BackstoneUrl)</string>
+	<key>INIntentsSupported</key>
+	<array>
+		<string>Intent</string>
+	</array>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

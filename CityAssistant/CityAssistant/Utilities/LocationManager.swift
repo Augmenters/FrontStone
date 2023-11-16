@@ -24,6 +24,19 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
+        locationManager.requestAlwaysAuthorization()
+        locationManager.startUpdatingLocation()
+    }
+
+    init(locationChangedAction: @escaping (Coordinate) -> Void,
+         failureAction: ((Error) -> Void)?) {
+        self.locationChangedAction = locationChangedAction
+        self.failureAction = failureAction
+
+        super.init()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
     }
 

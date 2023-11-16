@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import RealityKit
+import ARKit
 
 public class CityTourViewModel : ObservableObject
 {
@@ -28,6 +29,10 @@ public class CityTourViewModel : ObservableObject
 
     public init() {
         self.arView = ARView(frame: .zero, cameraMode: .ar, automaticallyConfigureSession: true)
+        
+        let worldConfiguration = ARWorldTrackingConfiguration()
+        
+        self.arView.session.run(worldConfiguration)
         self.userLocation = Coordinate()
         self.businessDataAccess = BusinessDataAccess()
         self.slottedPOIs = [:]
@@ -122,12 +127,15 @@ public class CityTourViewModel : ObservableObject
                 //this is the new position inside of the AR view coordinate space
                 let cameraPos = arView.cameraTransform.translation
                 let newX = cameraPos.x + (radius * sin(angleIncrement * Float(i)))
-                let newY = cameraPos.y + (radius * cos(angleIncrement * Float(i)))
-                let newPosition = SIMD3<Float>(x: newX, y: newY, z: cameraPos.z)
+                let newZ = cameraPos.z + (radius * cos(angleIncrement * Float(i)))
+                let newPosition = SIMD3<Float>(x: newX, y: cameraPos.y, z: newZ)
 
-                let anchor = AnchorEntity(world: newPosition)
-
-                currentlySlotted = (poi, anchor, poiDistance)
+                let poiAnchor = AnchorEntity()
+                let worldAnchor = AnchorEntity(world: .zero)
+                let poiTransform = Transform(scale: .one, rotation: simd_quatf(), translation: newPosition)
+                poiAnchor.move(to: poiTransform, relativeTo: worldAnchor)
+                
+                currentlySlotted = (poi, poiAnchor, poiDistance)
             }
 
             if(currentlySlotted != nil)
@@ -184,7 +192,10 @@ public class CityTourViewModel : ObservableObject
 
 //        let poiAnchor = AnchorEntity(world: newPosition) // Bubble didn't pop up when we tried this
         let poiAnchor = AnchorEntity()
-
+        let worldAnchor = AnchorEntity(world: .zero)
+        let poiTransform = Transform(scale: .one, rotation: simd_quatf(), translation: newPosition)
+        poiAnchor.move(to: poiTransform, relativeTo: worldAnchor)
+        
         let bubble = createBubble() // creates plane
         poiAnchor.addChild(bubble)
         // TODO Instead of adding multiple ModelEntities to the same anchor directly, they could be grouped under a single Entity and that Entity can be added.

@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import RealityKit
+import ARKit
 
 public class CityTourViewModel : ObservableObject
 {

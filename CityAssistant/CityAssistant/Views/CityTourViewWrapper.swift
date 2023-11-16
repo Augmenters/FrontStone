@@ -32,7 +32,8 @@ struct CityTourViewWrapper: View {
     var body: some View {
             ZStack {
                 if(showARView) {
-                    CityARView(cityModel: cityTourViewModel, poiModel: poiViewModel)
+//                    CityARView(cityModel: cityTourViewModel, poiModel: poiViewModel)
+                    CameraView()
                 }
                 else {
                     AsyncContentView(source: poiMapViewModel, content:  { pois in

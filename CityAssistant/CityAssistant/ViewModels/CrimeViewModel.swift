@@ -103,21 +103,23 @@ public class CrimeViewModel : LoadableObject {
     private func GetOverlay(coordinates: [Coordinate], crimeCount: Int) -> OverlayObject
     {
         var color: UIColor
+        let opacity: CGFloat = 0.5
+        
         if(crimeCount > highCrimeThreshold)
         {
-            color = UIColor.red
+            color = UIColor.red.withAlphaComponent(opacity)
         }
         else if(crimeCount > mediumCrimeThreshold)
         {
-            color = UIColor.orange
+            color = UIColor.orange.withAlphaComponent(opacity)
         }
         else if(crimeCount > lowCrimeThreshold)
         {
-            color = UIColor.yellow
+            color = UIColor.yellow.withAlphaComponent(opacity)
         }
         else
         {
-            color = UIColor.green
+            color = UIColor.green.withAlphaComponent(opacity)
         }
 
         return OverlayObject(coordinates: coordinates, color: color)

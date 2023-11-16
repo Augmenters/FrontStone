@@ -25,7 +25,7 @@ struct ContentView : View {
                         Label("2D Map", systemImage: "map")
                     }
                     NavigationLink {
-                        CityTourViewWrapper()
+                        CameraView()
                     } label: {
                         Label("City Tour", systemImage: "camera")
                     }

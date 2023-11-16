@@ -5,7 +5,6 @@
 //  Created by Justin Reini on 9/11/23.
 //
 
-import Foundation
 import SwiftUI
 import RealityKit
 import ARKit
@@ -19,20 +18,17 @@ struct CameraView: UIViewRepresentable
 //    }
     
     init() {
+        print("Creating Camera View")
     }
 
     func makeUIView(context: Context) -> ARView {
 //        context.coordinator.view = viewModel.arView
 //        viewModel.arView.addGestureRecognizer(UITapGestureRecognizer(target: context.coordinator, action: #selector(POITap.handleTap(_:))))
         
+        print("Creating AR View")
         let arView = ARView(frame: .zero)
-       // Configure the AR session
-       let config = ARWorldTrackingConfiguration()
-       config.planeDetection = [.vertical]
-       arView.session.run(config)
-        
-        context.coordinator.setupARView(arView)
-        
+        setupARView(arView)
+    
         return arView
     }
 
@@ -41,42 +37,72 @@ struct CameraView: UIViewRepresentable
         //viewModel.slotPOIs()
     }
     
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
+    private func setupARView(_ arView: ARView) {
+        let config = ARWorldTrackingConfiguration()
+        config.planeDetection = [.horizontal, .vertical]
+        arView.session.run(config, options: [.resetTracking, .removeExistingAnchors])
+
+        // Add the model after a delay to ensure the session is properly started
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.addModelTo(arView: arView)
+        }
     }
+
+    private func addModelTo(arView: ARView) {
+        
+        let boxMesh = MeshResource.generateBox(size: 0.5)
+        let material = SimpleMaterial(color: .red, isMetallic: false)
+        let boxEntity = ModelEntity(mesh: boxMesh, materials: [material])
+        
+        // Position the model 10 meters in front of the user
+        var translation = matrix_identity_float4x4
+        translation.columns.3.z = -2.0 // 10 meters away
+        let anchor = AnchorEntity(world: translation)
+        anchor.addChild(boxEntity)
+
+        arView.scene.addAnchor(anchor)
+    }
+    
 
 //    func makeCoordinator() -> POITap {
 //        POITap(viewModel: viewModel)
 //    }
 }
-
-class Coordinator: NSObject, ARSessionDelegate {
-    var parent: CameraView
-
-    init(_ parent: CameraView) {
-        self.parent = parent
-    }
-
-    func setupARView(_ arView: ARView) {
-        arView.session.delegate = self
-    }
-
-    func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
-        guard let arView = session.delegate as? ARView else { return }
-
-        for anchor in anchors {
-            if let planeAnchor = anchor as? ARPlaneAnchor, planeAnchor.alignment == .horizontal {
-                // Load a 3D model and add it to the anchor
-                if let modelEntity = try? ModelEntity.loadModel(named: "yourModelName") {
-                    let anchorEntity = AnchorEntity(anchor: planeAnchor)
-                    anchorEntity.addChild(modelEntity)
-                    arView.scene.addAnchor(anchorEntity)
-                }
-                break // Remove this if you want to place models on every detected plane
-            }
-        }
-    }
-}
+//
+//class Coordinator: NSObject, ARSessionDelegate {
+//    var parent: CameraView
+//
+//    init(_ parent: CameraView) {
+//        self.parent = parent
+//    }
+//
+//    func setupARView(_ arView: ARView) {
+//        arView.session.delegate = self
+//    }
+//
+//    func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
+//        //print(anchors)
+//        guard let arView = session.delegate as? ARView else { return }
+//
+//        for anchor in anchors {
+//            if let planeAnchor = anchor as? ARPlaneAnchor {
+//                
+//                print(planeAnchor)
+//                
+//                // Create a box and add it to the anchor
+//                let boxMesh = MeshResource.generateBox(size: 2)
+//                let material = SimpleMaterial(color: .red, isMetallic: false)
+//                let boxEntity = ModelEntity(mesh: boxMesh, materials: [material])
+//
+//                let anchorEntity = AnchorEntity(anchor: planeAnchor)
+//                anchorEntity.addChild(boxEntity)
+//                arView.scene.addAnchor(anchorEntity)
+//                
+//                break // Remove this if you want to place models on every detected plane
+//            }
+//        }
+//    }
+//}
 
 
 

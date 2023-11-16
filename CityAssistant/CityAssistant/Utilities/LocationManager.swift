@@ -81,7 +81,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
-        print(#function, location)
+        //print(#function, location)
         
         if(locationChangedAction != nil) {
             let userLocation = Coordinate(location.coordinate.latitude, location.coordinate.longitude)

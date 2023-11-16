@@ -11,12 +11,15 @@ import SwiftUI
 struct POIView: View {
     @State var viewModel: POIViewModel
     @State var selectedBusiness: POI
-    
-    public init(selectedBusiness: POI, viewModel: POIViewModel) {
+
+    private var backButtonAction: (() -> Void)?
+
+    public init(selectedBusiness: POI, viewModel: POIViewModel, onBackButton: (() -> Void )? = nil) {
         self.selectedBusiness = selectedBusiness
         self.viewModel = viewModel
+        self.backButtonAction = onBackButton
     }
-    
+
     var body: some View {
         AsyncContentView(source: viewModel) { reviews in
             VStack(alignment: .leading) {
@@ -42,7 +45,7 @@ struct POIView: View {
                         Text("Website: " + (selectedBusiness.Info ?? ""))
                             .font(.body)
                             .padding(.bottom)
-                        
+
                         Text("Reviews:")
                             .font(.title2)
                             .bold()
@@ -56,16 +59,15 @@ struct POIView: View {
                             }
                         }
                     }.padding(/*@START_MENU_TOKEN@*/[.top, .bottom, .trailing]/*@END_MENU_TOKEN@*/)
-                    
+
                     ForEach(reviews!, id: \.self) { review in
                         ReviewCard(selectedReview: review)
                     }
                     Text("More reviews on Yelp")
                         .foregroundColor(Color.blue)
-                        
                 }
                 Spacer()
-                
+
             }
             .padding(/*@START_MENU_TOKEN@*/[.top, .bottom, .trailing]/*@END_MENU_TOKEN@*/)
         }.onAppear {
@@ -82,7 +84,7 @@ struct POI_Previews: PreviewProvider {
         Review("Service was slow and waiters were rude. Not worth the price", 2, "Patrick Mahomes"),
         Review("Good food for a sunny day.", 3, "Tiger Woods")]
     static let mockViewModel: POIViewModel = POIViewModel(selectedBusiness: mockPOI, reviews: mockReviews)
-    
+
     static var previews: some View {
         POIView(selectedBusiness: mockPOI, viewModel: mockViewModel)
     }

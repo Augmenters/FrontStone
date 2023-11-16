@@ -14,13 +14,13 @@ struct CityTourViewWrapper: View {
     @ObservedObject var poiMapViewModel: POIMapViewModel
     @ObservedObject var poiViewModel: POIViewModel
     @ObservedObject var cityTourViewModel: CityTourViewModel
-
+    
     @State var showARView = true
 
     init() {
         poiMapViewModel = POIMapViewModel()
-        poiViewModel = POIViewModel() //we instantiate this here so that the context isn't lost if the view refreshes, probably a better way to do this
-        cityTourViewModel = CityTourViewModel() 
+        poiViewModel = POIViewModel()
+        cityTourViewModel = CityTourViewModel()
     }
 
     init(pois: [POI]) {

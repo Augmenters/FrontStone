@@ -112,11 +112,65 @@ public class CityTourViewModel : ObservableObject
     func degreesToRadians(_ degrees: Float) -> Float {
         return degrees * (.pi / 180)
     }
+    
+    func calculateBearing(userLocation: (latitude: Double, longitude: Double),
+                          poiLocation: (latitude: Double, longitude: Double)) -> Double {
+        let lat1 = userLocation.latitude * .pi / 180
+        let lon1 = userLocation.longitude * .pi / 180
+        let lat2 = poiLocation.latitude * .pi / 180
+        let lon2 = poiLocation.longitude * .pi / 180
+
+        let dLon = lon2 - lon1
+
+        let y = sin(dLon) * cos(lat2)
+        let x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(dLon)
+        let bearing = atan2(y, x) * 180 / .pi
+
+        return bearing // Bearing in degrees
+    }
+    
+    func approximateDistance(userLocation: (latitude: Double, longitude: Double),
+                             poiLocation: (latitude: Double, longitude: Double)) -> Double {
+        let earthRadius: Double = 6371000 // Earth's radius in meters
+
+        let lat1 = userLocation.latitude * .pi / 180
+        let lon1 = userLocation.longitude * .pi / 180
+        let lat2 = poiLocation.latitude * .pi / 180
+        let lon2 = poiLocation.longitude * .pi / 180
+
+        let dLat = lat2 - lat1
+        let dLon = lon2 - lon1
+
+        let a = sin(dLat / 2) * sin(dLat / 2) +
+                cos(lat1) * cos(lat2) *
+                sin(dLon / 2) * sin(dLon / 2)
+        let c = 2 * atan2(sqrt(a), sqrt(1 - a))
+
+        let distance = earthRadius * c
+        return distance // distance in meters
+    }
+    
+    func positionForPOI(userLocation: (latitude: Double, longitude: Double),
+                        poiLocation: (latitude: Double, longitude: Double)) -> SIMD3<Float> {
+        
+        let distance = approximateDistance(userLocation: userLocation, poiLocation: poiLocation)
+        let bearing = calculateBearing(userLocation: userLocation, poiLocation: poiLocation)
+
+        let bearingRadians = degreesToRadians(Float(bearing))
+
+        // Calculate x and z position using simple trigonometry
+        let x = Float(distance) * sin(bearingRadians)
+        let z = Float(distance) * cos(bearingRadians)
+        
+        return SIMD3<Float>(x: x, y: 0, z: z) // Assuming y is 0 (no altitude difference)
+    }
+
+
 
     func slotPOIs() {
         print("Slotting POIS")
         let angleIncrement = Float(360) / 12
-        let angleIncrementRadians = degreesToRadians(angleIncrement)
+        //let angleIncrementRadians = degreesToRadians(angleIncrement)
         let radius : Float = 1
         print("Loaded POIS")
         print(loadedPOIs)
@@ -127,57 +181,45 @@ public class CityTourViewModel : ObservableObject
             var currentlySlotted: (POI, AnchorEntity, Double)?
             
             //this is the width of the slot
-            let slotRangeLow = Double(angleIncrementRadians) * Double(i)
-            let slotRangeHigh = Double(angleIncrementRadians) * Double(i + 1)
+            let slotRangeLow = Double(angleIncrement) * Double(i)
+            let slotRangeHigh = Double(angleIncrement) * Double(i + 1)
             print(slotRangeLow)
             print(slotRangeHigh)
 
             for poi in loadedPOIs {
                 
-//                print("POI")
-//                print(poi)
-                //this is the real angle to the user
-                let deltaY = userLocation.Latitude - poi.Coordinates.Latitude
-                let deltaX = userLocation.Longitude - poi.Coordinates.Longitude
-                var angleToPOI = atan2(deltaY, deltaX)
                 
-                if angleToPOI < 0 {
-                    angleToPOI += 2 * .pi
-                }
+                let poiLatitude = poi.Coordinates.Latitude
+                let poiLongitude = poi.Coordinates.Longitude
+                let poiLocation = (latitude: poiLatitude, longitude: poiLongitude)
+                
+                let userLatitude = userLocation.Latitude
+                let userLongitude = userLocation.Longitude
+                let userLocation = (latitude: userLatitude, longitude: userLongitude)
+                
+                let distance = approximateDistance(userLocation: userLocation, poiLocation: poiLocation)
+                let bearing = calculateBearing(userLocation: userLocation, poiLocation: poiLocation)
+                print(bearing)
 
-                if(angleToPOI < slotRangeLow || angleToPOI > slotRangeHigh)
+                if(bearing < slotRangeLow || bearing > slotRangeHigh)
                 {
                     continue
                 }
                 
                 print("POI In angle range")
-
-                // arbitrarily high so that if the distance is null for whatever reason (it should never be)
-                // we replace the slot on the next go or dont slot it
-                let poiDistance = currentlySlotted?.0.Coordinates.Distance(from: userLocation) ?? 10000
-
-                if(currentlySlotted != nil)
-                {
-                    if(poiDistance > currentlySlotted!.2)
-                    {
-                        continue;
-                    }
+                
+                if let currentlySlottedPOI = currentlySlotted, distance > currentlySlottedPOI.2 {
+                    continue
                 }
                 
                 print("Slotting POI")
+                let bearingRadians = degreesToRadians(Float(bearing))
+                let x = radius * sin(bearingRadians)
+                let z = radius * cos(bearingRadians)
+                let newPosition = SIMD3<Float>(x: x, y: 0, z: z)  // Assuming y is 0 (no altitude difference)
 
-                //this is the new position inside of the AR view coordinate space
-                let cameraPos = arView.cameraTransform.translation
-                let newX = cameraPos.x + (radius * sin(angleIncrementRadians * Float(i)))
-                let newZ = cameraPos.z + (radius * cos(angleIncrementRadians * Float(i)))
-                let newPosition = SIMD3<Float>(x: newX, y: cameraPos.y, z: newZ)
-
-                let poiAnchor = AnchorEntity()
-                let worldAnchor = AnchorEntity(world: .zero)
-                let poiTransform = Transform(scale: .one, rotation: simd_quatf(), translation: newPosition)
-                poiAnchor.move(to: poiTransform, relativeTo: worldAnchor)
-                
-                currentlySlotted = (poi, poiAnchor, poiDistance)
+                let poiAnchor = AnchorEntity(world: newPosition)
+                currentlySlotted = (poi, poiAnchor, distance)
             }
 
             if(currentlySlotted != nil)
@@ -203,6 +245,7 @@ public class CityTourViewModel : ObservableObject
     }
 
     func addPOIToARView(poi: POI, anchor: AnchorEntity) {
+        print("Creating POI Bubble")
         let model = makePOIBubble(poi: poi)
         anchor.addChild(model)
         visiblePOIs.updateValue(poi, forKey: model.id)

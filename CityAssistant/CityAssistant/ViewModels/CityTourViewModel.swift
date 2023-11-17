@@ -124,7 +124,11 @@ public class CityTourViewModel : ObservableObject
 
         let y = sin(dLon) * cos(lat2)
         let x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(dLon)
-        let bearing = atan2(y, x) * 180 / .pi
+        var bearing = atan2(y, x) * 180 / .pi
+        
+        if bearing < 0 {
+            bearing += 360
+        }
 
         return bearing // Bearing in degrees
     }
@@ -169,24 +173,35 @@ public class CityTourViewModel : ObservableObject
 
     func slotPOIs() {
         print("Slotting POIS")
+        if loadedPOIs.isEmpty {
+            print("No POIs found")
+            return
+        }
+
         let angleIncrement = Float(360) / 12
         //let angleIncrementRadians = degreesToRadians(angleIncrement)
         let radius : Float = 1
+    
+        
         print("Loaded POIS")
-        print(loadedPOIs)
+        for poi in loadedPOIs {
+            print(poi.BusinessName)
+        }
 
         for i in 0...11
         {
-            print("\n\nSlot: " + String(i))
+            
             var currentlySlotted: (POI, AnchorEntity, Double)?
             
             //this is the width of the slot
             let slotRangeLow = Double(angleIncrement) * Double(i)
             let slotRangeHigh = Double(angleIncrement) * Double(i + 1)
-            print(slotRangeLow)
-            print(slotRangeHigh)
+            
+            print("\n\nSlot: \(i) (\(slotRangeLow), \(slotRangeHigh))")
 
             for poi in loadedPOIs {
+                
+                let businessName = poi.BusinessName
                 
                 
                 let poiLatitude = poi.Coordinates.Latitude
@@ -199,20 +214,21 @@ public class CityTourViewModel : ObservableObject
                 
                 let distance = approximateDistance(userLocation: userLocation, poiLocation: poiLocation)
                 let bearing = calculateBearing(userLocation: userLocation, poiLocation: poiLocation)
-                print(bearing)
+                
+                
+                //print("\(businessName): Bearing: \(bearing)")
 
                 if(bearing < slotRangeLow || bearing > slotRangeHigh)
                 {
                     continue
                 }
                 
-                print("POI In angle range")
                 
                 if let currentlySlottedPOI = currentlySlotted, distance > currentlySlottedPOI.2 {
                     continue
                 }
                 
-                print("Slotting POI")
+                print("Slotting \(businessName)")
                 let bearingRadians = degreesToRadians(Float(bearing))
                 let x = radius * sin(bearingRadians)
                 let z = radius * cos(bearingRadians)
@@ -245,7 +261,6 @@ public class CityTourViewModel : ObservableObject
     }
 
     func addPOIToARView(poi: POI, anchor: AnchorEntity) {
-        print("Creating POI Bubble")
         let model = makePOIBubble(poi: poi)
         anchor.addChild(model)
         visiblePOIs.updateValue(poi, forKey: model.id)

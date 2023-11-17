@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import RealityKit
+import ARKit
 
 struct CameraView: UIViewRepresentable
 {
@@ -18,7 +19,10 @@ struct CameraView: UIViewRepresentable
     }
 
     func makeUIView(context: Context) -> ARView {
-        context.coordinator.view = viewModel.arView
+        let arView = viewModel.arView
+        context.coordinator.view = arView
+        arView.session.delegate = context.coordinator
+        
         viewModel.arView.addGestureRecognizer(UITapGestureRecognizer(target: context.coordinator, action: #selector(POITap.handleTap(_:))))
         return viewModel.arView
     }
@@ -33,7 +37,7 @@ struct CameraView: UIViewRepresentable
     }
 }
 
-class POITap: NSObject {
+class POITap: NSObject, ARSessionDelegate {
     weak var view: ARView?
     let viewModel: CityTourViewModel
 
@@ -48,6 +52,29 @@ class POITap: NSObject {
         if let entity = view.entity(at: tapLocation) as? ModelEntity
         {
             viewModel.selectSlottedPOI(entity: entity)
+        }
+    }
+    
+    // added for plane detection
+    func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
+        
+        for anchor in anchors {
+//            print("Anchor found")
+            if let planeAnchor = anchor as? ARPlaneAnchor {
+                
+                guard let frame = session.currentFrame else { return }
+                
+                // Extracting the camera's transform matrix
+                let cameraTransform = frame.camera.transform
+                
+                // Manually extracting the translation from the transform matrix
+                let userPosition = SIMD3<Float>(cameraTransform.columns.3.x,
+                                                  cameraTransform.columns.3.y,
+                                                  cameraTransform.columns.3.z)
+                
+                
+                self.viewModel.slotOntoPlane(plane: planeAnchor, userLocation: userPosition)
+            }
         }
     }
 }

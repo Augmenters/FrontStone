@@ -30,7 +30,7 @@ public class CityTourViewModel : ObservableObject
     public init() {
         self.arView = ARView(frame: .zero)
         let config = ARWorldTrackingConfiguration()
-        config.planeDetection = [.horizontal, .vertical]
+        config.planeDetection = [.vertical]
         self.arView.session.run(config, options: [.resetTracking, .removeExistingAnchors])
         
         self.userLocation = Coordinate()
@@ -90,7 +90,7 @@ public class CityTourViewModel : ObservableObject
         }
 
         //after loading has finished, start slotting in the main thread so that we don't run into a race condition
-        slotPOIs()
+        //slotPOIs()
     }
 
     func LoadPOIs() async {
@@ -145,6 +145,20 @@ public class CityTourViewModel : ObservableObject
         return bearing // Bearing in degrees
     }
     
+    func calculateBearing(from userPosition: SIMD3<Float>, to planePosition: SIMD3<Float>) -> Float {
+        let dx = planePosition.x - userPosition.x
+        let dz = planePosition.z - userPosition.z
+        let bearingRadians = atan2(dz, dx)
+        var bearingDegrees = bearingRadians * 180 / .pi
+        
+        if bearingDegrees < 0 {
+            bearingDegrees += 360
+        }
+        
+        return bearingDegrees
+    }
+    
+    
     func approximateDistance(userLocation: (latitude: Double, longitude: Double),
                              poiLocation: (latitude: Double, longitude: Double)) -> Double {
         let earthRadius: Double = 6371000 // Earth's radius in meters
@@ -187,6 +201,55 @@ public class CityTourViewModel : ObservableObject
         
         return SIMD3<Float>(x: vector.x / length, y: vector.y / length, z: vector.z / length)
     }
+    
+    func slotOntoPlane(plane: ARPlaneAnchor, userLocation: SIMD3<Float>){
+        
+       
+        
+//        Get user heading
+        guard let heading = locationManager.currentHeading else { return }
+        print("User heading: \(heading)")
+        
+//        Convert user heading to a vector
+        
+//      Get user location
+        
+        
+//        Loop through POIS
+        
+//                  Create vector from user location to POI
+        
+//                  Calculate angle between user heading vector and POI vector
+        
+//                  Place object if the angle is within threshold
+        
+    
+        print("\n\nSlot onto plane")
+        let planeLocation = plane.center
+        let desiredBearing = calculateBearing(from: userLocation, to: planeLocation)
+        print("Desired Bearing: \(desiredBearing)")
+
+        
+        let location = locationManager.currentLocation?.coordinate
+        if let userLatitude = location?.latitude, let userLongitude = location?.longitude  {
+            let userGpsLocation = (latitude: userLatitude, longitude: userLongitude)
+            print(userGpsLocation)
+            
+            for poi in loadedPOIs{
+                
+                let poiLatitude = poi.Coordinates.Latitude
+                let poiLongitude = poi.Coordinates.Longitude
+                let poiLocation = (latitude: poiLatitude, longitude: poiLongitude)
+                
+                let poiBearing = calculateBearing(userLocation: userGpsLocation, poiLocation: poiLocation)
+                print("\(poi.BusinessName) Bearing: \(poiBearing)")
+            }
+            
+        }
+    }
+    
+    
+    
     func slotPOIs() {
         print("Slotting POIS")
         if loadedPOIs.isEmpty {

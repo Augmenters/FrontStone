@@ -14,6 +14,8 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private let locationManager = CLLocationManager()
     var locationChangedAction: ((Coordinate) -> Void)?
     var failureAction: ((Error) -> Void)?
+    var currentLocation: CLLocation?
+    var currentHeading: CLLocationDirection?
     @Published var locationStatus: CLAuthorizationStatus?
 
     override init() {
@@ -26,6 +28,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
+        locationManager.startUpdatingHeading()
     }
 
     init(locationChangedAction: @escaping (Coordinate) -> Void,
@@ -39,6 +42,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
+        locationManager.startUpdatingHeading()
     }
 
     var statusString: String {
@@ -67,6 +71,10 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 
         print(#function, statusString)
     }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        currentHeading = newHeading.trueHeading
+    }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         locationFailed(error)
@@ -83,6 +91,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else { return }
         //print(#function, location)
+        self.currentLocation = locations.last
 
         if(locationChangedAction != nil) {
             let userLocation = Coordinate(location.coordinate.latitude, location.coordinate.longitude)

@@ -53,19 +53,31 @@ public class CityTourViewModel : ObservableObject
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.addModelTo(arView: self.arView)
+            
+//            // top left
+//            self.addModelTo(arView: self.arView, zDistance: -2.0, xDistance: -2.0, color: .blue)
+//            
+//            // top right
+//            self.addModelTo(arView: self.arView, zDistance: -2.0, xDistance: 2.0, color: .black)
+//            
+//            //bottom right
+//            self.addModelTo(arView: self.arView, zDistance: 2.0, xDistance: 2.0, color: .red)
+//            
+//            // bottom left
+//            self.addModelTo(arView: self.arView, zDistance: 2.0, xDistance: -2.0, color: .green)
         }
     }
     
-    private func addModelTo(arView: ARView) {
+    private func addModelTo(arView: ARView, zDistance: Float, xDistance: Float, color: UIColor) {
         print("Placing simple object")
         let boxMesh = MeshResource.generateBox(size: 0.5)
-        let material = SimpleMaterial(color: .red, isMetallic: false)
+        let material = SimpleMaterial(color: color, isMetallic: false)
         let boxEntity = ModelEntity(mesh: boxMesh, materials: [material])
         
         // Position the model 10 meters in front of the user
         var translation = matrix_identity_float4x4
-        translation.columns.3.z = -2.0 // 10 meters away
+        translation.columns.3.z = zDistance // 10 meters away
+        translation.columns.3.x = xDistance
         let anchor = AnchorEntity(world: translation)
         anchor.addChild(boxEntity)
 
@@ -166,11 +178,15 @@ public class CityTourViewModel : ObservableObject
         let x = Float(distance) * sin(bearingRadians)
         let z = Float(distance) * cos(bearingRadians)
         
-        return SIMD3<Float>(x: x, y: 0, z: z) // Assuming y is 0 (no altitude difference)
+        return SIMD3<Float>(x: -x, y: 0, z: z) // Assuming y is 0 (no altitude difference)
     }
-
-
-
+    
+    func normalizeToUnitVector(_ vector: SIMD3<Float>) -> SIMD3<Float> {
+        let length = sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z)
+        guard length != 0 else { return SIMD3<Float>(x: 0, y: 0, z: 0) }
+        
+        return SIMD3<Float>(x: vector.x / length, y: vector.y / length, z: vector.z / length)
+    }
     func slotPOIs() {
         print("Slotting POIS")
         if loadedPOIs.isEmpty {
@@ -180,7 +196,7 @@ public class CityTourViewModel : ObservableObject
 
         let angleIncrement = Float(360) / 12
         //let angleIncrementRadians = degreesToRadians(angleIncrement)
-        let radius : Float = 1
+        //let radius : Float = 1
     
         
         print("Loaded POIS")
@@ -215,26 +231,23 @@ public class CityTourViewModel : ObservableObject
                 let distance = approximateDistance(userLocation: userLocation, poiLocation: poiLocation)
                 let bearing = calculateBearing(userLocation: userLocation, poiLocation: poiLocation)
                 
-                
-                //print("\(businessName): Bearing: \(bearing)")
 
                 if(bearing < slotRangeLow || bearing > slotRangeHigh)
                 {
                     continue
                 }
                 
-                
                 if let currentlySlottedPOI = currentlySlotted, distance > currentlySlottedPOI.2 {
                     continue
                 }
                 
-                print("Slotting \(businessName)")
-                let bearingRadians = degreesToRadians(Float(bearing))
-                let x = radius * sin(bearingRadians)
-                let z = radius * cos(bearingRadians)
-                let newPosition = SIMD3<Float>(x: x, y: 0, z: z)  // Assuming y is 0 (no altitude difference)
+                
+                var position = positionForPOI(userLocation: userLocation, poiLocation: poiLocation)
+                position = normalizeToUnitVector(position)
+                
+                print("Slotting \(businessName) at \(position)")
 
-                let poiAnchor = AnchorEntity(world: newPosition)
+                let poiAnchor = AnchorEntity(world: position)
                 currentlySlotted = (poi, poiAnchor, distance)
             }
 

@@ -243,7 +243,6 @@ public class CityTourViewModel : ObservableObject
                 
                 
                 var position = positionForPOI(userLocation: userLocation, poiLocation: poiLocation)
-                position = normalizeToUnitVector(position)
                 
                 print("Slotting \(businessName) at \(position)")
 

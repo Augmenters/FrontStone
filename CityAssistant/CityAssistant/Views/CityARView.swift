@@ -62,18 +62,18 @@ class POITap: NSObject, ARSessionDelegate {
 //            print("Anchor found")
             if let planeAnchor = anchor as? ARPlaneAnchor {
                 
-                guard let frame = session.currentFrame else { return }
+//                guard let frame = session.currentFrame else { return }
+//                
+//                // Extracting the camera's transform matrix
+//                let cameraTransform = frame.camera.transform
+//                
+//                // Manually extracting the translation from the transform matrix
+//                let userPosition = SIMD3<Float>(cameraTransform.columns.3.x,
+//                                                  cameraTransform.columns.3.y,
+//                                                  cameraTransform.columns.3.z)
                 
-                // Extracting the camera's transform matrix
-                let cameraTransform = frame.camera.transform
                 
-                // Manually extracting the translation from the transform matrix
-                let userPosition = SIMD3<Float>(cameraTransform.columns.3.x,
-                                                  cameraTransform.columns.3.y,
-                                                  cameraTransform.columns.3.z)
-                
-                
-                self.viewModel.slotOntoPlane(plane: planeAnchor, userLocation: userPosition)
+                self.viewModel.slotOntoPlane(plane: planeAnchor)
             }
         }
     }

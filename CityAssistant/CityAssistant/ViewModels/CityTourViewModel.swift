@@ -117,7 +117,7 @@ public class CityTourViewModel : ObservableObject
             }
         }
         else {
-            print("Failed to loaded POIS: \(result.Error.debugDescription)")
+            print("Failed to load POIs: \(result.Error.debugDescription)")
         }
     }
 
@@ -136,12 +136,12 @@ public class CityTourViewModel : ObservableObject
         return degrees * (.pi / 180)
     }
     
-    func calculateBearing(userLocation: (latitude: Double, longitude: Double),
-                          poiLocation: (latitude: Double, longitude: Double)) -> Double {
-        let lat1 = userLocation.latitude * .pi / 180
-        let lon1 = userLocation.longitude * .pi / 180
-        let lat2 = poiLocation.latitude * .pi / 180
-        let lon2 = poiLocation.longitude * .pi / 180
+    func calculateBearing(from: (latitude: Double, longitude: Double),
+                          to: (latitude: Double, longitude: Double)) -> Double {
+        let lat1 = from.latitude * .pi / 180
+        let lon1 = from.longitude * .pi / 180
+        let lat2 = to.latitude * .pi / 180
+        let lon2 = to.longitude * .pi / 180
 
         let dLon = lon2 - lon1
 
@@ -195,7 +195,7 @@ public class CityTourViewModel : ObservableObject
                         poiLocation: (latitude: Double, longitude: Double)) -> SIMD3<Float> {
         
         let distance = approximateDistance(userLocation: userLocation, poiLocation: poiLocation)
-        let bearing = calculateBearing(userLocation: userLocation, poiLocation: poiLocation)
+        let bearing = calculateBearing(from: userLocation, to: poiLocation)
 
         let bearingRadians = degreesToRadians(Float(bearing))
 
@@ -213,50 +213,89 @@ public class CityTourViewModel : ObservableObject
         return SIMD3<Float>(x: vector.x / length, y: vector.y / length, z: vector.z / length)
     }
     
-    func slotOntoPlane(plane: ARPlaneAnchor, userLocation: SIMD3<Float>){
+    func isPOIInUserDirection(userLocation: (latitude: Double, longitude: Double),
+                              userHeading: CLLocationDirection,
+                              poiLocation: (latitude: Double, longitude: Double)) -> Bool {
         
-        addModelToPlane(arView: self.arView, plane: plane)
+        let bearingToPOI = calculateBearing(from: userLocation, to: poiLocation)
+        let headingDifference = abs(userHeading - bearingToPOI)
+        let threshold = 20.0 // Define a threshold (in degrees) for "in direction"
+
+        return headingDifference <= threshold || headingDifference >= 360 - threshold
+    }
+
+    
+    func slotOntoPlane(plane: ARPlaneAnchor){
+        
+        //addModelToPlane(arView: self.arView, plane: plane)
+        
+        var closestValidPOI: POI? = nil
+        var closestDistance: Double = Double.greatestFiniteMagnitude
         
 //        Get user heading
         guard let heading = locationManager.currentHeading else { return }
         //print("User heading: \(heading)")
         
-//        Convert user heading to a vector
-        
 //      Get user location
-        
-        
-//        Loop through POIS
-        
-//                  Create vector from user location to POI
-        
-//                  Calculate angle between user heading vector and POI vector
-        
-//                  Place object if the angle is within threshold
-        
-    
-        //print("\n\nSlot onto plane")
-        let planeLocation = plane.center
-        let desiredBearing = calculateBearing(from: userLocation, to: planeLocation)
-        //print("Desired Bearing: \(desiredBearing)")
-
-        
         let location = locationManager.currentLocation?.coordinate
         if let userLatitude = location?.latitude, let userLongitude = location?.longitude  {
             let userGpsLocation = (latitude: userLatitude, longitude: userLongitude)
-            print(userGpsLocation)
+            //print("User gps location: \(userGpsLocation)")
             
+            //  Loop through POIS
             for poi in loadedPOIs{
                 
                 let poiLatitude = poi.Coordinates.Latitude
                 let poiLongitude = poi.Coordinates.Longitude
                 let poiLocation = (latitude: poiLatitude, longitude: poiLongitude)
                 
-                let poiBearing = calculateBearing(userLocation: userGpsLocation, poiLocation: poiLocation)
-                //print("\(poi.BusinessName) Bearing: \(poiBearing)")
+                let isPotentialPOI = isPOIInUserDirection(userLocation: userGpsLocation, userHeading: heading, poiLocation: poiLocation)
+                if isPotentialPOI == false {
+                   continue
+                }
+                
+                let distance = approximateDistance(userLocation: userGpsLocation, poiLocation: poiLocation)
+                if distance < closestDistance {
+                    closestValidPOI = poi
+                    closestDistance = distance
+                }
+//                print("\(poi.BusinessName) Distance: \(distance)")
             }
-            
+            if let poi = closestValidPOI {
+                addPoiToPlane(poi: poi, plane: plane)
+            } else {
+                print("No POIs in view")
+            }
         }
+        
+        
+
+        
+
+        
+    
+//        //print("\n\nSlot onto plane")
+//        let planeLocation = plane.center
+//        let desiredBearing = calculateBearing(from: userLocation, to: planeLocation)
+//        //print("Desired Bearing: \(desiredBearing)")
+//
+//        
+//        let location = locationManager.currentLocation?.coordinate
+//        if let userLatitude = location?.latitude, let userLongitude = location?.longitude  {
+//            let userGpsLocation = (latitude: userLatitude, longitude: userLongitude)
+//            print(userGpsLocation)
+//            
+//            for poi in loadedPOIs{
+//                
+//                let poiLatitude = poi.Coordinates.Latitude
+//                let poiLongitude = poi.Coordinates.Longitude
+//                let poiLocation = (latitude: poiLatitude, longitude: poiLongitude)
+//                
+//                let poiBearing = calculateBearing(userLocation: userGpsLocation, poiLocation: poiLocation)
+//                //print("\(poi.BusinessName) Bearing: \(poiBearing)")
+//            }
+//            
+//        }
     }
     
     
@@ -303,7 +342,7 @@ public class CityTourViewModel : ObservableObject
                 let userLocation = (latitude: userLatitude, longitude: userLongitude)
                 
                 let distance = approximateDistance(userLocation: userLocation, poiLocation: poiLocation)
-                let bearing = calculateBearing(userLocation: userLocation, poiLocation: poiLocation)
+                let bearing = calculateBearing(from: userLocation, to: poiLocation)
                 
 
                 if(bearing < slotRangeLow || bearing > slotRangeHigh)
@@ -326,7 +365,7 @@ public class CityTourViewModel : ObservableObject
 
             if(currentlySlotted != nil)
             {
-                addPOIToARView(poi: currentlySlotted!.0, anchor: currentlySlotted!.1)
+                //addPOIToARView(poi: currentlySlotted!.0, anchor: currentlySlotted!.1)
             }
         }
         print("POIS Slotted")
@@ -346,11 +385,15 @@ public class CityTourViewModel : ObservableObject
         return poi.value
     }
 
-    func addPOIToARView(poi: POI, anchor: AnchorEntity) {
+    func addPoiToPlane(poi: POI, plane: ARPlaneAnchor) {
+        
+        print("Placing \(poi.BusinessName) on plane")
         let model = makePOIBubble(poi: poi)
+        let anchor = AnchorEntity(world: plane.transform)
         anchor.addChild(model)
-        visiblePOIs.updateValue(poi, forKey: model.id)
-        arView.scene.addAnchor(anchor)
+        self.arView.scene.addAnchor(anchor)
+        
+        //visiblePOIs.updateValue(poi, forKey: model.id)
     }
 
     func removePOIFromArView(poi: POI) {

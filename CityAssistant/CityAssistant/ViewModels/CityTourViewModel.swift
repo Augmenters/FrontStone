@@ -214,40 +214,19 @@ public class CityTourViewModel : ObservableObject
                 }
             }
             if let poi = closestValidPOI {
-                addPoiToPlane(poi: poi, plane: plane)
+                
+                // TODO temporarily changing to BusinessName to account for nil ids on open addresses. Change back to id once we are ignoring open addresses
+                if !visiblePOIs.contains(where: { $0.value.BusinessName == poi.BusinessName }) {
+                    addPoiToPlane(poi: poi, plane: plane)
+                }
+                else {
+                    print("Cannot place \(poi.BusinessName) already in scene")
+                }
+                
             } else {
                 print("No POIs in view")
             }
         }
-        
-        
-
-        
-
-        
-    
-//        //print("\n\nSlot onto plane")
-//        let planeLocation = plane.center
-//        let desiredBearing = calculateBearing(from: userLocation, to: planeLocation)
-//        //print("Desired Bearing: \(desiredBearing)")
-//
-//        
-//        let location = locationManager.currentLocation?.coordinate
-//        if let userLatitude = location?.latitude, let userLongitude = location?.longitude  {
-//            let userGpsLocation = (latitude: userLatitude, longitude: userLongitude)
-//            print(userGpsLocation)
-//            
-//            for poi in loadedPOIs{
-//                
-//                let poiLatitude = poi.Coordinates.Latitude
-//                let poiLongitude = poi.Coordinates.Longitude
-//                let poiLocation = (latitude: poiLatitude, longitude: poiLongitude)
-//                
-//                let poiBearing = calculateBearing(userLocation: userGpsLocation, poiLocation: poiLocation)
-//                //print("\(poi.BusinessName) Bearing: \(poiBearing)")
-//            }
-//            
-//        }
     }
     
     
@@ -345,10 +324,7 @@ public class CityTourViewModel : ObservableObject
         anchor.addChild(model)
         self.arView.scene.addAnchor(anchor)
         
-        //visiblePOIs.updateValue(poi, forKey: model.id)
-        
-        
-
+        visiblePOIs.updateValue(poi, forKey: model.id)
     }
 
     func removePOIFromArView(poi: POI) {

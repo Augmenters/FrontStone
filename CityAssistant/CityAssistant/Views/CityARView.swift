@@ -55,24 +55,12 @@ class POITap: NSObject, ARSessionDelegate {
         }
     }
     
-    // added for plane detection
+    // function that detects new planes
     func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
         
         for anchor in anchors {
-//            print("Anchor found")
             if let planeAnchor = anchor as? ARPlaneAnchor {
-                
-//                guard let frame = session.currentFrame else { return }
-//                
-//                // Extracting the camera's transform matrix
-//                let cameraTransform = frame.camera.transform
-//                
-//                // Manually extracting the translation from the transform matrix
-//                let userPosition = SIMD3<Float>(cameraTransform.columns.3.x,
-//                                                  cameraTransform.columns.3.y,
-//                                                  cameraTransform.columns.3.z)
-                
-                
+            
                 self.viewModel.slotOntoPlane(plane: planeAnchor)
             }
         }

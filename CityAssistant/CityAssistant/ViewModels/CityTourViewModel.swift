@@ -355,7 +355,7 @@ public class CityTourViewModel : ObservableObject
                 }
                 
                 
-                var position = positionForPOI(userLocation: userLocation, poiLocation: poiLocation)
+                let position = positionForPOI(userLocation: userLocation, poiLocation: poiLocation)
                 
                 print("Slotting \(businessName) at \(position)")
 
@@ -394,6 +394,9 @@ public class CityTourViewModel : ObservableObject
         self.arView.scene.addAnchor(anchor)
         
         //visiblePOIs.updateValue(poi, forKey: model.id)
+        
+        
+
     }
 
     func removePOIFromArView(poi: POI) {
@@ -404,21 +407,22 @@ public class CityTourViewModel : ObservableObject
 
     // Where the bubble needs to be built
     private func makePOIBubble(poi: POI) -> ModelEntity {
-        let model = ModelEntity(mesh: MeshResource.generateText(poi.BusinessName, extrusionDepth: 0.01, font: .boldSystemFont(ofSize: 0.1), containerFrame: .zero, alignment: .center,lineBreakMode: .byWordWrapping), materials: [SimpleMaterial(color: .black, isMetallic: true)])
-
+        //let model = ModelEntity(mesh: MeshResource.generateText(poi.BusinessName, extrusionDepth: 0.01, font: .boldSystemFont(ofSize: 0.1), containerFrame: .zero, alignment: .center,lineBreakMode: .byWordWrapping), materials: [SimpleMaterial(color: .black, isMetallic: true)])
+        let model = createPOIBubble(poi: poi)
+        
        // First, rotate to make it flat
         model.transform.rotation = simd_quatf(angle: .pi / 2, axis: [1, 0, 0])
        
        // Then, flip it backwards and upside down
         model.transform.rotation *= simd_quatf(angle: .pi, axis: [0, 1, 0]) // Flip backwards
         model.transform.rotation *= simd_quatf(angle: .pi, axis: [0, 0, 1]) // Flip upside down
-        model.position = [0, 0, 0]
+//        model.position = [0, 0, 0]
         model.generateCollisionShapes(recursive: true)
         return model
     }
 
     // Creates POI bubble and returns anchor that the bubble is fixed to
-    func createPOIBubble(poi: POI, newPosition: SIMD3<Float>) -> AnchorEntity {
+    func createPOIBubble(poi: POI) -> ModelEntity {
         let leftMargin = -0.45
         let topMargin = 0.4
         let bottomMargin = -0.4
@@ -426,37 +430,44 @@ public class CityTourViewModel : ObservableObject
         let bigFontSize = 0.1
         let mediumFontSize = 0.07
         let smallFontSize = 0.05
-
-//        let poiAnchor = AnchorEntity(world: newPosition) // Bubble didn't pop up when we tried this
-        let poiAnchor = AnchorEntity()
-        let worldAnchor = AnchorEntity(world: .zero)
-        let poiTransform = Transform(scale: .one, rotation: simd_quatf(), translation: newPosition)
-        poiAnchor.move(to: poiTransform, relativeTo: worldAnchor)
         
         let bubble = createBubble() // creates plane
-        poiAnchor.addChild(bubble)
         // TODO Instead of adding multiple ModelEntities to the same anchor directly, they could be grouped under a single Entity and that Entity can be added.
         //   https://developer.apple.com/documentation/realitykit/entity
 
         let businessNameText = create3dText(text: poi.BusinessName, x: leftMargin, y: topMargin, fontSize: bigFontSize)
-        poiAnchor.addChild(businessNameText)
+        bubble.addChild(businessNameText)
 
         let businessType = "Business Type" // do we have this?
         let businessTypeText = create3dText(text: businessType, x: leftMargin, y: topMargin - textSpacing, fontSize: mediumFontSize)
-        poiAnchor.addChild(businessTypeText)
+        bubble.addChild(businessTypeText)
 
         let hours = "8 am to 9 pm" // this should be pulled from business open time
         let hoursText = create3dText(text: hours, x: leftMargin, y: topMargin - textSpacing * 2, fontSize: mediumFontSize)
-        poiAnchor.addChild(hoursText)
+        bubble.addChild(hoursText)
 
         let ratingText = create3dText(text: "Yelp Rating: \(poi.Rating!)/5 Stars", x: leftMargin, y: topMargin - textSpacing * 3, fontSize: mediumFontSize)
-        poiAnchor.addChild(ratingText)
+        bubble.addChild(ratingText)
 
         let promptText = create3dText(text: "Click for more information", x: leftMargin, y: bottomMargin, fontSize: smallFontSize)
-        poiAnchor.addChild(promptText)
+        bubble.addChild(promptText)
 
-        return poiAnchor
+        return bubble
     }
+    
+    func createTextEntity(text: String, fontSize: CGFloat = 0.1, color: UIColor = .black) -> ModelEntity {
+        let mesh = MeshResource.generateText(
+            text,
+            extrusionDepth: 0.01,
+            font: .boldSystemFont(ofSize: fontSize),
+            containerFrame: CGRect.zero,
+            alignment: .center,
+            lineBreakMode: .byWordWrapping
+        )
+        let material = SimpleMaterial(color: color, isMetallic: false)
+        return ModelEntity(mesh: mesh, materials: [material])
+    }
+
 
     // Create custom 3D text at specified local coordinate (x,y)
     func create3dText(text: String, x: Double = 0.0, y: Double = 0.0, fontSize: CGFloat = 0.1) -> ModelEntity {
@@ -479,7 +490,7 @@ public class CityTourViewModel : ObservableObject
         let planeCornerRadius: Float = 0.1
         let planeCollisionDepth: Float = 0.1
         let planeCollisionMass: Float = 0
-        let planeColor = UIColor(red: 170, green: 166, blue: 255, alpha: 0.80)
+        let planeColor = UIColor(red: 170/255.0, green: 166/255.0, blue: 255/255.0, alpha: 0.80)
 
         let plane = ModelEntity(
             mesh: MeshResource.generatePlane(width: planeWidth, height: planeHeight, cornerRadius: planeCornerRadius),
@@ -487,13 +498,14 @@ public class CityTourViewModel : ObservableObject
             collisionShape: ShapeResource.generateBox(width: planeWidth, height: planeHeight, depth: planeCollisionDepth),
                 mass: planeCollisionMass
             )
+
         return plane
     }
 
     // Creates a POI bubble and places it at given position (The specified position part doesn't work yet)
-    func placePOI(poi: POI, newPosition: SIMD3<Float>) {
-        let poiAnchor = createPOIBubble(poi: poi, newPosition: newPosition)
-        arView.scene.addAnchor(poiAnchor)
-        print("placePOI was called")
-    }
+//    func placePOI(poi: POI) {
+//        let poiAnchor = createPOIBubble(poi: poi)
+//        arView.scene.addAnchor(poiAnchor)
+//        print("placePOI was called")
+//    }
 }

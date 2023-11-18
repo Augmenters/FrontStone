@@ -83,6 +83,18 @@ public class CityTourViewModel : ObservableObject
 
         arView.scene.addAnchor(anchor)
     }
+    
+    private func addModelToPlane(arView: ARView, plane: ARPlaneAnchor) {
+        print("Placing plane object")
+        let boxMesh = MeshResource.generateBox(size: 0.5)
+        let material = SimpleMaterial(color: .blue, isMetallic: false)
+        let boxEntity = ModelEntity(mesh: boxMesh, materials: [material])
+        
+        let anchor = AnchorEntity(world: plane.transform)
+        anchor.addChild(boxEntity)
+
+        arView.scene.addAnchor(anchor)
+    }
 
     func load() {
         Task.init{
@@ -204,11 +216,11 @@ public class CityTourViewModel : ObservableObject
     
     func slotOntoPlane(plane: ARPlaneAnchor, userLocation: SIMD3<Float>){
         
-       
+        addModelToPlane(arView: self.arView, plane: plane)
         
 //        Get user heading
         guard let heading = locationManager.currentHeading else { return }
-        print("User heading: \(heading)")
+        //print("User heading: \(heading)")
         
 //        Convert user heading to a vector
         
@@ -224,10 +236,10 @@ public class CityTourViewModel : ObservableObject
 //                  Place object if the angle is within threshold
         
     
-        print("\n\nSlot onto plane")
+        //print("\n\nSlot onto plane")
         let planeLocation = plane.center
         let desiredBearing = calculateBearing(from: userLocation, to: planeLocation)
-        print("Desired Bearing: \(desiredBearing)")
+        //print("Desired Bearing: \(desiredBearing)")
 
         
         let location = locationManager.currentLocation?.coordinate
@@ -242,7 +254,7 @@ public class CityTourViewModel : ObservableObject
                 let poiLocation = (latitude: poiLatitude, longitude: poiLongitude)
                 
                 let poiBearing = calculateBearing(userLocation: userGpsLocation, poiLocation: poiLocation)
-                print("\(poi.BusinessName) Bearing: \(poiBearing)")
+                //print("\(poi.BusinessName) Bearing: \(poiBearing)")
             }
             
         }

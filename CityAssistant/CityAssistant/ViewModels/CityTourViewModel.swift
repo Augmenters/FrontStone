@@ -406,6 +406,13 @@ public class CityTourViewModel : ObservableObject
     private func makePOIBubble(poi: POI) -> ModelEntity {
         let model = ModelEntity(mesh: MeshResource.generateText(poi.BusinessName, extrusionDepth: 0.01, font: .boldSystemFont(ofSize: 0.1), containerFrame: .zero, alignment: .center,lineBreakMode: .byWordWrapping), materials: [SimpleMaterial(color: .black, isMetallic: true)])
 
+       // First, rotate to make it flat
+        model.transform.rotation = simd_quatf(angle: .pi / 2, axis: [1, 0, 0])
+       
+       // Then, flip it backwards and upside down
+        model.transform.rotation *= simd_quatf(angle: .pi, axis: [0, 1, 0]) // Flip backwards
+        model.transform.rotation *= simd_quatf(angle: .pi, axis: [0, 0, 1]) // Flip upside down
+        model.position = [0, 0, 0]
         model.generateCollisionShapes(recursive: true)
         return model
     }

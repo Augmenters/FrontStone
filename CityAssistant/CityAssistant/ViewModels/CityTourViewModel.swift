@@ -52,7 +52,7 @@ public class CityTourViewModel : ObservableObject
             //No real error handling in this view, need to find a way to display an error to the user
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             
 //            // top left
 //            self.addModelTo(arView: self.arView, zDistance: -2.0, xDistance: -2.0, color: .blue)
@@ -65,36 +65,36 @@ public class CityTourViewModel : ObservableObject
 //            
 //            // bottom left
 //            self.addModelTo(arView: self.arView, zDistance: 2.0, xDistance: -2.0, color: .green)
-        }
+//        }
     }
     
-    private func addModelTo(arView: ARView, zDistance: Float, xDistance: Float, color: UIColor) {
-        print("Placing simple object")
-        let boxMesh = MeshResource.generateBox(size: 0.5)
-        let material = SimpleMaterial(color: color, isMetallic: false)
-        let boxEntity = ModelEntity(mesh: boxMesh, materials: [material])
-        
-        // Position the model 10 meters in front of the user
-        var translation = matrix_identity_float4x4
-        translation.columns.3.z = zDistance // 10 meters away
-        translation.columns.3.x = xDistance
-        let anchor = AnchorEntity(world: translation)
-        anchor.addChild(boxEntity)
-
-        arView.scene.addAnchor(anchor)
-    }
+//    private func addModelTo(arView: ARView, zDistance: Float, xDistance: Float, color: UIColor) {
+//        print("Placing simple object")
+//        let boxMesh = MeshResource.generateBox(size: 0.5)
+//        let material = SimpleMaterial(color: color, isMetallic: false)
+//        let boxEntity = ModelEntity(mesh: boxMesh, materials: [material])
+//        
+//        // Position the model 10 meters in front of the user
+//        var translation = matrix_identity_float4x4
+//        translation.columns.3.z = zDistance // 10 meters away
+//        translation.columns.3.x = xDistance
+//        let anchor = AnchorEntity(world: translation)
+//        anchor.addChild(boxEntity)
+//
+//        arView.scene.addAnchor(anchor)
+//    }
     
-    private func addModelToPlane(arView: ARView, plane: ARPlaneAnchor) {
-        print("Placing plane object")
-        let boxMesh = MeshResource.generateBox(size: 0.5)
-        let material = SimpleMaterial(color: .blue, isMetallic: false)
-        let boxEntity = ModelEntity(mesh: boxMesh, materials: [material])
-        
-        let anchor = AnchorEntity(world: plane.transform)
-        anchor.addChild(boxEntity)
-
-        arView.scene.addAnchor(anchor)
-    }
+//    private func addModelToPlane(arView: ARView, plane: ARPlaneAnchor) {
+//        print("Placing plane object")
+//        let boxMesh = MeshResource.generateBox(size: 0.5)
+//        let material = SimpleMaterial(color: .blue, isMetallic: false)
+//        let boxEntity = ModelEntity(mesh: boxMesh, materials: [material])
+//        
+//        let anchor = AnchorEntity(world: plane.transform)
+//        anchor.addChild(boxEntity)
+//
+//        arView.scene.addAnchor(anchor)
+//    }
 
     func load() {
         Task.init{
@@ -132,9 +132,6 @@ public class CityTourViewModel : ObservableObject
             //This is where we will have to remove POIs that are far away, assuming that they did not get replaced during slotting already
         }
     }
-    func degreesToRadians(_ degrees: Float) -> Float {
-        return degrees * (.pi / 180)
-    }
     
     func calculateBearing(from: (latitude: Double, longitude: Double),
                           to: (latitude: Double, longitude: Double)) -> Double {
@@ -155,20 +152,6 @@ public class CityTourViewModel : ObservableObject
 
         return bearing // Bearing in degrees
     }
-    
-    func calculateBearing(from userPosition: SIMD3<Float>, to planePosition: SIMD3<Float>) -> Float {
-        let dx = planePosition.x - userPosition.x
-        let dz = planePosition.z - userPosition.z
-        let bearingRadians = atan2(dz, dx)
-        var bearingDegrees = bearingRadians * 180 / .pi
-        
-        if bearingDegrees < 0 {
-            bearingDegrees += 360
-        }
-        
-        return bearingDegrees
-    }
-    
     
     func approximateDistance(userLocation: (latitude: Double, longitude: Double),
                              poiLocation: (latitude: Double, longitude: Double)) -> Double {
@@ -191,28 +174,6 @@ public class CityTourViewModel : ObservableObject
         return distance // distance in meters
     }
     
-    func positionForPOI(userLocation: (latitude: Double, longitude: Double),
-                        poiLocation: (latitude: Double, longitude: Double)) -> SIMD3<Float> {
-        
-        let distance = approximateDistance(userLocation: userLocation, poiLocation: poiLocation)
-        let bearing = calculateBearing(from: userLocation, to: poiLocation)
-
-        let bearingRadians = degreesToRadians(Float(bearing))
-
-        // Calculate x and z position using simple trigonometry
-        let x = Float(distance) * sin(bearingRadians)
-        let z = Float(distance) * cos(bearingRadians)
-        
-        return SIMD3<Float>(x: -x, y: 0, z: z) // Assuming y is 0 (no altitude difference)
-    }
-    
-    func normalizeToUnitVector(_ vector: SIMD3<Float>) -> SIMD3<Float> {
-        let length = sqrt(vector.x * vector.x + vector.y * vector.y + vector.z * vector.z)
-        guard length != 0 else { return SIMD3<Float>(x: 0, y: 0, z: 0) }
-        
-        return SIMD3<Float>(x: vector.x / length, y: vector.y / length, z: vector.z / length)
-    }
-    
     func isPOIInUserDirection(userLocation: (latitude: Double, longitude: Double),
                               userHeading: CLLocationDirection,
                               poiLocation: (latitude: Double, longitude: Double)) -> Bool {
@@ -224,25 +185,17 @@ public class CityTourViewModel : ObservableObject
         return headingDifference <= threshold || headingDifference >= 360 - threshold
     }
 
-    
     func slotOntoPlane(plane: ARPlaneAnchor){
-        
-        //addModelToPlane(arView: self.arView, plane: plane)
-        
+                
         var closestValidPOI: POI? = nil
         var closestDistance: Double = Double.greatestFiniteMagnitude
         
-//        Get user heading
         guard let heading = locationManager.currentHeading else { return }
-        //print("User heading: \(heading)")
         
-//      Get user location
         let location = locationManager.currentLocation?.coordinate
         if let userLatitude = location?.latitude, let userLongitude = location?.longitude  {
             let userGpsLocation = (latitude: userLatitude, longitude: userLongitude)
-            //print("User gps location: \(userGpsLocation)")
             
-            //  Loop through POIS
             for poi in loadedPOIs{
                 
                 let poiLatitude = poi.Coordinates.Latitude
@@ -259,7 +212,6 @@ public class CityTourViewModel : ObservableObject
                     closestValidPOI = poi
                     closestDistance = distance
                 }
-//                print("\(poi.BusinessName) Distance: \(distance)")
             }
             if let poi = closestValidPOI {
                 addPoiToPlane(poi: poi, plane: plane)
@@ -299,91 +251,91 @@ public class CityTourViewModel : ObservableObject
     }
     
     
-    
-    func slotPOIs() {
-        print("Slotting POIS")
-        if loadedPOIs.isEmpty {
-            print("No POIs found")
-            return
-        }
+//    
+//    func slotPOIs() {
+//        print("Slotting POIS")
+//        if loadedPOIs.isEmpty {
+//            print("No POIs found")
+//            return
+//        }
+//
+//        let angleIncrement = Float(360) / 12
+//        //let angleIncrementRadians = degreesToRadians(angleIncrement)
+//        //let radius : Float = 1
+//    
+//        
+//        print("Loaded POIS")
+//        for poi in loadedPOIs {
+//            print(poi.BusinessName)
+//        }
+//
+//        for i in 0...11
+//        {
+//            
+//            var currentlySlotted: (POI, AnchorEntity, Double)?
+//            
+//            //this is the width of the slot
+//            let slotRangeLow = Double(angleIncrement) * Double(i)
+//            let slotRangeHigh = Double(angleIncrement) * Double(i + 1)
+//            
+//            print("\n\nSlot: \(i) (\(slotRangeLow), \(slotRangeHigh))")
+//
+//            for poi in loadedPOIs {
+//                
+//                let businessName = poi.BusinessName
+//                
+//                
+//                let poiLatitude = poi.Coordinates.Latitude
+//                let poiLongitude = poi.Coordinates.Longitude
+//                let poiLocation = (latitude: poiLatitude, longitude: poiLongitude)
+//                
+//                let userLatitude = userLocation.Latitude
+//                let userLongitude = userLocation.Longitude
+//                let userLocation = (latitude: userLatitude, longitude: userLongitude)
+//                
+//                let distance = approximateDistance(userLocation: userLocation, poiLocation: poiLocation)
+//                let bearing = calculateBearing(from: userLocation, to: poiLocation)
+//                
+//
+//                if(bearing < slotRangeLow || bearing > slotRangeHigh)
+//                {
+//                    continue
+//                }
+//                
+//                if let currentlySlottedPOI = currentlySlotted, distance > currentlySlottedPOI.2 {
+//                    continue
+//                }
+//                
+//                
+//                let position = positionForPOI(userLocation: userLocation, poiLocation: poiLocation)
+//                
+//                print("Slotting \(businessName) at \(position)")
+//
+//                let poiAnchor = AnchorEntity(world: position)
+//                currentlySlotted = (poi, poiAnchor, distance)
+//            }
+//
+//            if(currentlySlotted != nil)
+//            {
+//                //addPOIToARView(poi: currentlySlotted!.0, anchor: currentlySlotted!.1)
+//            }
+//        }
+//        print("POIS Slotted")
+//    }
 
-        let angleIncrement = Float(360) / 12
-        //let angleIncrementRadians = degreesToRadians(angleIncrement)
-        //let radius : Float = 1
-    
-        
-        print("Loaded POIS")
-        for poi in loadedPOIs {
-            print(poi.BusinessName)
-        }
-
-        for i in 0...11
-        {
-            
-            var currentlySlotted: (POI, AnchorEntity, Double)?
-            
-            //this is the width of the slot
-            let slotRangeLow = Double(angleIncrement) * Double(i)
-            let slotRangeHigh = Double(angleIncrement) * Double(i + 1)
-            
-            print("\n\nSlot: \(i) (\(slotRangeLow), \(slotRangeHigh))")
-
-            for poi in loadedPOIs {
-                
-                let businessName = poi.BusinessName
-                
-                
-                let poiLatitude = poi.Coordinates.Latitude
-                let poiLongitude = poi.Coordinates.Longitude
-                let poiLocation = (latitude: poiLatitude, longitude: poiLongitude)
-                
-                let userLatitude = userLocation.Latitude
-                let userLongitude = userLocation.Longitude
-                let userLocation = (latitude: userLatitude, longitude: userLongitude)
-                
-                let distance = approximateDistance(userLocation: userLocation, poiLocation: poiLocation)
-                let bearing = calculateBearing(from: userLocation, to: poiLocation)
-                
-
-                if(bearing < slotRangeLow || bearing > slotRangeHigh)
-                {
-                    continue
-                }
-                
-                if let currentlySlottedPOI = currentlySlotted, distance > currentlySlottedPOI.2 {
-                    continue
-                }
-                
-                
-                let position = positionForPOI(userLocation: userLocation, poiLocation: poiLocation)
-                
-                print("Slotting \(businessName) at \(position)")
-
-                let poiAnchor = AnchorEntity(world: position)
-                currentlySlotted = (poi, poiAnchor, distance)
-            }
-
-            if(currentlySlotted != nil)
-            {
-                //addPOIToARView(poi: currentlySlotted!.0, anchor: currentlySlotted!.1)
-            }
-        }
-        print("POIS Slotted")
-    }
-
-    // Jules' slotting helper functions
-    func selectSlottedPOI(entity: ModelEntity) {
-        let poi = getSlottedPOIFromEntity(entity: entity)
-        if(poi != nil)
-        {
-            selectedPOI = poi
-        }
-    }
-
-    func getSlottedPOIFromEntity(entity: ModelEntity) -> POI? {
-        guard let poi = visiblePOIs.first(where: {(key, _) -> Bool in return key == entity.id}) else {return nil}
-        return poi.value
-    }
+//    // Jules' slotting helper functions
+//    func selectSlottedPOI(entity: ModelEntity) {
+//        let poi = getSlottedPOIFromEntity(entity: entity)
+//        if(poi != nil)
+//        {
+//            selectedPOI = poi
+//        }
+//    }
+//
+//    func getSlottedPOIFromEntity(entity: ModelEntity) -> POI? {
+//        guard let poi = visiblePOIs.first(where: {(key, _) -> Bool in return key == entity.id}) else {return nil}
+//        return poi.value
+//    }
 
     func addPoiToPlane(poi: POI, plane: ARPlaneAnchor) {
         

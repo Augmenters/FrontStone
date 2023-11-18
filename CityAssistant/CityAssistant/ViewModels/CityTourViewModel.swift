@@ -110,15 +110,14 @@ public class CityTourViewModel : ObservableObject
         let result = await businessDataAccess.GetLocations(latitude: userLocation.Latitude, longitude: userLocation.Longitude)
 
         if(result.Success) {
+            loadedPOIs = []
+            
             for poi in result.Data ?? []  {
-                //If the poi has not been seen, add it to the loaded pois... we should probably also be clearing the loaded poi list at some point
-                //Worth noting that the Id here is returned from yelp (or in the case of an empty address the database) not the uuid or entity id
-                if(!loadedPOIs.contains(where: { (loadedPOI) -> Bool in return loadedPOI.Id == poi.Id })) {
-                    loadedPOIs.append(poi)
-                }
+                loadedPOIs.append(poi)
             }
         }
         else {
+            print("Failed to loaded POIS: \(result.Error.debugDescription)")
         }
     }
 

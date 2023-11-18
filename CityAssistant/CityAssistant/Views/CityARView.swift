@@ -29,7 +29,7 @@ struct CameraView: UIViewRepresentable
 
     func updateUIView(_ uiView: ARView, context: Context) {
         //Reslot the pois whenever ios decides to reload the view, not really sure if this is what we want but I think it is
-        viewModel.slotPOIs()
+        //viewModel.slotPOIs()
     }
 
     func makeCoordinator() -> POITap {

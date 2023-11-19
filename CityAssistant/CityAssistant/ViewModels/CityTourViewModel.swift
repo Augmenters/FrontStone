@@ -198,6 +198,10 @@ public class CityTourViewModel : ObservableObject
             
             for poi in loadedPOIs{
                 
+                if poi.BusinessName == "3601 greeley dr a"{
+                    continue
+                }
+                
                 let poiLatitude = poi.Coordinates.Latitude
                 let poiLongitude = poi.Coordinates.Longitude
                 let poiLocation = (latitude: poiLatitude, longitude: poiLongitude)
@@ -303,18 +307,18 @@ public class CityTourViewModel : ObservableObject
 //    }
 
 //    // Jules' slotting helper functions
-//    func selectSlottedPOI(entity: ModelEntity) {
-//        let poi = getSlottedPOIFromEntity(entity: entity)
-//        if(poi != nil)
-//        {
-//            selectedPOI = poi
-//        }
-//    }
-//
-//    func getSlottedPOIFromEntity(entity: ModelEntity) -> POI? {
-//        guard let poi = visiblePOIs.first(where: {(key, _) -> Bool in return key == entity.id}) else {return nil}
-//        return poi.value
-//    }
+    func selectPOI(entity: ModelEntity) {
+        let poi = getPOIFromEntity(entity: entity)
+        if(poi != nil)
+        {
+            selectedPOI = poi
+        }
+    }
+
+    func getPOIFromEntity(entity: ModelEntity) -> POI? {
+        guard let poi = visiblePOIs.first(where: {(key, _) -> Bool in return key == entity.id}) else {return nil}
+        return poi.value
+    }
 
     func addPoiToPlane(poi: POI, plane: ARPlaneAnchor) {
         
@@ -333,9 +337,8 @@ public class CityTourViewModel : ObservableObject
         arView.scene.anchors.remove(entity) //This shouldn't happen now but if we use plane detection in the future, I think its possible that multiple models could be tied to a single anchor so this may need to be reevaluated
     }
 
-    // Where the bubble needs to be built
     private func makePOIBubble(poi: POI) -> ModelEntity {
-        //let model = ModelEntity(mesh: MeshResource.generateText(poi.BusinessName, extrusionDepth: 0.01, font: .boldSystemFont(ofSize: 0.1), containerFrame: .zero, alignment: .center,lineBreakMode: .byWordWrapping), materials: [SimpleMaterial(color: .black, isMetallic: true)])
+
         let model = createPOIBubble(poi: poi)
         
        // First, rotate to make it flat

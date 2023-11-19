@@ -51,7 +51,7 @@ class POITap: NSObject, ARSessionDelegate {
         let tapLocation = recognizer.location(in: view)
         if let entity = view.entity(at: tapLocation) as? ModelEntity
         {
-            //viewModel.selectSlottedPOI(entity: entity)
+            viewModel.selectPOI(entity: entity)
         }
     }
     

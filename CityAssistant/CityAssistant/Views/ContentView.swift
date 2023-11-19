@@ -10,31 +10,27 @@ import SwiftUI
 import RealityKit
 
 struct ContentView : View {
+    @State var currentView: ViewType
     
     init() {
-        
+        currentView = ViewType.POIView
     }
     
     var body: some View {
         ZStack{
-            VStack(alignment: .trailing) {
-                NavigationStack {
-                    NavigationLink {
-                        CrimeView()
-                    } label: {
-                        Label("2D Map", systemImage: "map")
-                    }
-                    NavigationLink {
-                        CityTourViewWrapper()
-                    } label: {
-                        Label("City Tour", systemImage: "camera")
-                    }
-                    NavigationLink {
-                        AboutView()
-                    } label: {
-                        Label("About this app", systemImage: "info")
-                    }
-                }
+            switch currentView
+            {
+                case .AboutView:
+                    AboutView()
+                case .POIView:
+                    CityTourViewWrapper()
+                case .CrimeView:
+                    CrimeView()
+            }
+            VStack()
+            {
+                Spacer()
+                NavBar(selectedView: $currentView)
             }
         }
     }

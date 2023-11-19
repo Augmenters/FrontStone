@@ -48,7 +48,7 @@ struct CityTourViewWrapper: View {
                         showARView.toggle()
                     }) {
                         Text(showARView ? "Show Map view" : "Show AR View")
-                    }
+                    }.padding([.bottom], 90)
                 }
             }
     }

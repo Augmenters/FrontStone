@@ -24,7 +24,7 @@ struct CrimeView: View {
                         overlays: crimeOverlays)
                 .edgesIgnoringSafeArea(.all)
                 
-                TimeSlotSelector(timeSlots: viewModel.timeSlots, sliderChangedAction: viewModel.SelectTimeSlot)
+                TimeSlotSelector(timeSlots: viewModel.timeSlots, sliderChangedAction: viewModel.SelectTimeSlot).padding([.bottom], 90)
             }
         }
     }

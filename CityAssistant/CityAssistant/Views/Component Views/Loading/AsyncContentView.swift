@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct AsyncContentView<Source: LoadableObject, Content: View>: View {
-    @State var source: Source
+    @ObservedObject var source: Source
     var content: (Source.Output) -> Content
     var useProgressView: Bool = true
     

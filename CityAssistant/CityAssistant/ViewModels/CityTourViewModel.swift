@@ -12,10 +12,10 @@ import ARKit
 
 public class CityTourViewModel : ObservableObject
 {
-    @Published var userLocation: Coordinate
     @Published var selectedPOI: POI?
 
     public var arView: ARView
+    private var userLocation: Coordinate
 
     private let businessDataAccess: BusinessDataAccess
     private let locationManager = LocationManager()

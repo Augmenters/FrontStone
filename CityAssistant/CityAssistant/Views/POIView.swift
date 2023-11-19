@@ -15,6 +15,7 @@ struct POIView: View {
     private var backButtonAction: (() -> Void)?
 
     public init(selectedBusiness: POI, viewModel: POIViewModel, onBackButton: (() -> Void )? = nil) {
+        print("Creating POI view")
         self.selectedBusiness = selectedBusiness
         self.viewModel = viewModel
         self.backButtonAction = onBackButton

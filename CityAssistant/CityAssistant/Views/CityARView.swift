@@ -74,6 +74,7 @@ struct CityARView : View
     @ObservedObject var poiViewModel: POIViewModel
 
     init(cityModel: CityTourViewModel, poiModel: POIViewModel) {
+        print("Creating city AR view")
         cityTourViewModel = cityModel
         poiViewModel = poiModel
     }

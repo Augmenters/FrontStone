@@ -19,6 +19,21 @@ public class POI : Codable, Identifiable
     public var Coordinates : Coordinate
     public var Address : Address
     public var Info : String?
+    public var Hours : [Hour]?
+    public var CurrentHours : String {
+        
+        if(Hours == nil)
+        {
+            return "Closed"
+        }
+        
+        let currentDate = Date()
+        let calendar = Calendar.current
+        let weekdayNumber = calendar.component(.weekday, from: currentDate)
+        
+        //Add in actual hours value here
+        return ""
+    }
     
     public init() {
         self.Id = ""
@@ -30,6 +45,7 @@ public class POI : Codable, Identifiable
         self.Coordinates = Coordinate()
         self.Address = CityAssistant.Address()
         self.Info = ""
+        self.Hours = nil
     }
     
     public init(_ name: String, _ phone: String, _ rating: Decimal, _ price: String, _ address: Address, _ reviewCount: Int) {
@@ -42,6 +58,7 @@ public class POI : Codable, Identifiable
         self.Coordinates = Coordinate()
         self.Address = address
         self.Info = ""
+        self.Hours = nil
     }
     
     public enum CodingKeys: String, CodingKey {
@@ -54,5 +71,6 @@ public class POI : Codable, Identifiable
         case Coordinates
         case Address
         case Info
+        case Hours
     }
 }

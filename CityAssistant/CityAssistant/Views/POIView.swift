@@ -46,7 +46,7 @@ struct POIView: View {
                     }
                     Text("Address: " +  selectedBusiness.Address.ToString())
                         .font(.body)
-                    Text("Hours: " + "8 am to 9 pm")
+                    Text("Hours: " + selectedBusiness.CurrentHours)
                         .font(.body)
                     Text("Phone Number: " + (selectedBusiness.Phone ?? ""))
                         .font(.body)

@@ -7,32 +7,31 @@
 
 import Foundation
 
-public class POIViewModel: LoadableObject {
-    typealias Output = [Review]?
-    var state: LoadingState<[Review]?>
+public class POIViewModel: ObservableObject {
     
     private let businessDataAccess: BusinessDataAccess
     
     public var SelectedBusiness: POI
+    public var Reviews: [Review]
         
     public init(selectedBusiness: POI, reviews: [Review]) {
         self.SelectedBusiness = selectedBusiness
-        self.state = LoadingState.loaded(reviews)
         self.businessDataAccess = BusinessDataAccess()
+        self.Reviews = []
     }
     
     public init(business: POI)
     {
         self.businessDataAccess = BusinessDataAccess()
         self.SelectedBusiness = business
-        self.state = LoadingState.ignored
+        self.Reviews = []
     }
     
     public init()
     {
         self.businessDataAccess = BusinessDataAccess()
         self.SelectedBusiness = POI()
-        self.state = LoadingState.ignored
+        self.Reviews = []
     }
     
     func load() {
@@ -40,16 +39,15 @@ public class POIViewModel: LoadableObject {
     }
     
     func load(business: POI) {
-        self.state = LoadingState.loading
         self.SelectedBusiness = business
         
         Task.init {
             let result = await businessDataAccess.GetReviews(businessId: SelectedBusiness.Id ?? "0")
             if(result.Success) {
-                self.state = .loaded(result.Data?.Reviews)
+                self.Reviews = result.Data?.Reviews ?? []
             }
             else {
-                self.state = .failed(result.Error ?? LoadingError.internalError(message: "Failed to load"))
+                self.Reviews = []
             }
         }
     }

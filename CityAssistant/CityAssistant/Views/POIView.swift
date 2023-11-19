@@ -21,61 +21,57 @@ struct POIView: View {
         self.backButtonAction = onBackButton
         
         self.selectedBusiness.Id = "4dCjF2VsM-byUGUbhYL_Ng"
+        viewModel.load(business: selectedBusiness)
     }
 
     var body: some View {
-        AsyncContentView(source: viewModel) { reviews in
-            VStack(alignment: .leading) {
-                Group{
-                    VStack(alignment: .leading){
-                        Text(selectedBusiness.BusinessName)
-                            .font(.largeTitle)
-                            .fontWeight(.bold)
-                        HStack {
-                            Text("Business Type")
-                                .font(.title2)
-                                .padding(.bottom)
-                            Text((selectedBusiness.Price ?? ""))
-                                .font(.title2)
-                                .padding(.bottom)
-                        }
-                        Text("Address: " +  selectedBusiness.Address.ToString())
-                            .font(.body)
-                        Text("Hours: " + "8 am to 9 pm")
-                            .font(.body)
-                        Text("Phone Number: " + (selectedBusiness.Phone ?? ""))
-                            .font(.body)
-                        Text("Website: " + (selectedBusiness.Info ?? ""))
-                            .font(.body)
-                            .padding(.bottom)
-
-                        Text("Reviews:")
+        VStack(alignment: .leading) {
+            Group{
+                VStack(alignment: .leading){
+                    Text(selectedBusiness.BusinessName)
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                    HStack {
+                        Text("Business Type")
                             .font(.title2)
-                            .bold()
-                        HStack {
-                            if(selectedBusiness.Rating != nil)
-                            {
-                                RatingStars(rating: selectedBusiness.Rating!)
-                                    .frame(minWidth: 1, idealWidth: 100, maxWidth: 140, minHeight: 1, idealHeight: 20, maxHeight: 20)
-                                Text("\(selectedBusiness.ReviewCount)")
-                                    .font(.body)
-                            }
-                        }
-                    }.padding(/*@START_MENU_TOKEN@*/[.top, .bottom, .trailing]/*@END_MENU_TOKEN@*/)
-
-                    ForEach(reviews!, id: \.self) { review in
-                        ReviewCard(selectedReview: review)
+                            .padding(.bottom)
+                        Text((selectedBusiness.Price ?? ""))
+                            .font(.title2)
+                            .padding(.bottom)
                     }
-                    Text("More reviews on Yelp")
-                        .foregroundColor(Color.blue)
-                }
-                Spacer()
+                    Text("Address: " +  selectedBusiness.Address.ToString())
+                        .font(.body)
+                    Text("Hours: " + "8 am to 9 pm")
+                        .font(.body)
+                    Text("Phone Number: " + (selectedBusiness.Phone ?? ""))
+                        .font(.body)
+                    Text("Website: " + (selectedBusiness.Info ?? ""))
+                        .font(.body)
+                        .padding(.bottom)
 
+                    Text("Reviews:")
+                        .font(.title2)
+                        .bold()
+                    HStack {
+                        if(selectedBusiness.Rating != nil)
+                        {
+                            RatingStars(rating: selectedBusiness.Rating!)
+                                .frame(minWidth: 1, idealWidth: 100, maxWidth: 140, minHeight: 1, idealHeight: 20, maxHeight: 20)
+                            Text("\(selectedBusiness.ReviewCount)")
+                                .font(.body)
+                        }
+                    }
+                }.padding(/*@START_MENU_TOKEN@*/[.top, .bottom, .trailing]/*@END_MENU_TOKEN@*/)
+
+                ForEach(viewModel.Reviews, id: \.self) { review in
+                    ReviewCard(selectedReview: review)
+                }
+                Text("More reviews on Yelp")
+                    .foregroundColor(Color.blue)
             }
-            .padding(/*@START_MENU_TOKEN@*/[.top, .bottom, .trailing]/*@END_MENU_TOKEN@*/)
-        }.onAppear {
-            viewModel.load(business: selectedBusiness)
-        }
+            Spacer()
+
+        }.padding(/*@START_MENU_TOKEN@*/[.top, .bottom, .trailing]/*@END_MENU_TOKEN@*/)
     }
 }
 

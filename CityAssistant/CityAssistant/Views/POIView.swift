@@ -27,6 +27,11 @@ struct POIView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Group{
+                if let buttonAction = backButtonAction {
+                    Button(action: {buttonAction()}) {
+                        Text("< Back")
+                    }
+                }
                 VStack(alignment: .leading){
                     Text(selectedBusiness.BusinessName)
                         .font(.largeTitle)
@@ -71,7 +76,7 @@ struct POIView: View {
             }
             Spacer()
 
-        }.padding(/*@START_MENU_TOKEN@*/[.top, .bottom, .trailing]/*@END_MENU_TOKEN@*/)
+        }.padding(/*@START_MENU_TOKEN@*/[.top, .bottom, .trailing]/*@END_MENU_TOKEN@*/).navigationBarBackButtonHidden(true)
     }
 }
 

@@ -81,7 +81,7 @@ struct CityARView : View
 
     var body: some View {
         if(cityTourViewModel.selectedPOI != nil) { //This will sort of work, except we have no way of knowing when the user exits out of the view
-            POIView(selectedBusiness: cityTourViewModel.selectedPOI!, viewModel: poiViewModel)
+            POIView(selectedBusiness: cityTourViewModel.selectedPOI!, viewModel: poiViewModel, onBackButton: { cityTourViewModel.selectedPOI = nil})
         }
         else {
             CameraView(viewModel: cityTourViewModel).edgesIgnoringSafeArea(.all)

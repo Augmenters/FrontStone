@@ -22,16 +22,43 @@ public class POI : Codable, Identifiable
     public var Hours : [Hour]?
     public var CurrentHours : String {
         
-        if(Hours == nil)
-        {
-            return "Closed"
-        }
         
         let currentDate = Date()
         let calendar = Calendar.current
         let weekdayNumber = calendar.component(.weekday, from: currentDate)
-        
+        var actualDay = weekdayNumber - 2
+        if (actualDay == -1) {
+            actualDay = 6
+        }
+        var lastDay = actualDay - 1
+
+        if (lastDay == -1) {
+            lastDay = 6
+        }
+
+        let hour = String(calendar.component(.hour, from: currentDate))
+        let minute = String(calendar.component(.minute, from: currentDate))
+
+        var currTime : String = hour
+        currTime += minute
+
+        let currTimeint = Int(currTime)
+
+        let close = 100
+
+    /*if (currTimeint! < close) { //last day
+            actualDay = actualDay - 1
+            if (actualDay == -1) {
+                actualDay = 6
+            }
+        }
+        */
         //Add in actual hours value here
+        for day in Hours! {
+            if (day.Day == actualDay) {
+                return "\(day.Open) to \(day.Close)"
+            }
+        }
         return ""
     }
     

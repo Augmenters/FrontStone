@@ -52,7 +52,7 @@ struct POIView: View {
                         .font(.body)
                     HStack(){
                         Text("Website: ")
-                        Link((selectedBusiness.Info)!, destination: URL(string: selectedBusiness.Info ?? "")!)
+                        Link((selectedBusiness.Info ?? "")!, destination: URL(string: selectedBusiness.Info ?? "")!)
                     }
 
                     Text("Reviews:")

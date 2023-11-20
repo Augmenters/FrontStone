@@ -26,6 +26,12 @@ public class CrimeDataAccess
         return result
     }
     
+    public func GetAllCrimes() async -> Result<[CrimeTimeResponse]?> {
+        let result : Result<[CrimeTimeResponse]?> = await HttpClientHelper().Get(baseUrl: backstoneUrl, resource: "Crime/All")
+        
+        return result
+    }
+    
     public func GetTimeSlots() async -> Result<[TimeSlot]?> {
         let result : Result<[TimeSlot]?> = await HttpClientHelper().Get(baseUrl: backstoneUrl, resource: "Crime/TimeSlots")
         

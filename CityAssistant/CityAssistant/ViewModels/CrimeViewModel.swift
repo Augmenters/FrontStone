@@ -22,6 +22,7 @@ public class CrimeViewModel : LoadableObject {
     private var lowCrimeThreshold: Int
     private var mediumCrimeThreshold: Int
     private var highCrimeThreshold: Int
+    private var allCrimes: [CrimeTimeResponse]?
 
     public init() {
         self.userLocation = Coordinate()
@@ -56,10 +57,9 @@ public class CrimeViewModel : LoadableObject {
                 await LoadTimeslots()
             }
 
-            await LoadCrimes()
+            await GetCrimes()
         }
     }
-
 
     func LoadTimeslots() async
     {
@@ -71,29 +71,34 @@ public class CrimeViewModel : LoadableObject {
             self.state = .failed(result.Error ?? LoadingError.internalError(message: "Failed to load crimes"))
         }
     }
-
-    func LoadCrimes() async
+    
+    func GetCrimes() async
     {
         if(timeSlots.isEmpty)//timeslot loading failed so don't try to load the crimes b/c the error from loading timeslots will be replaced and there will be no option to retry
         {
             return
         }
-
-        let result = await crimeDataAccess.CrimeSearch(timeSlotId: selectedTimeSlotId)
-
-        if(result.Success) {
-            let crimeResponses = result.Data ?? []
-            let overlays = crimeResponses.map({
-                GetOverlay(coordinates: $0.Coordinates, crimeCount: $0.CrimeCount)
-            })
-
-            self.state = .loaded(overlays)
+        
+        if(allCrimes == nil)
+        {
+            let result = await crimeDataAccess.GetAllCrimes()
+            if(result.Success) {
+                allCrimes = result.Data ?? []
+            }
+            else {
+                self.state = .failed(result.Error ?? LoadingError.internalError(message: "Failed to load crimes"))
+            }
         }
-        else {
-            self.state = .failed(result.Error ?? LoadingError.internalError(message: "Failed to load crimes"))
-        }
+
+        let selectedCrimes = allCrimes?.first(where: { crime in crime.Id == selectedTimeSlotId})
+        
+        let overlays = selectedCrimes?.Crimes.map({
+            GetOverlay(coordinates: $0.Coordinates, crimeCount: $0.CrimeCount)
+        })
+
+        self.state = .loaded(overlays ?? [])
     }
-
+    
     func SelectTimeSlot(timeSlotId: Int)
     {
         selectedTimeSlotId = timeSlotId

@@ -373,8 +373,7 @@ public class CityTourViewModel : ObservableObject
         let businessTypeText = create3dText(text: businessType, x: leftMargin, y: topMargin - textSpacing, fontSize: mediumFontSize)
         bubble.addChild(businessTypeText)
 
-        let hours = "8 am to 9 pm" // this should be pulled from business open time
-        let hoursText = create3dText(text: hours, x: leftMargin, y: topMargin - textSpacing * 2, fontSize: mediumFontSize)
+        let hoursText = create3dText(text: poi.CurrentHours, x: leftMargin, y: topMargin - textSpacing * 2, fontSize: mediumFontSize)
         bubble.addChild(hoursText)
 
         let ratingText = create3dText(text: "Yelp Rating: \(poi.Rating!)/5 Stars", x: leftMargin, y: topMargin - textSpacing * 3, fontSize: mediumFontSize)

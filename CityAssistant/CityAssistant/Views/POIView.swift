@@ -50,9 +50,10 @@ struct POIView: View {
                         .font(.body)
                     Text("Phone Number: " + (selectedBusiness.Phone ?? ""))
                         .font(.body)
-                    Text("Website: " + (selectedBusiness.Info ?? ""))
-                        .font(.body)
-                        .padding(.bottom)
+                    HStack(){
+                        Text("Website: ")
+                        Link((selectedBusiness.Info)!, destination: URL(string: selectedBusiness.Info ?? "")!)
+                    }
 
                     Text("Reviews:")
                         .font(.title2)
@@ -71,8 +72,7 @@ struct POIView: View {
                 ForEach(viewModel.Reviews, id: \.self) { review in
                     ReviewCard(selectedReview: review)
                 }
-                Text("More reviews on Yelp")
-                    .foregroundColor(Color.blue)
+                Link("More Reviews on Yelp", destination: URL(string: selectedBusiness.Info ?? "")!)
             }
             Spacer()
 

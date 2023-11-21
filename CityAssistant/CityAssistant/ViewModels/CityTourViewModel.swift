@@ -219,8 +219,16 @@ public class CityTourViewModel : ObservableObject
             }
             if let poi = closestValidPOI {
                 
-                // TODO temporarily changing to BusinessName to account for nil ids on open addresses. Change back to id once we are ignoring open addresses
-                if !visiblePOIs.contains(where: { $0.value.BusinessName == poi.BusinessName }) {
+                if closestDistance > 50 {
+                    print("Closest poi is more than 50 meters away, not displaying as it is likely wrong...")
+                    return
+                }
+                if poi.Id == nil {
+                    print("Found open address for plane, so not placing...")
+                    return
+                }
+                
+                if !visiblePOIs.contains(where: { $0.value.Id == poi.Id }) {
                     addPoiToPlane(poi: poi, plane: plane)
                 }
                 else {

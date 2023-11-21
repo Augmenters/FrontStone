@@ -59,22 +59,33 @@ public class CrimeViewModel : ObservableObject {
     }
     
     
-    func getData(selectedId: Double) -> [OverlayObject]? {
+    func getData(selectedId: Double, selectedDay: String) -> [OverlayObject]? {
 
         // logic to get timeSlotId
-//        let timeSlotGroup = timeSlots?.first(where: { timeslot in timeslot.Key == selectedGroupString})
-//        let timeSlotId = timeSlotGroup?.TimeSlots[selectedId]
+        let timeSlotGroup = timeSlots.first(where: { timeslot in timeslot.Key == selectedDay})
+        print("Time slot group: \(timeSlotGroup)")
+        let timeSlotIdOptional = timeSlotGroup?.TimeSlots[Int(selectedId)].Id
+        if let timeSlotId = timeSlotIdOptional {
+            
+            print("Selected id: \(selectedId), Selected day: \(selectedDay)")
+            print("Time slot id new: \(timeSlotId)")
+            
+            //print("Getting overlays for id: \(timeSlotId)")
+            let selectedCrimes = allCrimes?.first(where: { crime in crime.Id == timeSlotId})
+            //print("selected crimes count: \(selectedCrimes?.Crimes.count)")
+            
+            let overlays = selectedCrimes?.Crimes.map({
+                GetOverlay(coordinates: $0.Coordinates, crimeCount: $0.CrimeCount)
+            })
+            
+            return overlays
+        }
+        else {
+            print("time slot id is null")
+            return []
+        }
         
-        let timeSlotId = Int(selectedId)
-        print("Getting overlays for id: \(timeSlotId)")
-        let selectedCrimes = allCrimes?.first(where: { crime in crime.Id == timeSlotId})
-        print("selected crimes count: \(selectedCrimes?.Crimes.count)")
-        
-        let overlays = selectedCrimes?.Crimes.map({
-            GetOverlay(coordinates: $0.Coordinates, crimeCount: $0.CrimeCount)
-        })
-        
-        return overlays
+
     }
 
     func LoadTimeslots() async

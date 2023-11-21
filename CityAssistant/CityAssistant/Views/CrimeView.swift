@@ -10,12 +10,14 @@ import SwiftUI
 
 struct CrimeView: View {
     @State var viewModel: CrimeViewModel
-    @State private var selectedTime: Double = 1
+    @State private var selectedTime: Double = 0
+    @State private var selectedDay: String = "Sunday"
     @State private var overlays: [OverlayObject] = []
+    
+    private let daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     
     init() {
         viewModel = CrimeViewModel()
-        selectedTime = 1
     }
     
     var body: some View {
@@ -25,19 +27,29 @@ struct CrimeView: View {
             MapView(userLocation: viewModel.userLocation,
                     overlays: $overlays)
             .edgesIgnoringSafeArea(.all)
-        }.onAppear(){
-            overlays = viewModel.getData(selectedId: selectedTime) ?? []
         }
+        
         VStack (alignment: .trailing)
         {
             Spacer()
             
             HStack (alignment: .center) {
-                //we could adjust the available times to be dynamic but I don't think it makes sense bc it probably wont ever change
-                Slider(value: $selectedTime, in: Double(1)...Double(4), step: Double(1))
-            }.background(RoundedRectangle(cornerRadius: 10.0)).onChange(of: selectedTime) { newValue in
-                overlays = viewModel.getData(selectedId: newValue) ?? []
-            }
+
+                Picker("Select Day", selection: $selectedDay) {
+                    ForEach(daysOfWeek, id: \.self) { day in
+                        Text(day).tag(day)
+                    }
+                }
+                .pickerStyle(MenuPickerStyle()) // You can choose the picker style
+                .onChange(of: selectedDay) { newValue in
+                    overlays = viewModel.getData(selectedId: selectedTime, selectedDay: newValue) ?? []
+                }
+
+                Slider(value: $selectedTime, in: Double(0)...Double(3), step: Double(1)).onChange(of: selectedTime) { newValue in
+                    overlays = viewModel.getData(selectedId: newValue, selectedDay: selectedDay) ?? []
+                }
+                
+            }.background(RoundedRectangle(cornerRadius: 10.0))
         }.padding([.bottom], 90)
     }
 }

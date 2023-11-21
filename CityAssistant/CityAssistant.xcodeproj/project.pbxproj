@@ -713,7 +713,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8943T9GWZR;
+				DEVELOPMENT_TEAM = FD4Q9HB8QL;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CityAssistant/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "City Assistant requires Camera Permissions";
@@ -727,7 +727,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = edu.missouri.CityAssistant1.552;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.missouri.CityAssistant1.552asdf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -742,7 +742,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8943T9GWZR;
+				DEVELOPMENT_TEAM = FD4Q9HB8QL;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CityAssistant/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "City Assistant requires Camera Permissions";
@@ -756,7 +756,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = edu.missouri.CityAssistant.4506;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.missouri.CityAssistant.4506as;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

@@ -36,30 +36,77 @@ public class POI : Codable, Identifiable
             lastDay = 6
         }
 
-        let hour = String(calendar.component(.hour, from: currentDate))
-        let minute = String(calendar.component(.minute, from: currentDate))
+        let currHour = String(calendar.component(.hour, from: currentDate))
+        var currMinute = String(calendar.component(.minute, from: currentDate))
 
-        var currTime : String = hour
-        currTime += minute
+        if (Int(currMinute)! < 10) {
+            currMinute = "0" + currMinute
+        }
+
+        var currTime : String = currHour
+        currTime += currMinute
 
         let currTimeint = Int(currTime)
+        
+        var lastDayClose = 100
 
-        let close = 100
+        for day in Hours! {
+            if (day.Day == lastDay) {
+                lastDayClose = day.Close
+            }
+        }
 
-    /*if (currTimeint! < close) { //last day
+        if (currTimeint! < lastDayClose) { //last day
             actualDay = actualDay - 1
             if (actualDay == -1) {
                 actualDay = 6
             }
         }
-        */
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "h:mm a"
+        
+        var hours = 10
+        var minutes = 30
+        
+        var open = "1:00 AM"
+        var close = "1:00 PM"
+        
         //Add in actual hours value here
-        for day in Hours! {
-            if (day.Day == actualDay) {
-                return "\(day.Open) to \(day.Close)"
+        for currday in Hours! {
+            if (currday.Day == actualDay) {
+                //Open time conversion
+                hours = currday.Open / 100
+                minutes = currday.Open % 100
+                
+                var dateComponents = DateComponents()
+                dateComponents.hour = hours
+                dateComponents.minute = minutes
+                
+                let calendar = Calendar.current
+                if let date = calendar.date(from: dateComponents) {
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "h:mm a"
+                    open = dateFormatter.string(from: date)
+                }
+                
+                //Close time conversion
+                hours = currday.Close / 100
+                minutes = currday.Close % 100
+                
+                dateComponents = DateComponents()
+                dateComponents.hour = hours
+                dateComponents.minute = minutes
+                
+                if let date = calendar.date(from: dateComponents) {
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "h:mm a"
+                    close = dateFormatter.string(from: date)
+                }
+                
+                return "\(open) to \(close)"
             }
         }
-        return ""
+        return "Closed Today"
     }
     
     public init() {

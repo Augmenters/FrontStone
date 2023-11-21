@@ -369,9 +369,6 @@ public class CityTourViewModel : ObservableObject
         let businessNameText = create3dText(text: poi.BusinessName, x: leftMargin, y: topMargin, fontSize: bigFontSize)
         bubble.addChild(businessNameText)
 
-        let businessType = "Business Type" // do we have this?
-        let businessTypeText = create3dText(text: businessType, x: leftMargin, y: topMargin - textSpacing, fontSize: mediumFontSize)
-        bubble.addChild(businessTypeText)
 
         let hoursText = create3dText(text: poi.CurrentHours, x: leftMargin, y: topMargin - textSpacing * 2, fontSize: mediumFontSize)
         bubble.addChild(hoursText)

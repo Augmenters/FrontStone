@@ -12,7 +12,7 @@ public class POIViewModel: ObservableObject {
     private let businessDataAccess: BusinessDataAccess
     
     public var SelectedBusiness: POI
-    public var Reviews: [Review]
+    @Published var Reviews: [Review]
         
     public init(selectedBusiness: POI, reviews: [Review]) {
         self.SelectedBusiness = selectedBusiness

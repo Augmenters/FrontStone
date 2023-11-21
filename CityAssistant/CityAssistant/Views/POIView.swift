@@ -36,14 +36,6 @@ struct POIView: View {
                     Text(selectedBusiness.BusinessName)
                         .font(.largeTitle)
                         .fontWeight(.bold)
-                    HStack {
-                        Text("Business Type")
-                            .font(.title2)
-                            .padding(.bottom)
-                        Text((selectedBusiness.Price ?? ""))
-                            .font(.title2)
-                            .padding(.bottom)
-                    }
                     Text("Address: " +  selectedBusiness.Address.ToString())
                         .font(.body)
                     Text("Hours: " + selectedBusiness.CurrentHours)
@@ -53,6 +45,7 @@ struct POIView: View {
                     HStack(){
                         Text("Website: ")
                         Link((selectedBusiness.Info ?? "")!, destination: URL(string: selectedBusiness.Info ?? "")!)
+                            .lineLimit(1)
                     }
 
                     Text("Reviews:")

@@ -11,9 +11,11 @@ import RealityKit
 
 struct ContentView : View {
     @State var currentView: ViewType
+    @State var crimeViewModel: CrimeViewModel
     
     init() {
         currentView = ViewType.POIView
+        crimeViewModel = CrimeViewModel()
     }
     
     var body: some View {
@@ -25,7 +27,7 @@ struct ContentView : View {
                 case .POIView:
                     CityTourViewWrapper()
                 case .CrimeView:
-                    CrimeView()
+                    CrimeView(viewModel: crimeViewModel)
             }
             VStack()
             {

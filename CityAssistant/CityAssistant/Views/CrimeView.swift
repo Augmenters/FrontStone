@@ -9,15 +9,15 @@ import Foundation
 import SwiftUI
 
 struct CrimeView: View {
-    @State var viewModel: CrimeViewModel
+    var viewModel: CrimeViewModel
     @State private var selectedTime: Double = 0
     @State private var selectedDay: String = "Sunday"
     @State private var overlays: [OverlayObject] = []
     
-    private let daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    private let daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     
-    init() {
-        viewModel = CrimeViewModel()
+    init(viewModel: CrimeViewModel) {
+        self.viewModel = viewModel
     }
     
     var body: some View {
@@ -27,6 +27,8 @@ struct CrimeView: View {
             MapView(userLocation: viewModel.userLocation,
                     overlays: $overlays)
             .edgesIgnoringSafeArea(.all)
+        }.onAppear(){
+            overlays = viewModel.getData(selectedId: selectedTime, selectedDay: selectedDay) ?? []
         }
         
         VStack (alignment: .trailing)

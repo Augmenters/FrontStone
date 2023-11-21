@@ -63,16 +63,10 @@ public class CrimeViewModel : ObservableObject {
 
         // logic to get timeSlotId
         let timeSlotGroup = timeSlots.first(where: { timeslot in timeslot.Key == selectedDay})
-        print("Time slot group: \(timeSlotGroup)")
         let timeSlotIdOptional = timeSlotGroup?.TimeSlots[Int(selectedId)].Id
         if let timeSlotId = timeSlotIdOptional {
-            
-            print("Selected id: \(selectedId), Selected day: \(selectedDay)")
-            print("Time slot id new: \(timeSlotId)")
-            
-            //print("Getting overlays for id: \(timeSlotId)")
+    
             let selectedCrimes = allCrimes?.first(where: { crime in crime.Id == timeSlotId})
-            //print("selected crimes count: \(selectedCrimes?.Crimes.count)")
             
             let overlays = selectedCrimes?.Crimes.map({
                 GetOverlay(coordinates: $0.Coordinates, crimeCount: $0.CrimeCount)

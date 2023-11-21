@@ -20,7 +20,6 @@ struct POIView: View {
         self.viewModel = viewModel
         self.backButtonAction = onBackButton
         
-        self.selectedBusiness.Id = "4dCjF2VsM-byUGUbhYL_Ng"
         viewModel.load(business: selectedBusiness)
     }
 

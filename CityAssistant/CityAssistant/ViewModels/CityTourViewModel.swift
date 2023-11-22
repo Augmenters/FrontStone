@@ -110,10 +110,13 @@ public class CityTourViewModel : ObservableObject
         let result = await businessDataAccess.GetLocations(latitude: userLocation.Latitude, longitude: userLocation.Longitude)
 
         if(result.Success) {
-            loadedPOIs = []
-            
-            for poi in result.Data ?? []  {
-                loadedPOIs.append(poi)
+            await MainActor.run
+            {
+                loadedPOIs = []
+                
+                for poi in result.Data ?? []  {
+                    loadedPOIs.append(poi)
+                }
             }
         }
         else {
@@ -377,6 +380,8 @@ public class CityTourViewModel : ObservableObject
         let businessNameText = create3dText(text: poi.BusinessName, x: leftMargin, y: topMargin, fontSize: bigFontSize)
         bubble.addChild(businessNameText)
 
+        let priceText = create3dText(text: poi.Price ?? "", x: leftMargin, y: topMargin - textSpacing * 2, fontSize: mediumFontSize)
+        bubble.addChild(priceText)
 
         let hoursText = create3dText(text: poi.CurrentHours, x: leftMargin, y: topMargin - textSpacing * 2, fontSize: mediumFontSize)
         bubble.addChild(hoursText)

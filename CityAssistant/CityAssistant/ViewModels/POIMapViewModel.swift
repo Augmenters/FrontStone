@@ -59,17 +59,20 @@ public class POIMapViewModel: LoadableObject
     func LoadPOIs() async {
         let result = await businessDataAccess.GetLocations(latitude: userLocation.Latitude, longitude: userLocation.Longitude)
         
-        if(result.Success) {
-            for poi in result.Data ?? []  {
-                if(!loadedPOIs.contains(where: { (loadedPOI) -> Bool in return loadedPOI.Id == poi.Id })) {
-                    loadedPOIs.append(poi)
+        await MainActor.run
+        {
+            if(result.Success) {
+                for poi in result.Data ?? []  {
+                    if(!loadedPOIs.contains(where: { (loadedPOI) -> Bool in return loadedPOI.Id == poi.Id })) {
+                        loadedPOIs.append(poi)
+                    }
                 }
+                
+                self.state = .loaded(loadedPOIs)
             }
-            
-            self.state = .loaded(loadedPOIs)
-        }
-        else {
-            self.state = .failed(result.Error ?? LoadingError.internalError(message: "Failed to load"))
+            else {
+                self.state = .failed(result.Error ?? LoadingError.internalError(message: "Failed to load"))
+            }
         }
     }
     

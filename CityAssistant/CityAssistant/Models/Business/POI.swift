@@ -50,7 +50,7 @@ public class POI : Codable, Identifiable
         
         var lastDayClose = 100
 
-        for day in Hours! {
+        for day in Hours ?? [] {
             if (day.Day == lastDay) {
                 lastDayClose = day.Close
             }
@@ -72,7 +72,7 @@ public class POI : Codable, Identifiable
         var close = "1:00 PM"
         
         //Add in actual hours value here
-        for currday in Hours! {
+        for currday in Hours ?? [] {
             if (currday.Day == actualDay) {
                 //Open time conversion
                 hours = currday.Open / 100

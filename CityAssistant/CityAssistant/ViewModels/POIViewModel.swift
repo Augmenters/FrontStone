@@ -43,11 +43,15 @@ public class POIViewModel: ObservableObject {
         
         Task.init {
             let result = await businessDataAccess.GetReviews(businessId: SelectedBusiness.Id ?? "0")
-            if(result.Success) {
-                self.Reviews = result.Data?.Reviews ?? []
-            }
-            else {
-                self.Reviews = []
+            
+            await MainActor.run
+            {
+                if(result.Success) {
+                    self.Reviews = result.Data?.Reviews ?? []
+                }
+                else {
+                    self.Reviews = []
+                }
             }
         }
     }

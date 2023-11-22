@@ -88,7 +88,10 @@ public class CrimeViewModel : ObservableObject {
             let result = await crimeDataAccess.GetTimeSlots()
             print("Loading time slots")
             if(result.Success) {
-                timeSlots = GroupTimeslots(timeslots: result.Data ?? [])
+                await MainActor.run
+                {
+                    timeSlots = GroupTimeslots(timeslots: result.Data ?? [])
+                }
                 print("Time slot loading success")
             }
             else {
@@ -113,7 +116,10 @@ public class CrimeViewModel : ObservableObject {
             let result = await crimeDataAccess.GetAllCrimes()
             print("Getting all crimes")
             if(result.Success) {
-                allCrimes = result.Data ?? []
+                await MainActor.run
+                {
+                    allCrimes = result.Data ?? []
+                }
                 print("Crime loading success")
    
             }

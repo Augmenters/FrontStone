@@ -22,23 +22,23 @@ struct POIMapView: View {
     }
     
     var body: some View {
-        VStack{
+        ZStack(alignment: .bottom) {
             MapView(userLocation: userLocation,
-                    annotations: pois.map{AnnotationItem(coordinate: $0.Coordinates)})
-                .edgesIgnoringSafeArea([.top, .leading, .trailing])
-                .frame(width: 400, height: 500)
+                    annotations: pois.map{AnnotationItem(coordinate: $0.Coordinates)}).edgesIgnoringSafeArea([.top, .leading, .trailing, .bottom])
             NavigationStack {
                 List {
                     ForEach(pois, id: \.Id) { poi in
                         NavigationLink {
-                            POIView(selectedBusiness: poi, viewModel: poiViewModel)
+                            ScrollView
+                            {
+                                POIView(selectedBusiness: poi, viewModel: poiViewModel)
+                            }
                         } label: {
                             POICard(poi: poi)
                         }
                     }
                 }
-            }.frame(width: 400, height: 400)
-            Spacer()
+            }.frame(height: 400, alignment: .bottom).opacity(0.6)
         }
     }
 }

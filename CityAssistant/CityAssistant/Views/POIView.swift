@@ -41,13 +41,19 @@ struct POIView: View {
                         .font(.body)
                     Text("Phone Number: " + (selectedBusiness.Phone ?? ""))
                         .font(.body)
-                    HStack(){
-                        Text("Website: ")
-                        Link((selectedBusiness.Info ?? "")!, destination: URL(string: selectedBusiness.Info ?? "")!)
-                            .lineLimit(1)
+                    Text("Price: " + (selectedBusiness.Price ?? ""))
+                        .font(.body)
+                    
+                    if(selectedBusiness.Info != nil)
+                    {
+                        HStack(){
+                            Text("Website: ")
+                            Link((selectedBusiness.Info ?? "")!, destination: URL(string: selectedBusiness.Info ?? "")!)
+                                .lineLimit(1)
+                        }
                     }
 
-                    Text("Reviews:")
+                    Text("Reviews: \(selectedBusiness.ReviewCount)")
                         .font(.title2)
                         .bold()
                     HStack {
@@ -55,8 +61,6 @@ struct POIView: View {
                         {
                             RatingStars(rating: selectedBusiness.Rating!)
                                 .frame(minWidth: 1, idealWidth: 100, maxWidth: 140, minHeight: 1, idealHeight: 20, maxHeight: 20)
-                            Text("\(selectedBusiness.ReviewCount)")
-                                .font(.body)
                         }
                     }
                 }.padding(/*@START_MENU_TOKEN@*/[.top, .bottom, .trailing]/*@END_MENU_TOKEN@*/)
@@ -64,11 +68,14 @@ struct POIView: View {
                 ForEach(viewModel.Reviews, id: \.self) { review in
                     ReviewCard(selectedReview: review)
                 }
-                Link("More Reviews on Yelp", destination: URL(string: selectedBusiness.Info ?? "")!)
+                if(selectedBusiness.Info != nil)
+                {
+                    Link("More Reviews on Yelp", destination: URL(string: selectedBusiness.Info ?? "")!)
+                }
             }
             Spacer()
 
-        }.padding(/*@START_MENU_TOKEN@*/[.top, .bottom, .trailing]/*@END_MENU_TOKEN@*/).navigationBarBackButtonHidden(true)
+        }.padding(/*@START_MENU_TOKEN@*/[.top, .bottom, .trailing]/*@END_MENU_TOKEN@*/)
     }
 }
 

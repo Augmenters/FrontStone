@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct POIView: View {
-    @State var viewModel: POIViewModel
+    @ObservedObject var viewModel: POIViewModel
     @State var selectedBusiness: POI
 
     private var backButtonAction: (() -> Void)?

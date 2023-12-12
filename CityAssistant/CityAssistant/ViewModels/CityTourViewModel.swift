@@ -383,10 +383,10 @@ public class CityTourViewModel : ObservableObject
         let priceText = create3dText(text: poi.Price ?? "", x: leftMargin, y: topMargin - textSpacing * 2, fontSize: mediumFontSize)
         bubble.addChild(priceText)
 
-        let hoursText = create3dText(text: poi.CurrentHours, x: leftMargin, y: topMargin - textSpacing * 2, fontSize: mediumFontSize)
+        let hoursText = create3dText(text: poi.CurrentHours, x: leftMargin, y: topMargin - textSpacing * 3, fontSize: mediumFontSize)
         bubble.addChild(hoursText)
 
-        let ratingText = create3dText(text: "Yelp Rating: \(poi.Rating!)/5 Stars", x: leftMargin, y: topMargin - textSpacing * 3, fontSize: mediumFontSize)
+        let ratingText = create3dText(text: "Yelp Rating: \(poi.Rating!)/5 Stars", x: leftMargin, y: topMargin - textSpacing * 4, fontSize: mediumFontSize)
         bubble.addChild(ratingText)
 
         let promptText = create3dText(text: "Click for more information", x: leftMargin, y: bottomMargin, fontSize: smallFontSize)
